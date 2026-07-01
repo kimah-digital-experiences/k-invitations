@@ -7,22 +7,34 @@ import { createCelebrationScene } from "./scenes/celebration-scene.js";
 import { createCoordinatesScene } from "./scenes/coordinates-scene.js";
 import { createInvitationScene } from "./scenes/invitation-scene.js";
 
-const sceneManager = new SceneManager();
+function showBootstrapError() {
+  const transitionStatus = document.querySelector("[data-transition-status]");
 
-sceneManager.registerScene(createOpeningScene());
-sceneManager.registerScene(createBenjaminScene());
-sceneManager.registerScene(createSignalScene());
-sceneManager.registerScene(createStarScene());
-sceneManager.registerScene(createCelebrationScene());
-sceneManager.registerScene(createCoordinatesScene());
-sceneManager.registerScene(createInvitationScene());
-
-window.PolarisEngine = {
-  sceneManager,
-};
-
-async function bootstrapPolarisEngine() {
-  await sceneManager.showScene("opening");
+  if (transitionStatus) {
+    transitionStatus.textContent = "No se pudo iniciar el viaje. Recarga la página.";
+  }
 }
 
-bootstrapPolarisEngine();
+function bootstrapPolarisEngine() {
+  const sceneManager = new SceneManager();
+
+  sceneManager.registerScene(createOpeningScene());
+  sceneManager.registerScene(createBenjaminScene());
+  sceneManager.registerScene(createSignalScene());
+  sceneManager.registerScene(createStarScene());
+  sceneManager.registerScene(createCelebrationScene());
+  sceneManager.registerScene(createCoordinatesScene());
+  sceneManager.registerScene(createInvitationScene());
+
+  window.PolarisEngine = {
+    sceneManager,
+  };
+
+  sceneManager.showScene("opening").catch(showBootstrapError);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bootstrapPolarisEngine, { once: true });
+} else {
+  bootstrapPolarisEngine();
+}
