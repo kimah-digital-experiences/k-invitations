@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Primera escena interactiva de Baby Shower Space: una invitación espacial, cálida y cinematográfica."
+    />
+    <title>Baby Shower Space</title>
+    <link rel="stylesheet" href="src/styles/main.css" />
+    <script type="module" src="src/scripts/main.js"></script>
+  </head>
+  <body>
+    <main class="experience" aria-label="Baby Shower Space">
+      <section class="scene scene-opening" data-scene="opening" aria-labelledby="scene-title">
+        <div class="space-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content">
+          <p class="scene-kicker">Una señal acaba de llegar</p>
+          <h1 id="scene-title">Entre las estrellas, algo hermoso está por comenzar.</h1>
+          <p class="scene-copy">
+            Respira un momento. El viaje hacia una nueva luz está a punto de iniciar.
+          </p>
+
+          <button class="primary-action" type="button" data-start-journey>
+            Iniciar viaje
+          </button>
+
+          <p class="mvp-message" data-mvp-message hidden>
+            El viaje continuará en la siguiente escena durante el desarrollo del MVP.
+          </p>
+
+          <p class="scene-hint" aria-hidden="true">Toca para cruzar el primer umbral</p>
+        </div>
+
+        <p class="transition-status" role="status" aria-live="polite" data-transition-status></p>
+      </section>
+
+      <section
+        class="scene scene-benjamin"
+        data-scene="benjamin"
+        aria-labelledby="benjamin-title"
+        hidden
+      >
+        <div class="space-field discovery-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="discovery-star"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content benjamin-content">
+          <p class="discovery-line discovery-line-first">Entre millones de estrellas...</p>
+          <p class="discovery-line discovery-line-second">
+            hay una que pronto iluminará nuestras vidas.
+          </p>
+          <h2 id="benjamin-title" class="benjamin-name">Benjamin</h2>
+          <button class="primary-action benjamin-next-action" type="button" data-continue-from-benjamin>
+            Seguir la señal
+          </button>
+        </div>
+      </section>
+
+      <section
+        class="scene scene-signal"
+        data-scene="signal"
+        aria-labelledby="signal-title"
+        hidden
+      >
+        <div class="space-field signal-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="constellation constellation-line-one"></div>
+          <div class="constellation constellation-line-two"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content signal-content">
+          <p class="scene-kicker signal-kicker">Una señal desde el universo</p>
+          <h2 id="signal-title" class="signal-title">Daniel y Ana Josse</h2>
+          <p class="scene-copy signal-copy">
+            nos invitan a seguir esta luz y celebrar juntos el inicio de una historia
+            muy especial.
+          </p>
+          <button class="primary-action signal-next-action" type="button" data-continue-from-signal>
+            Descubrir la estrella
+          </button>
+          <p class="scene-hint signal-hint">La travesía continuará pronto.</p>
+        </div>
+      </section>
+
+      <section class="scene scene-star" data-scene="star" aria-labelledby="star-title" hidden>
+        <div class="space-field star-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="central-star"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content star-content">
+          <p class="scene-kicker star-kicker">La estrella de Benjamin</p>
+          <h2 id="star-title" class="star-title">Una nueva luz</h2>
+          <p class="scene-copy star-copy">
+            pequeña, cálida y llena de esperanza, comienza a iluminar nuestro universo.
+          </p>
+          <p class="benjamin-signature">Benjamin</p>
+          <button class="primary-action star-next-action" type="button" data-continue-from-star>
+            Celebrar su llegada
+          </button>
+          <p class="scene-hint star-hint">La celebración está cada vez más cerca.</p>
+        </div>
+      </section>
+
+      <section
+        class="scene scene-celebration"
+        data-scene="scene5"
+        aria-labelledby="celebration-title"
+        hidden
+      >
+        <div class="space-field celebration-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="orbit-ring orbit-ring-one"></div>
+          <div class="orbit-ring orbit-ring-two"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content celebration-content">
+          <p class="scene-kicker celebration-kicker">Celebración en órbita</p>
+          <h2 id="celebration-title" class="celebration-title">Su luz nos reúne</h2>
+          <p class="scene-copy celebration-copy">
+            La llegada de Benjamin merece un encuentro lleno de alegría, ternura y esperanza.
+          </p>
+          <button class="primary-action celebration-next-action" type="button" data-continue-from-celebration>
+            Ver coordenadas
+          </button>
+        </div>
+      </section>
+
+      <section
+        class="scene scene-coordinates"
+        data-scene="scene6"
+        aria-labelledby="coordinates-title"
+        hidden
+      >
+        <div class="space-field coordinates-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content coordinates-content">
+          <p class="scene-kicker coordinates-kicker">Coordenadas del encuentro</p>
+          <h2 id="coordinates-title" class="coordinates-title">Baby Shower de Benjamin</h2>
+
+          <dl class="event-details" aria-label="Detalles del evento">
+            <div class="event-detail">
+              <dt>Fecha</dt>
+              <dd>Por confirmar</dd>
+            </div>
+            <div class="event-detail">
+              <dt>Hora</dt>
+              <dd>Por confirmar</dd>
+            </div>
+            <div class="event-detail">
+              <dt>Lugar</dt>
+              <dd>Por confirmar</dd>
+            </div>
+            <div class="event-detail">
+              <dt>Anfitriones</dt>
+              <dd>Daniel y Ana Josse</dd>
+            </div>
+          </dl>
+
+          <button class="primary-action coordinates-next-action" type="button" data-continue-from-coordinates>
+            Continuar invitación
+          </button>
+        </div>
+      </section>
+
+      <section
+        class="scene scene-invitation"
+        data-scene="scene7"
+        aria-labelledby="invitation-title"
+        hidden
+      >
+        <div class="space-field invitation-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content invitation-content">
+          <p class="scene-kicker invitation-kicker">La invitación personal</p>
+          <h2 id="invitation-title" class="invitation-title">Acompáñanos a celebrar a Benjamin</h2>
+          <p class="scene-copy invitation-copy">
+            Daniel y Ana Josse desean compartir este momento con las personas que hacen
+            más luminosa su historia.
+          </p>
+          <p class="scene-hint invitation-hint">El siguiente paso llegará en el próximo sprint.</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
