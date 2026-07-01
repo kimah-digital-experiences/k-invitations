@@ -168,6 +168,11 @@ export function createOpeningScene() {
     init({ sceneManager }) {
       ["click", "pointerup", "touchend"].forEach((eventName) => {
         startButton?.addEventListener(eventName, (event) => {
+          if (window.startPolarisJourney) {
+            window.startPolarisJourney(event);
+            return;
+          }
+
           startJourney(sceneManager, event);
         }, { passive: false });
       });

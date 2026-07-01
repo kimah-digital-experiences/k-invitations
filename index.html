@@ -9,7 +9,7 @@
     />
     <title>Baby Shower Space</title>
     <link rel="stylesheet" href="src/styles/main.css" />
-    <script type="module" src="src/scripts/main.js?v=4"></script>
+    <script type="module" src="src/scripts/main.js?v=5"></script>
   </head>
   <body>
     <main class="experience" aria-label="Baby Shower Space">
@@ -29,7 +29,12 @@
             Respira un momento. El viaje hacia una nueva luz está a punto de iniciar.
           </p>
 
-          <button class="primary-action" type="button" data-start-journey>
+          <button
+            class="primary-action"
+            type="button"
+            data-start-journey
+            onclick="window.startPolarisJourney && window.startPolarisJourney()"
+          >
             Iniciar viaje
           </button>
 
