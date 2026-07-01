@@ -1,6 +1,7 @@
 const OPENING_SCENE_ID = "opening";
 const NEXT_SCENE_ID = "benjamin";
 const TRANSITION_DURATION_MS = 1700;
+const FALLBACK_DELAY_MS = 2000;
 
 export function createOpeningScene() {
   const root = document.querySelector("[data-scene='opening']");
@@ -8,7 +9,9 @@ export function createOpeningScene() {
   const transitionStatus = document.querySelector("[data-transition-status]");
   const mvpMessage = document.querySelector("[data-mvp-message]");
   let transitionTimer;
-  let isNavigating = false;
+  let fallbackTimer;
+  let isFallbackActive = false;
+  let isStarting = false;
 
   function setTransitionStatus(message) {
     if (transitionStatus) {
@@ -18,6 +21,70 @@ export function createOpeningScene() {
 
   function clearTransitionStatus() {
     setTransitionStatus("");
+  }
+
+  function isBenjaminVisible(sceneManager) {
+    const nextScene = document.querySelector(`[data-scene='${NEXT_SCENE_ID}']`);
+
+    return (
+      sceneManager?.getCurrentSceneId?.() === NEXT_SCENE_ID ||
+      (nextScene ? !nextScene.hasAttribute("hidden") : false)
+    );
+  }
+
+  function disableStatusFallback() {
+    if (!transitionStatus) {
+      return;
+    }
+
+    isFallbackActive = false;
+    transitionStatus.setAttribute("role", "status");
+    transitionStatus.removeAttribute("tabindex");
+    transitionStatus.removeAttribute("data-start-fallback");
+  }
+
+  function enableStatusFallback(sceneManager) {
+    if (!transitionStatus || isFallbackActive) {
+      return;
+    }
+
+    isFallbackActive = true;
+    transitionStatus.textContent = "Si no avanza, toca aquí para continuar";
+    transitionStatus.setAttribute("role", "button");
+    transitionStatus.setAttribute("tabindex", "0");
+    transitionStatus.setAttribute("data-start-fallback", "true");
+
+    function showBenjaminDirectly(event) {
+      event?.preventDefault?.();
+      sceneManager.showScene(NEXT_SCENE_ID, { direction: "forward" });
+    }
+
+    ["click", "pointerup", "touchend"].forEach((eventName) => {
+      transitionStatus.addEventListener(eventName, showBenjaminDirectly, {
+        once: true,
+        passive: false,
+      });
+    });
+    transitionStatus.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        sceneManager.showScene(NEXT_SCENE_ID, { direction: "forward" });
+      }
+    }, { once: true });
+  }
+
+  function clearFallbackTimer() {
+    window.clearTimeout(fallbackTimer);
+  }
+
+  function scheduleFallback(sceneManager) {
+    clearFallbackTimer();
+
+    fallbackTimer = window.setTimeout(() => {
+      if (!isBenjaminVisible(sceneManager)) {
+        enableStatusFallback(sceneManager);
+      }
+    }, FALLBACK_DELAY_MS);
   }
 
   function waitForIdleSceneManager(sceneManager) {
@@ -53,12 +120,17 @@ export function createOpeningScene() {
     });
   }
 
-  async function startJourney(sceneManager) {
-    if (isNavigating) {
+  async function startJourney(sceneManager, event) {
+    event?.preventDefault?.();
+
+    if (isStarting || sceneManager?.getCurrentSceneId?.() !== OPENING_SCENE_ID) {
       return;
     }
 
-    isNavigating = true;
+    isStarting = true;
+    disableStatusFallback();
+    setTransitionStatus("Iniciando viaje...");
+    scheduleFallback(sceneManager);
 
     try {
       await waitForIdleSceneManager(sceneManager);
@@ -66,6 +138,7 @@ export function createOpeningScene() {
       const didAdvance = await sceneManager.nextScene();
 
       if (didAdvance) {
+        clearFallbackTimer();
         clearTransitionStatus();
         return;
       }
@@ -79,12 +152,13 @@ export function createOpeningScene() {
       if (!didFallbackAdvance) {
         setTransitionStatus("No se pudo iniciar el viaje. Recarga la página.");
       } else {
+        clearFallbackTimer();
         clearTransitionStatus();
       }
     } catch {
       setTransitionStatus("No se pudo iniciar el viaje. Recarga la página.");
     } finally {
-      isNavigating = false;
+      isStarting = false;
     }
   }
 
@@ -92,8 +166,10 @@ export function createOpeningScene() {
     id: OPENING_SCENE_ID,
     nextSceneId: NEXT_SCENE_ID,
     init({ sceneManager }) {
-      startButton?.addEventListener("click", () => {
-        startJourney(sceneManager);
+      ["click", "pointerup", "touchend"].forEach((eventName) => {
+        startButton?.addEventListener(eventName, (event) => {
+          startJourney(sceneManager, event);
+        }, { passive: false });
       });
     },
     enter() {
