@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Primera escena interactiva de Baby Shower Space: una invitación espacial, cálida y cinematográfica."
+    />
+    <title>Baby Shower Space</title>
+    <link rel="stylesheet" href="src/styles/main.css" />
+    <script type="module" src="src/scripts/main.js"></script>
+  </head>
+  <body>
+    <main class="experience" aria-label="Baby Shower Space">
+      <section class="scene scene-opening" data-scene="opening" aria-labelledby="scene-title">
+        <div class="space-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content">
+          <p class="scene-kicker">Una señal acaba de llegar</p>
+          <h1 id="scene-title">Entre las estrellas, algo hermoso está por comenzar.</h1>
+          <p class="scene-copy">
+            Respira un momento. El viaje hacia una nueva luz está a punto de iniciar.
+          </p>
+
+          <button class="primary-action" type="button" data-start-journey>
+            Iniciar viaje
+          </button>
+
+          <p class="mvp-message" data-mvp-message hidden>
+            El viaje continuará en la siguiente escena durante el desarrollo del MVP.
+          </p>
+
+          <p class="scene-hint" aria-hidden="true">Toca para cruzar el primer umbral</p>
+        </div>
+
+        <p class="transition-status" role="status" aria-live="polite" data-transition-status></p>
+      </section>
+
+      <section
+        class="scene scene-benjamin"
+        data-scene="benjamin"
+        aria-labelledby="benjamin-title"
+        hidden
+      >
+        <div class="space-field discovery-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="discovery-star"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content benjamin-content">
+          <p class="discovery-line discovery-line-first">Entre millones de estrellas...</p>
+          <p class="discovery-line discovery-line-second">
+            hay una que pronto iluminará nuestras vidas.
+          </p>
+          <h2 id="benjamin-title" class="benjamin-name">Benjamin</h2>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
