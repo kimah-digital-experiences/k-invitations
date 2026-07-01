@@ -1,13 +1,14 @@
-import { SceneManager } from "./core/scene-manager.js?v=8";
-import { createOpeningScene } from "./scenes/opening-scene.js?v=8";
-import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=8";
-import { createSignalScene } from "./scenes/signal-scene.js?v=8";
-import { createStarScene } from "./scenes/star-scene.js?v=8";
-import { createCelebrationScene } from "./scenes/celebration-scene.js?v=8";
-import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=8";
-import { createInvitationScene } from "./scenes/invitation-scene.js?v=8";
-import { createRsvpScene } from "./scenes/rsvp-scene.js?v=8";
-import { createFinaleScene } from "./scenes/finale-scene.js?v=8";
+import { eventConfig } from "./config/event-config.js?v=9";
+import { SceneManager } from "./core/scene-manager.js?v=9";
+import { createOpeningScene } from "./scenes/opening-scene.js?v=9";
+import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=9";
+import { createSignalScene } from "./scenes/signal-scene.js?v=9";
+import { createStarScene } from "./scenes/star-scene.js?v=9";
+import { createCelebrationScene } from "./scenes/celebration-scene.js?v=9";
+import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=9";
+import { createInvitationScene } from "./scenes/invitation-scene.js?v=9";
+import { createRsvpScene } from "./scenes/rsvp-scene.js?v=9";
+import { createFinaleScene } from "./scenes/finale-scene.js?v=9";
 
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
@@ -108,9 +109,29 @@ function exposeStartJourneyFallback(sceneManager) {
   };
 }
 
+function setEventText(fieldName, value) {
+  document.querySelectorAll(`[data-event-field='${fieldName}']`).forEach((element) => {
+    element.textContent = value;
+  });
+}
+
+function applyEventConfig() {
+  const eventTitle = `${eventConfig.eventType} de ${eventConfig.babyName}`;
+
+  setEventText("babyName", eventConfig.babyName);
+  setEventText("hosts", eventConfig.hosts);
+  setEventText("eventTitle", eventTitle);
+  setEventText("eventTime", eventConfig.time);
+  setEventText("eventLocation", eventConfig.location.name);
+  setEventText("invitationTitle", `Acompáñanos a celebrar a ${eventConfig.babyName}`);
+  setEventText("finaleTitle", `${eventConfig.babyName} los espera`);
+  setEventText("finaleHosts", `Con cariño, ${eventConfig.hosts}.`);
+}
+
 function bootstrapPolarisEngine() {
   document.body.classList.add("js-ready");
   setTransitionStatus("JS listo");
+  applyEventConfig();
 
   const sceneManager = new SceneManager();
 
@@ -125,6 +146,7 @@ function bootstrapPolarisEngine() {
   sceneManager.registerScene(createFinaleScene());
 
   window.PolarisEngine = {
+    eventConfig,
     sceneManager,
   };
 

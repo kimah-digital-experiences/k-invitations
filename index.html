@@ -9,7 +9,7 @@
     />
     <title>Baby Shower Space</title>
     <link rel="stylesheet" href="src/styles/main.css?v=8" />
-    <script type="module" src="src/scripts/main.js?v=8"></script>
+    <script type="module" src="src/scripts/main.js?v=9"></script>
   </head>
   <body>
     <main class="experience" aria-label="Baby Shower Space">
@@ -68,7 +68,7 @@
           <p class="discovery-line discovery-line-second">
             hay una que pronto iluminará nuestras vidas.
           </p>
-          <h2 id="benjamin-title" class="benjamin-name">Benjamin</h2>
+          <h2 id="benjamin-title" class="benjamin-name" data-event-field="babyName">Benjamin</h2>
           <button class="primary-action benjamin-next-action" type="button" data-continue-from-benjamin>
             Seguir la señal
           </button>
@@ -93,7 +93,7 @@
 
         <div class="scene-content signal-content">
           <p class="scene-kicker signal-kicker">Una señal desde el universo</p>
-          <h2 id="signal-title" class="signal-title">Daniel y Ana Josse</h2>
+          <h2 id="signal-title" class="signal-title" data-event-field="hosts">Daniel y Ana Josse</h2>
           <p class="scene-copy signal-copy">
             nos invitan a seguir esta luz y celebrar juntos el inicio de una historia
             muy especial.
@@ -121,7 +121,7 @@
           <p class="scene-copy star-copy">
             pequeña, cálida y llena de esperanza, comienza a iluminar nuestro universo.
           </p>
-          <p class="benjamin-signature">Benjamin</p>
+          <p class="benjamin-signature" data-event-field="babyName">Benjamin</p>
           <button class="primary-action star-next-action" type="button" data-continue-from-star>
             Celebrar su llegada
           </button>
@@ -173,7 +173,7 @@
 
         <div class="scene-content coordinates-content">
           <p class="scene-kicker coordinates-kicker">Coordenadas del encuentro</p>
-          <h2 id="coordinates-title" class="coordinates-title">Baby Shower de Benjamin</h2>
+          <h2 id="coordinates-title" class="coordinates-title" data-event-field="eventTitle">Baby Shower de Benjamin</h2>
 
           <dl class="event-details" aria-label="Detalles del evento">
             <div class="event-detail">
@@ -182,15 +182,15 @@
             </div>
             <div class="event-detail">
               <dt>Hora</dt>
-              <dd>Por confirmar</dd>
+              <dd data-event-field="eventTime">3:00 pm</dd>
             </div>
             <div class="event-detail">
               <dt>Lugar</dt>
-              <dd>Por confirmar</dd>
+              <dd data-event-field="eventLocation">Colegio Médico de Honduras, Tegucigalpa</dd>
             </div>
             <div class="event-detail">
               <dt>Anfitriones</dt>
-              <dd>Daniel y Ana Josse</dd>
+              <dd data-event-field="hosts">Daniel y Ana Josse</dd>
             </div>
           </dl>
 
@@ -216,7 +216,7 @@
 
         <div class="scene-content invitation-content">
           <p class="scene-kicker invitation-kicker">La invitación personal</p>
-          <h2 id="invitation-title" class="invitation-title">Acompáñanos a celebrar a Benjamin</h2>
+          <h2 id="invitation-title" class="invitation-title" data-event-field="invitationTitle">Acompáñanos a celebrar a Benjamin</h2>
           <p class="scene-copy invitation-copy">
             Daniel y Ana Josse desean compartir este momento con las personas que hacen
             más luminosa su historia.
@@ -276,12 +276,12 @@
 
         <div class="scene-content finale-content">
           <p class="scene-kicker finale-kicker">Gracias por acompañarnos</p>
-          <h2 id="finale-title" class="finale-title">Benjamin los espera</h2>
+          <h2 id="finale-title" class="finale-title" data-event-field="finaleTitle">Benjamin los espera</h2>
           <p class="scene-copy finale-copy">
             Cada estrella de esta historia brilla un poco más cuando la compartimos con
             ustedes.
           </p>
-          <p class="finale-message">Con cariño, Daniel y Ana Josse.</p>
+          <p class="finale-message" data-event-field="finaleHosts">Con cariño, Daniel y Ana Josse.</p>
           <p class="scene-hint finale-hint">El viaje queda guardado entre las estrellas.</p>
         </div>
       </section>
