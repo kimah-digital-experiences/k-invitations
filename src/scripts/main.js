@@ -16,8 +16,13 @@ sceneManager.registerScene(createStarScene());
 sceneManager.registerScene(createCelebrationScene());
 sceneManager.registerScene(createCoordinatesScene());
 sceneManager.registerScene(createInvitationScene());
-await sceneManager.showScene("opening");
 
 window.PolarisEngine = {
   sceneManager,
 };
+
+async function bootstrapPolarisEngine() {
+  await sceneManager.showScene("opening");
+}
+
+bootstrapPolarisEngine();
