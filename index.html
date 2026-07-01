@@ -8,8 +8,8 @@
       content="Primera escena interactiva de Baby Shower Space: una invitación espacial, cálida y cinematográfica."
     />
     <title>Baby Shower Space</title>
-    <link rel="stylesheet" href="src/styles/main.css?v=7" />
-    <script type="module" src="src/scripts/main.js?v=5"></script>
+    <link rel="stylesheet" href="src/styles/main.css?v=8" />
+    <script type="module" src="src/scripts/main.js?v=8"></script>
   </head>
   <body>
     <main class="experience" aria-label="Baby Shower Space">
@@ -221,7 +221,68 @@
             Daniel y Ana Josse desean compartir este momento con las personas que hacen
             más luminosa su historia.
           </p>
-          <p class="scene-hint invitation-hint">El siguiente paso llegará en el próximo sprint.</p>
+          <button class="primary-action invitation-next-action" type="button" data-continue-from-invitation>
+            Ir a confirmar
+          </button>
+        </div>
+      </section>
+
+      <section
+        class="scene scene-rsvp"
+        data-scene="scene8"
+        aria-labelledby="rsvp-title"
+        hidden
+      >
+        <div class="space-field rsvp-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="confirmation-glow"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content rsvp-content">
+          <p class="scene-kicker rsvp-kicker">Invitación oficial</p>
+          <h2 id="rsvp-title" class="rsvp-title">Confirma tu lugar en esta misión</h2>
+          <p class="scene-copy rsvp-copy">
+            Tu presencia hará más luminosa esta celebración. Benjamin está por llegar,
+            y nos emociona imaginar este momento acompañados por quienes queremos.
+          </p>
+          <p class="rsvp-note">
+            La confirmación formal se activará pronto. Por ahora, este paso prepara el
+            cierre de la experiencia Alpha.
+          </p>
+          <button class="primary-action rsvp-next-action" type="button" data-confirm-presence>
+            Confirmar asistencia
+          </button>
+        </div>
+      </section>
+
+      <section
+        class="scene scene-finale"
+        data-scene="scene9"
+        aria-labelledby="finale-title"
+        hidden
+      >
+        <div class="space-field finale-field" aria-hidden="true">
+          <div class="nebula nebula-primary"></div>
+          <div class="nebula nebula-secondary"></div>
+          <div class="star-layer star-layer-soft"></div>
+          <div class="star-layer star-layer-bright"></div>
+          <div class="final-star"></div>
+          <div class="horizon-glow"></div>
+        </div>
+
+        <div class="scene-content finale-content">
+          <p class="scene-kicker finale-kicker">Gracias por acompañarnos</p>
+          <h2 id="finale-title" class="finale-title">Benjamin los espera</h2>
+          <p class="scene-copy finale-copy">
+            Cada estrella de esta historia brilla un poco más cuando la compartimos con
+            ustedes.
+          </p>
+          <p class="finale-message">Con cariño, Daniel y Ana Josse.</p>
+          <p class="scene-hint finale-hint">El viaje queda guardado entre las estrellas.</p>
         </div>
       </section>
     </main>

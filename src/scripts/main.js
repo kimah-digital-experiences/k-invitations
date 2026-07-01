@@ -1,11 +1,13 @@
-import { SceneManager } from "./core/scene-manager.js?v=5";
-import { createOpeningScene } from "./scenes/opening-scene.js?v=5";
-import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=5";
-import { createSignalScene } from "./scenes/signal-scene.js?v=5";
-import { createStarScene } from "./scenes/star-scene.js?v=5";
-import { createCelebrationScene } from "./scenes/celebration-scene.js?v=5";
-import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=5";
-import { createInvitationScene } from "./scenes/invitation-scene.js?v=5";
+import { SceneManager } from "./core/scene-manager.js?v=8";
+import { createOpeningScene } from "./scenes/opening-scene.js?v=8";
+import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=8";
+import { createSignalScene } from "./scenes/signal-scene.js?v=8";
+import { createStarScene } from "./scenes/star-scene.js?v=8";
+import { createCelebrationScene } from "./scenes/celebration-scene.js?v=8";
+import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=8";
+import { createInvitationScene } from "./scenes/invitation-scene.js?v=8";
+import { createRsvpScene } from "./scenes/rsvp-scene.js?v=8";
+import { createFinaleScene } from "./scenes/finale-scene.js?v=8";
 
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
@@ -119,6 +121,8 @@ function bootstrapPolarisEngine() {
   sceneManager.registerScene(createCelebrationScene());
   sceneManager.registerScene(createCoordinatesScene());
   sceneManager.registerScene(createInvitationScene());
+  sceneManager.registerScene(createRsvpScene());
+  sceneManager.registerScene(createFinaleScene());
 
   window.PolarisEngine = {
     sceneManager,

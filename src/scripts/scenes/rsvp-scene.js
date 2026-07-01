@@ -1,15 +1,15 @@
-const INVITATION_SCENE_ID = "scene7";
-const NEXT_SCENE_ID = "scene8";
+const RSVP_SCENE_ID = "scene8";
+const NEXT_SCENE_ID = "scene9";
 
-export function createInvitationScene() {
-  const root = document.querySelector("[data-scene='scene7']");
-  const continueButton = document.querySelector("[data-continue-from-invitation]");
+export function createRsvpScene() {
+  const root = document.querySelector("[data-scene='scene8']");
+  const confirmButton = document.querySelector("[data-confirm-presence]");
 
   return {
-    id: INVITATION_SCENE_ID,
+    id: RSVP_SCENE_ID,
     nextSceneId: NEXT_SCENE_ID,
     init({ sceneManager }) {
-      continueButton?.addEventListener("click", () => {
+      confirmButton?.addEventListener("click", () => {
         sceneManager.nextScene();
       });
     },
