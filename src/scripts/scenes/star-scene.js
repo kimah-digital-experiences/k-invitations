@@ -1,5 +1,5 @@
 const STAR_SCENE_ID = "star";
-const NEXT_SCENE_ID = "scene5";
+const NEXT_SCENE_ID = "scene6";
 
 export function createStarScene() {
   const root = document.querySelector("[data-scene='star']");
