@@ -1,4 +1,4 @@
-import { eventConfig } from "../config/event-config.js?v=10";
+import { eventConfig } from "../config/event-config.js?v=11";
 
 const RSVP_SCENE_ID = "scene8";
 const NEXT_SCENE_ID = "scene9";
@@ -39,8 +39,11 @@ export function createRsvpScene() {
           const message = button.dataset.rsvpMessage || eventConfig.rsvp.affirmativeMessage;
           const whatsappUrl = button.dataset.rsvpUrl || buildWhatsappUrl(message);
 
-          window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-          sceneManager.nextScene();
+          try {
+            window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+          } finally {
+            sceneManager.nextScene();
+          }
         });
       });
     },

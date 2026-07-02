@@ -1,4 +1,4 @@
-import { eventConfig } from "../config/event-config.js?v=10";
+import { eventConfig } from "../config/event-config.js?v=11";
 
 const COORDINATES_SCENE_ID = "scene6";
 const NEXT_SCENE_ID = "scene7";

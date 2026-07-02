@@ -17,6 +17,8 @@ export const eventConfig = {
     negativeMessage: `Hola, soy ${guestNameFallback}. Con mucho cariño agradezco la invitación al Baby Shower de Benjamin. En esta ocasión no podré acompañarlos, pero les deseo un hermoso evento y muchas bendiciones para Benjamin.`,
   },
   gifts: {
-    text: "Se aceptan regalos para Benjamin, excepto zapatos y juguetes.",
+    title: "🎁 Regalos para Benjamin",
+    text:
+      "Si desean obsequiar algo a Benjamin, con mucho cariño les pedimos evitar zapatos y juguetes. Cualquier otro regalo será recibido con enorme gratitud y alegría.",
   },
 };

@@ -720,6 +720,7 @@ button {
 .finale-kicker,
 .finale-title,
 .finale-copy,
+.gift-preferences,
 .finale-message,
 .finale-hint {
   opacity: 0;
@@ -775,6 +776,35 @@ button {
   background:
     linear-gradient(135deg, rgba(169, 199, 232, 0.16), rgba(216, 180, 106, 0.08)),
     rgba(9, 18, 42, 0.48);
+}
+
+.gift-preferences {
+  width: min(100%, 28rem);
+  margin: 1.15rem auto 0;
+  padding: 1rem 1.05rem;
+  border: 1px solid rgba(216, 180, 106, 0.22);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(135deg, rgba(216, 180, 106, 0.12), rgba(169, 199, 232, 0.07)),
+    rgba(9, 18, 42, 0.42);
+  box-shadow: 0 1.2rem 3rem rgba(1, 5, 16, 0.2);
+}
+
+.gift-preferences-title {
+  margin: 0;
+  color: var(--gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.gift-preferences-copy {
+  margin: 0.55rem 0 0;
+  color: rgba(246, 241, 232, 0.82);
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .confirmation-glow,
@@ -865,6 +895,10 @@ button {
 .scene-rsvp.is-revealed .rsvp-copy,
 .scene-finale.is-revealed .finale-copy {
   animation: contentArrival 1s ease 1s forwards;
+}
+
+.scene-finale.is-revealed .gift-preferences {
+  animation: contentArrival 1s ease 1.2s forwards;
 }
 
 .scene-coordinates.is-revealed .event-details {
