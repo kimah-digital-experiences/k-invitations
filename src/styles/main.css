@@ -40,11 +40,83 @@ button {
 }
 
 .experience {
+  position: relative;
   min-height: 100svh;
   overflow: hidden;
   background:
     radial-gradient(circle at 50% 82%, rgba(216, 180, 106, 0.14), transparent 22rem),
     linear-gradient(180deg, #050b16 0%, var(--space-deep) 48%, #0b1830 100%);
+}
+
+.astronaut-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.traveler-astronaut {
+  position: absolute;
+  top: 58%;
+  left: -7rem;
+  width: clamp(4.6rem, 19vw, 8rem);
+  height: auto;
+  opacity: 0.38;
+  transform: translate3d(-10vw, 16vh, 0) rotate(-10deg) scale(0.9);
+  filter:
+    drop-shadow(0 0 1.2rem rgba(169, 199, 232, 0.16))
+    drop-shadow(0 0 2.2rem rgba(216, 180, 106, 0.12));
+  animation: astronautVoyage 52s var(--ease-cinematic) 3s infinite;
+}
+
+.traveler-astronaut-body {
+  animation: astronautFloat 9s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.astronaut-glow {
+  fill: rgba(169, 199, 232, 0.08);
+}
+
+.astronaut-helmet,
+.astronaut-suit,
+.astronaut-pack {
+  fill: rgba(246, 241, 232, 0.12);
+  stroke: rgba(246, 241, 232, 0.72);
+  stroke-width: 2;
+}
+
+.astronaut-visor {
+  fill: rgba(12, 26, 52, 0.72);
+  stroke: rgba(169, 199, 232, 0.72);
+  stroke-width: 1.4;
+}
+
+.astronaut-panel {
+  fill: rgba(216, 180, 106, 0.18);
+  stroke: rgba(216, 180, 106, 0.56);
+  stroke-width: 1.2;
+}
+
+.astronaut-tether,
+.astronaut-arm,
+.astronaut-leg {
+  fill: none;
+  stroke: rgba(246, 241, 232, 0.62);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 5;
+}
+
+.astronaut-tether {
+  stroke: rgba(169, 199, 232, 0.26);
+  stroke-width: 1.4;
+}
+
+.astronaut-star {
+  fill: rgba(216, 180, 106, 0.68);
 }
 
 .scene {
@@ -1196,6 +1268,37 @@ button {
   }
 }
 
+@keyframes astronautVoyage {
+  0% {
+    opacity: 0;
+    transform: translate3d(-12vw, 18vh, 0) rotate(-12deg) scale(0.86);
+  }
+
+  12%,
+  78% {
+    opacity: 0.38;
+  }
+
+  45% {
+    transform: translate3d(46vw, -6vh, 0) rotate(7deg) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(112vw, -28vh, 0) rotate(18deg) scale(0.92);
+  }
+}
+
+@keyframes astronautFloat {
+  from {
+    transform: translateY(-0.35rem) rotate(-2deg);
+  }
+
+  to {
+    transform: translateY(0.35rem) rotate(2deg);
+  }
+}
+
 @keyframes finalStarAway {
   to {
     opacity: 0.48;
@@ -1287,6 +1390,10 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .traveler-astronaut {
+    display: none;
+  }
+
   *,
   *::before,
   *::after {
