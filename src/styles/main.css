@@ -51,19 +51,19 @@ button {
 .astronaut-layer {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
   pointer-events: none;
 }
 
 .traveler-astronaut {
   position: absolute;
-  top: 60%;
-  left: -8rem;
-  width: clamp(4.2rem, 18vw, 7.5rem);
+  top: 18%;
+  left: 8%;
+  width: clamp(5.4rem, 24vw, 8.5rem);
   height: auto;
-  opacity: 0.34;
-  transform: translate3d(-12vw, 17vh, 0) rotate(-10deg) scale(0.88);
+  opacity: 0.48;
+  transform: translate3d(0, 0, 0) rotate(-8deg) scale(0.92);
   filter:
     drop-shadow(0 0 1.35rem rgba(169, 199, 232, 0.14))
     drop-shadow(0 0 2.6rem rgba(216, 180, 106, 0.11));
@@ -84,7 +84,7 @@ button {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
-  z-index: 1;
+  z-index: 2;
   transform: translateY(0);
   transition:
     opacity 640ms var(--ease-cinematic),
@@ -1225,22 +1225,22 @@ button {
 
 @keyframes astronautVoyage {
   0% {
-    opacity: 0;
-    transform: translate3d(-12vw, 18vh, 0) rotate(-12deg) scale(0.86);
+    opacity: 0.42;
+    transform: translate3d(0, 0, 0) rotate(-8deg) scale(0.92);
   }
 
   12%,
   78% {
-    opacity: 0.38;
+    opacity: 0.5;
   }
 
   45% {
-    transform: translate3d(46vw, -6vh, 0) rotate(7deg) scale(1);
+    transform: translate3d(38vw, 12vh, 0) rotate(7deg) scale(0.98);
   }
 
   100% {
-    opacity: 0;
-    transform: translate3d(112vw, -28vh, 0) rotate(18deg) scale(0.92);
+    opacity: 0.18;
+    transform: translate3d(86vw, 34vh, 0) rotate(18deg) scale(0.88);
   }
 }
 
