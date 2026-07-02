@@ -19,6 +19,6 @@ export const eventConfig = {
   gifts: {
     title: "🎁 Regalos para Benjamin",
     text:
-      "Si desean obsequiar algo a Benjamin, con mucho cariño les pedimos evitar zapatos y juguetes. Cualquier otro regalo será recibido con enorme gratitud y alegría.",
+      "Su presencia será nuestro mejor regalo. Si además desean tener un detalle con Benjamin, les agradeceremos elegir un obsequio distinto de zapatos o juguetes.",
   },
 };
