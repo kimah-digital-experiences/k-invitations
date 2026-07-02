@@ -48,32 +48,6 @@ button {
     linear-gradient(180deg, #050b16 0%, var(--space-deep) 48%, #0b1830 100%);
 }
 
-.astronaut-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.traveler-astronaut {
-  position: absolute;
-  top: 18%;
-  left: 8%;
-  width: clamp(5.4rem, 24vw, 8.5rem);
-  height: auto;
-  opacity: 0.48;
-  transform: translate3d(0, 0, 0) rotate(-8deg) scale(0.92);
-  filter:
-    drop-shadow(0 0 1.35rem rgba(169, 199, 232, 0.14))
-    drop-shadow(0 0 2.6rem rgba(216, 180, 106, 0.11));
-  mix-blend-mode: screen;
-  animation:
-    astronautVoyage 54s var(--ease-cinematic) 3s infinite,
-    astronautFloat 9s ease-in-out 3s infinite alternate;
-  user-select: none;
-}
-
 .scene {
   position: relative;
   display: grid;
@@ -1223,37 +1197,6 @@ button {
   }
 }
 
-@keyframes astronautVoyage {
-  0% {
-    opacity: 0.42;
-    transform: translate3d(0, 0, 0) rotate(-8deg) scale(0.92);
-  }
-
-  12%,
-  78% {
-    opacity: 0.5;
-  }
-
-  45% {
-    transform: translate3d(38vw, 12vh, 0) rotate(7deg) scale(0.98);
-  }
-
-  100% {
-    opacity: 0.18;
-    transform: translate3d(86vw, 34vh, 0) rotate(18deg) scale(0.88);
-  }
-}
-
-@keyframes astronautFloat {
-  from {
-    transform: translateY(-0.35rem) rotate(-2deg);
-  }
-
-  to {
-    transform: translateY(0.35rem) rotate(2deg);
-  }
-}
-
 @keyframes finalStarAway {
   to {
     opacity: 0.48;
@@ -1345,10 +1288,6 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .traveler-astronaut {
-    display: none;
-  }
-
   *,
   *::before,
   *::after {
