@@ -716,7 +716,7 @@ button {
 .rsvp-title,
 .rsvp-copy,
 .rsvp-note,
-.rsvp-next-action,
+.rsvp-actions,
 .finale-kicker,
 .finale-title,
 .finale-copy,
@@ -757,6 +757,24 @@ button {
   color: rgba(216, 180, 106, 0.86);
   font-size: 0.95rem;
   line-height: 1.55;
+}
+
+.rsvp-actions {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: center;
+  margin: 2rem auto 0;
+  width: min(100%, 22rem);
+}
+
+.rsvp-actions .primary-action {
+  margin-top: 0;
+}
+
+.rsvp-action-secondary {
+  background:
+    linear-gradient(135deg, rgba(169, 199, 232, 0.16), rgba(216, 180, 106, 0.08)),
+    rgba(9, 18, 42, 0.48);
 }
 
 .confirmation-glow,
@@ -861,7 +879,7 @@ button {
   animation: contentArrival 1s ease 1.35s forwards;
 }
 
-.scene-rsvp.is-revealed .rsvp-next-action,
+.scene-rsvp.is-revealed .rsvp-actions,
 .scene-finale.is-revealed .finale-hint {
   animation: contentArrival 1s ease 1.7s forwards;
 }

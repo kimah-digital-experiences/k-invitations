@@ -1,14 +1,14 @@
-import { eventConfig } from "./config/event-config.js?v=9";
-import { SceneManager } from "./core/scene-manager.js?v=9";
-import { createOpeningScene } from "./scenes/opening-scene.js?v=9";
-import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=9";
-import { createSignalScene } from "./scenes/signal-scene.js?v=9";
-import { createStarScene } from "./scenes/star-scene.js?v=9";
-import { createCelebrationScene } from "./scenes/celebration-scene.js?v=9";
-import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=9";
-import { createInvitationScene } from "./scenes/invitation-scene.js?v=9";
-import { createRsvpScene } from "./scenes/rsvp-scene.js?v=9";
-import { createFinaleScene } from "./scenes/finale-scene.js?v=9";
+import { eventConfig } from "./config/event-config.js?v=10";
+import { SceneManager } from "./core/scene-manager.js?v=10";
+import { createOpeningScene } from "./scenes/opening-scene.js?v=10";
+import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=10";
+import { createSignalScene } from "./scenes/signal-scene.js?v=10";
+import { createStarScene } from "./scenes/star-scene.js?v=10";
+import { createCelebrationScene } from "./scenes/celebration-scene.js?v=10";
+import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=10";
+import { createInvitationScene } from "./scenes/invitation-scene.js?v=10";
+import { createRsvpScene } from "./scenes/rsvp-scene.js?v=10";
+import { createFinaleScene } from "./scenes/finale-scene.js?v=10";
 
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
@@ -121,6 +121,7 @@ function applyEventConfig() {
   setEventText("babyName", eventConfig.babyName);
   setEventText("hosts", eventConfig.hosts);
   setEventText("eventTitle", eventTitle);
+  setEventText("eventDate", eventConfig.date);
   setEventText("eventTime", eventConfig.time);
   setEventText("eventLocation", eventConfig.location.name);
   setEventText("invitationTitle", `Acompáñanos a celebrar a ${eventConfig.babyName}`);

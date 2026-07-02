@@ -1,28 +1,47 @@
-import { eventConfig } from "../config/event-config.js?v=9";
+import { eventConfig } from "../config/event-config.js?v=10";
 
 const RSVP_SCENE_ID = "scene8";
 const NEXT_SCENE_ID = "scene9";
 
 export function createRsvpScene() {
   const root = document.querySelector("[data-scene='scene8']");
-  const confirmButton = document.querySelector("[data-confirm-presence]");
+  const responseButtons = Array.from(document.querySelectorAll("[data-rsvp-response]"));
+
+  function formatWhatsappPhone(phone) {
+    return phone.replace(/\D/g, "");
+  }
+
+  function buildWhatsappUrl(message) {
+    const phone = formatWhatsappPhone(eventConfig.rsvp.phone);
+
+    return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  }
 
   function prepareRsvpMessages() {
-    if (!confirmButton) {
-      return;
-    }
+    responseButtons.forEach((button) => {
+      const message =
+        button.dataset.rsvpResponse === "no"
+          ? eventConfig.rsvp.negativeMessage
+          : eventConfig.rsvp.affirmativeMessage;
 
-    confirmButton.dataset.rsvpPhone = eventConfig.rsvp.phone;
-    confirmButton.dataset.rsvpAffirmativeMessage = eventConfig.rsvp.affirmativeMessage;
-    confirmButton.dataset.rsvpNegativeMessage = eventConfig.rsvp.negativeMessage;
+      button.dataset.rsvpPhone = eventConfig.rsvp.phone;
+      button.dataset.rsvpMessage = message;
+      button.dataset.rsvpUrl = buildWhatsappUrl(message);
+    });
   }
 
   return {
     id: RSVP_SCENE_ID,
     nextSceneId: NEXT_SCENE_ID,
     init({ sceneManager }) {
-      confirmButton?.addEventListener("click", () => {
-        sceneManager.nextScene();
+      responseButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const message = button.dataset.rsvpMessage || eventConfig.rsvp.affirmativeMessage;
+          const whatsappUrl = button.dataset.rsvpUrl || buildWhatsappUrl(message);
+
+          window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+          sceneManager.nextScene();
+        });
       });
     },
     enter() {

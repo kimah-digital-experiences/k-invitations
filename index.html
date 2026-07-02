@@ -8,8 +8,8 @@
       content="Primera escena interactiva de Baby Shower Space: una invitación espacial, cálida y cinematográfica."
     />
     <title>Baby Shower Space</title>
-    <link rel="stylesheet" href="src/styles/main.css?v=8" />
-    <script type="module" src="src/scripts/main.js?v=9"></script>
+    <link rel="stylesheet" href="src/styles/main.css?v=10" />
+    <script type="module" src="src/scripts/main.js?v=10"></script>
   </head>
   <body>
     <main class="experience" aria-label="Baby Shower Space">
@@ -178,11 +178,11 @@
           <dl class="event-details" aria-label="Detalles del evento">
             <div class="event-detail">
               <dt>Fecha</dt>
-              <dd>Por confirmar</dd>
+              <dd data-event-field="eventDate">2 de agosto de 2026</dd>
             </div>
             <div class="event-detail">
               <dt>Hora</dt>
-              <dd data-event-field="eventTime">3:00 pm</dd>
+              <dd data-event-field="eventTime">3:00 p.m.</dd>
             </div>
             <div class="event-detail">
               <dt>Lugar</dt>
@@ -250,12 +250,16 @@
             y nos emociona imaginar este momento acompañados por quienes queremos.
           </p>
           <p class="rsvp-note">
-            La confirmación formal se activará pronto. Por ahora, este paso prepara el
-            cierre de la experiencia Alpha.
+            Elige la respuesta que deseas enviar por WhatsApp.
           </p>
-          <button class="primary-action rsvp-next-action" type="button" data-confirm-presence>
-            Confirmar asistencia
-          </button>
+          <div class="rsvp-actions" aria-label="Opciones de confirmación">
+            <button class="primary-action rsvp-action" type="button" data-rsvp-response="yes">
+              Asistiré
+            </button>
+            <button class="primary-action rsvp-action rsvp-action-secondary" type="button" data-rsvp-response="no">
+              No podré asistir
+            </button>
+          </div>
         </div>
       </section>
 

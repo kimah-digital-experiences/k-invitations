@@ -1,4 +1,4 @@
-import { eventConfig } from "../config/event-config.js?v=9";
+import { eventConfig } from "../config/event-config.js?v=10";
 
 const COORDINATES_SCENE_ID = "scene6";
 const NEXT_SCENE_ID = "scene7";
@@ -7,6 +7,7 @@ export function createCoordinatesScene() {
   const root = document.querySelector("[data-scene='scene6']");
   const continueButton = document.querySelector("[data-continue-from-coordinates]");
   const title = document.querySelector("[data-event-field='eventTitle']");
+  const date = document.querySelector("[data-event-field='eventDate']");
   const time = document.querySelector("[data-event-field='eventTime']");
   const location = document.querySelector("[data-event-field='eventLocation']");
   const hosts = document.querySelector("[data-event-field='hosts']");
@@ -18,6 +19,10 @@ export function createCoordinatesScene() {
 
     if (time) {
       time.textContent = eventConfig.time;
+    }
+
+    if (date) {
+      date.textContent = eventConfig.date;
     }
 
     if (location) {
