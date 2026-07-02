@@ -1,14 +1,14 @@
-import { eventConfig } from "./config/event-config.js?v=13";
-import { SceneManager } from "./core/scene-manager.js?v=13";
-import { createOpeningScene } from "./scenes/opening-scene.js?v=13";
-import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=13";
-import { createSignalScene } from "./scenes/signal-scene.js?v=13";
-import { createStarScene } from "./scenes/star-scene.js?v=13";
-import { createCelebrationScene } from "./scenes/celebration-scene.js?v=13";
-import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=13";
-import { createInvitationScene } from "./scenes/invitation-scene.js?v=13";
-import { createRsvpScene } from "./scenes/rsvp-scene.js?v=13";
-import { createFinaleScene } from "./scenes/finale-scene.js?v=13";
+import { eventConfig } from "./config/event-config.js?v=14";
+import { SceneManager } from "./core/scene-manager.js?v=14";
+import { createOpeningScene } from "./scenes/opening-scene.js?v=14";
+import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=14";
+import { createSignalScene } from "./scenes/signal-scene.js?v=14";
+import { createStarScene } from "./scenes/star-scene.js?v=14";
+import { createCelebrationScene } from "./scenes/celebration-scene.js?v=14";
+import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=14";
+import { createInvitationScene } from "./scenes/invitation-scene.js?v=14";
+import { createRsvpScene } from "./scenes/rsvp-scene.js?v=14";
+import { createFinaleScene } from "./scenes/finale-scene.js?v=14";
 
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
@@ -267,8 +267,6 @@ function bindAutoPlayHoldControls(autoPlay) {
 }
 
 function exposeStartJourneyFallback(sceneManager, autoPlay) {
-  document.body.setAttribute("data-start-fallback-ready", "true");
-
   window.startPolarisJourney = async function startPolarisJourney(event) {
     event?.preventDefault?.();
 
@@ -322,8 +320,6 @@ function applyEventConfig() {
 }
 
 function bootstrapPolarisEngine() {
-  document.body.classList.add("js-ready");
-  setTransitionStatus("JS listo");
   applyEventConfig();
 
   const sceneManager = new SceneManager();
@@ -348,10 +344,6 @@ function bootstrapPolarisEngine() {
 
   bindAutoPlayHoldControls(autoPlay);
   exposeStartJourneyFallback(sceneManager, autoPlay);
-
-  if (document.querySelector("[data-start-journey]")) {
-    setTransitionStatus("JS listo · Botón detectado");
-  }
 
   sceneManager.showScene("opening").catch(showBootstrapError);
 }
