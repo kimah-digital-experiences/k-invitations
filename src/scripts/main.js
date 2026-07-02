@@ -1,20 +1,22 @@
-import { eventConfig } from "./config/event-config.js?v=14";
-import { SceneManager } from "./core/scene-manager.js?v=14";
-import { createOpeningScene } from "./scenes/opening-scene.js?v=14";
-import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=14";
-import { createSignalScene } from "./scenes/signal-scene.js?v=14";
-import { createStarScene } from "./scenes/star-scene.js?v=14";
-import { createCelebrationScene } from "./scenes/celebration-scene.js?v=14";
-import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=14";
-import { createInvitationScene } from "./scenes/invitation-scene.js?v=14";
-import { createRsvpScene } from "./scenes/rsvp-scene.js?v=14";
-import { createFinaleScene } from "./scenes/finale-scene.js?v=14";
+import { eventConfig } from "./config/event-config.js?v=15";
+import { SceneManager } from "./core/scene-manager.js?v=15";
+import { createOpeningScene } from "./scenes/opening-scene.js?v=15";
+import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=15";
+import { createSignalScene } from "./scenes/signal-scene.js?v=15";
+import { createStarScene } from "./scenes/star-scene.js?v=15";
+import { createCelebrationScene } from "./scenes/celebration-scene.js?v=15";
+import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=15";
+import { createInvitationScene } from "./scenes/invitation-scene.js?v=15";
+import { createRsvpScene } from "./scenes/rsvp-scene.js?v=15";
+import { createFinaleScene } from "./scenes/finale-scene.js?v=15";
 
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
 const RSVP_SCENE_ID = "scene8";
 const AUTO_PLAY_DELAY_MS = 4000;
 const SCENE_TRANSITION_MS = 600;
+const BACKGROUND_MUSIC_SRC = "assets/audio/theme.mp3";
+const BACKGROUND_MUSIC_VOLUME = 0.2;
 let isStartingJourney = false;
 
 function wait(ms) {
@@ -266,7 +268,44 @@ function bindAutoPlayHoldControls(autoPlay) {
   });
 }
 
-function exposeStartJourneyFallback(sceneManager, autoPlay) {
+function createBackgroundMusicController() {
+  let audio;
+  let isUnavailable = false;
+
+  function ensureAudio() {
+    if (!audio) {
+      audio = new Audio(BACKGROUND_MUSIC_SRC);
+      audio.loop = true;
+      audio.preload = "auto";
+      audio.volume = BACKGROUND_MUSIC_VOLUME;
+    }
+
+    return audio;
+  }
+
+  function start() {
+    if (isUnavailable) {
+      return;
+    }
+
+    const backgroundMusic = ensureAudio();
+    const playAttempt = backgroundMusic.play();
+
+    if (playAttempt?.catch) {
+      playAttempt.catch((error) => {
+        if (backgroundMusic.error || error?.name === "NotSupportedError") {
+          isUnavailable = true;
+        }
+      });
+    }
+  }
+
+  return {
+    start,
+  };
+}
+
+function exposeStartJourneyFallback(sceneManager, autoPlay, backgroundMusic) {
   window.startPolarisJourney = async function startPolarisJourney(event) {
     event?.preventDefault?.();
 
@@ -275,6 +314,7 @@ function exposeStartJourneyFallback(sceneManager, autoPlay) {
     }
 
     isStartingJourney = true;
+    backgroundMusic.start();
     setTransitionStatus("Iniciando viaje...");
 
     try {
@@ -324,6 +364,7 @@ function bootstrapPolarisEngine() {
 
   const sceneManager = new SceneManager();
   const autoPlay = createAutoPlayController(sceneManager);
+  const backgroundMusic = createBackgroundMusicController();
 
   sceneManager.registerScene(createOpeningScene());
   sceneManager.registerScene(createBenjaminScene());
@@ -338,12 +379,13 @@ function bootstrapPolarisEngine() {
 
   window.PolarisEngine = {
     autoPlay,
+    backgroundMusic,
     eventConfig,
     sceneManager,
   };
 
   bindAutoPlayHoldControls(autoPlay);
-  exposeStartJourneyFallback(sceneManager, autoPlay);
+  exposeStartJourneyFallback(sceneManager, autoPlay, backgroundMusic);
 
   sceneManager.showScene("opening").catch(showBootstrapError);
 }
