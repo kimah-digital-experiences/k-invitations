@@ -1,4 +1,4 @@
-import { eventConfig } from "../config/event-config.js?v=11";
+import { eventConfig } from "../config/event-config.js?v=12";
 
 const FINALE_SCENE_ID = "scene9";
 

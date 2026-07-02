@@ -60,7 +60,7 @@ Generar curiosidad inmediata y establecer que el usuario está entrando en una e
 ### 8. Dependencias con otras escenas
 
 - Debe preparar la sensación de viaje de la Escena 2.
-- No debe revelar aún a Benjamin ni los datos del evento.
+- No debe revelar aún a Benjamín ni los datos del evento.
 - Debe establecer el tono visual y emocional de toda la experiencia.
 
 ---
@@ -111,7 +111,7 @@ Provocar asombro y hacer que el usuario sienta movimiento, escala y descubrimien
 
 - Depende de que la Escena 1 haya iniciado el viaje.
 - Debe conducir naturalmente hacia la constelación de la Escena 3.
-- Debe mantener oculta la revelación central de Benjamin.
+- Debe mantener oculta la revelación central de Benjamín.
 
 ---
 
@@ -160,7 +160,7 @@ Conectar el asombro con una primera capa de ternura al introducir a Daniel y Ana
 ### 8. Dependencias con otras escenas
 
 - Debe recibir la expectativa construida en la Escena 2.
-- Debe preparar emocionalmente la revelación de Benjamin en la Escena 4.
+- Debe preparar emocionalmente la revelación de Benjamín en la Escena 4.
 - Debe mantener coherencia con el tono premium y no infantil.
 
 ---
@@ -169,23 +169,23 @@ Conectar el asombro con una primera capa de ternura al introducir a Daniel y Ana
 
 ### 1. Nombre de la escena
 
-La estrella de Benjamin
+La estrella de Benjamín
 
 ### 2. Objetivo
 
-Revelar a Benjamin como centro emocional de la experiencia y transformar el viaje espacial en una celebración íntima.
+Revelar a Benjamín como centro emocional de la experiencia y transformar el viaje espacial en una celebración íntima.
 
 ### 3. Componentes principales que aparecerán
 
 - Momento de revelación principal.
-- Nombre de Benjamin.
+- Nombre de Benjamín.
 - Símbolo central de estrella.
 - Mensaje emocional breve.
 - Control de avance posterior a la contemplación.
 
 ### 4. Qué información verá el usuario
 
-- El nombre Benjamin como foco principal.
+- El nombre Benjamín como foco principal.
 - Una frase que conecte su llegada con la metáfora de una nueva estrella.
 - La confirmación emocional de que el viaje celebra su Baby Shower.
 
@@ -224,7 +224,7 @@ Celebración en órbita
 
 ### 2. Objetivo
 
-Transformar la ternura en alegría elegante y anunciar que la llegada de Benjamin será celebrada.
+Transformar la ternura en alegría elegante y anunciar que la llegada de Benjamín será celebrada.
 
 ### 3. Componentes principales que aparecerán
 
@@ -235,7 +235,7 @@ Transformar la ternura en alegría elegante y anunciar que la llegada de Benjami
 
 ### 4. Qué información verá el usuario
 
-- Que se celebrará el Baby Shower de Benjamin.
+- Que se celebrará el Baby Shower de Benjamín.
 - Una frase breve que eleve el tono de celebración.
 - Transición emocional entre revelación y datos prácticos.
 
@@ -259,7 +259,7 @@ Transformar la ternura en alegría elegante y anunciar que la llegada de Benjami
 
 ### 8. Dependencias con otras escenas
 
-- Depende de la revelación de Benjamin en la Escena 4.
+- Depende de la revelación de Benjamín en la Escena 4.
 - Debe preparar la llegada de datos concretos en la Escena 6.
 - No debe competir con la claridad de información posterior.
 
@@ -329,12 +329,12 @@ La invitación personal
 
 ### 2. Objetivo
 
-Hacer que el invitado sienta que su presencia importa y convertir la información recibida en deseo de acompañar a Benjamin.
+Hacer que el invitado sienta que su presencia importa y convertir la información recibida en deseo de acompañar a Benjamín.
 
 ### 3. Componentes principales que aparecerán
 
 - Mensaje personal de invitación.
-- Referencia a Benjamin.
+- Referencia a Benjamín.
 - Referencia a Daniel y Ana Josse.
 - Llamado emocional a acompañar.
 - Acción principal hacia confirmación.
@@ -342,7 +342,7 @@ Hacer que el invitado sienta que su presencia importa y convertir la informació
 ### 4. Qué información verá el usuario
 
 - Un mensaje cálido que explique por qué su presencia es importante.
-- Una invitación directa a acompañar a Benjamin.
+- Una invitación directa a acompañar a Benjamín.
 - Una transición clara hacia confirmar asistencia.
 
 ### 5. Qué acciones podrá realizar
@@ -431,7 +431,7 @@ Permitir que el usuario confirme asistencia de forma sencilla, clara y emocional
 
 ### 1. Nombre de la escena
 
-Gracias por acompañar a Benjamin
+Gracias por acompañar a Benjamín
 
 ### 2. Objetivo
 
@@ -440,14 +440,14 @@ Cerrar la experiencia con gratitud, emoción y sensación de pertenencia.
 ### 3. Componentes principales que aparecerán
 
 - Mensaje final de agradecimiento.
-- Referencia a Benjamin.
+- Referencia a Benjamín.
 - Estado final de confirmación.
 - Acceso a detalles importantes del evento.
 - Cierre visual sereno.
 
 ### 4. Qué información verá el usuario
 
-- Agradecimiento por acompañar a Benjamin.
+- Agradecimiento por acompañar a Benjamín.
 - Confirmación de que su respuesta fue recibida, cuando aplique.
 - Recordatorio breve de la emoción del encuentro.
 - Opción de volver a consultar información esencial, si se aprueba.
@@ -474,7 +474,7 @@ Cerrar la experiencia con gratitud, emoción y sensación de pertenencia.
 ### 8. Dependencias con otras escenas
 
 - Depende de la confirmación o decisión tomada en la Escena 8.
-- Debe cerrar el símbolo de Benjamin como estrella central.
+- Debe cerrar el símbolo de Benjamín como estrella central.
 - Debe mantener disponibles los datos esenciales sin reabrir el flujo completo.
 
 ---
@@ -484,7 +484,7 @@ Cerrar la experiencia con gratitud, emoción y sensación de pertenencia.
 - Escena 1 inicia el tono y habilita el recorrido.
 - Escena 2 construye escala y asombro.
 - Escena 3 introduce a los anfitriones y humaniza la travesía.
-- Escena 4 revela a Benjamin como centro emocional.
+- Escena 4 revela a Benjamín como centro emocional.
 - Escena 5 transforma la revelación en celebración.
 - Escena 6 entrega información práctica.
 - Escena 7 convierte la información en invitación personal.

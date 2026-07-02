@@ -51,9 +51,9 @@ Esta estimación contempla el trabajo restante para completar una versión 1.0 u
 - **Reutilización estimada:** 80%
 - **Estado:** Pendiente
 
-## BS-EWI-012 — Escena 4: La estrella de Benjamin
+## BS-EWI-012 — Escena 4: La estrella de Benjamín
 
-- **Descripción:** Implementar el momento emocional central donde Benjamin se presenta como nueva estrella, reforzando ternura y contemplación.
+- **Descripción:** Implementar el momento emocional central donde Benjamín se presenta como nueva estrella, reforzando ternura y contemplación.
 - **Dependencias:** Escena 3, patrón reutilizable de escena narrativa.
 - **Complejidad:** Alta
 - **Riesgo:** Alto
@@ -77,7 +77,7 @@ Esta estimación contempla el trabajo restante para completar una versión 1.0 u
 
 ## BS-EWI-014 — Escena 5: Celebración en órbita
 
-- **Descripción:** Implementar la escena que transforma la revelación de Benjamin en una celebración elegante y cálida.
+- **Descripción:** Implementar la escena que transforma la revelación de Benjamín en una celebración elegante y cálida.
 - **Dependencias:** Escena 4 aprobada.
 - **Complejidad:** Media
 - **Riesgo:** Medio
@@ -121,7 +121,7 @@ Esta estimación contempla el trabajo restante para completar una versión 1.0 u
 
 ## BS-EWI-018 — Escena 7: Invitación personal
 
-- **Descripción:** Implementar la escena emocional donde Daniel y Ana Josse invitan al usuario a acompañar a Benjamin.
+- **Descripción:** Implementar la escena emocional donde Daniel y Ana Josse invitan al usuario a acompañar a Benjamín.
 - **Dependencias:** Escena 6 aprobada, texto emocional final aprobado.
 - **Complejidad:** Media
 - **Riesgo:** Medio
@@ -163,7 +163,7 @@ Esta estimación contempla el trabajo restante para completar una versión 1.0 u
 
 # Sprint 7 — Cierre emocional y experiencia completa
 
-## BS-EWI-022 — Escena 9: Gracias por acompañar a Benjamin
+## BS-EWI-022 — Escena 9: Gracias por acompañar a Benjamín
 
 - **Descripción:** Implementar cierre emocional con gratitud, estado final de confirmación y acceso resumido a datos importantes.
 - **Dependencias:** Escena 8, estado de RSVP definido.
@@ -340,7 +340,7 @@ Rango recomendado de planificación: **110 a 145 horas**, considerando iteracion
 - **Alcance visual creciente:** nuevas ideas visuales pueden aumentar tiempos si se tratan como cambios dentro de tickets existentes.
 - **Sonido:** la política de autoplay móvil y el contexto de WhatsApp pueden limitar la experiencia sonora.
 - **Accesibilidad y reducción de movimiento:** deben considerarse antes del cierre para evitar retrabajo.
-- **Diferencias entre storyboard y v1.0 real:** la Escena 2 implementada actualmente ya revela Benjamin, mientras el storyboard original distribuía esa revelación más adelante; cualquier ajuste narrativo futuro debe aprobarse explícitamente.
+- **Diferencias entre storyboard y v1.0 real:** la Escena 2 implementada actualmente ya revela Benjamín, mientras el storyboard original distribuía esa revelación más adelante; cualquier ajuste narrativo futuro debe aprobarse explícitamente.
 
 ## Recomendaciones para acelerar el desarrollo
 

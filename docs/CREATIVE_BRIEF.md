@@ -2,17 +2,17 @@
 
 ## 1. Concepto creativo
 
-**"Un viaje hacia la primera estrella de Benjamin."**
+**"Un viaje hacia la primera estrella de Benjamín."**
 
-La invitacion debe sentirse como el inicio de una travesia espacial intima, elegante y emocional. No es una pieza decorativa ni una tarjeta digital tradicional: es una experiencia cinematografica breve donde cada invitado siente que esta siendo guiado a traves del universo para celebrar la llegada de Benjamin.
+La invitacion debe sentirse como el inicio de una travesia espacial intima, elegante y emocional. No es una pieza decorativa ni una tarjeta digital tradicional: es una experiencia cinematografica breve donde cada invitado siente que esta siendo guiado a traves del universo para celebrar la llegada de Benjamín.
 
-El concepto combina la inmensidad del cosmos con la delicadeza de una nueva vida. El espacio no se usara como fantasia infantil, sino como una metafora premium: Benjamin como una nueva estrella que empieza a iluminar el universo de Daniel y Ana Josse.
+El concepto combina la inmensidad del cosmos con la delicadeza de una nueva vida. El espacio no se usara como fantasia infantil, sino como una metafora premium: Benjamín como una nueva estrella que empieza a iluminar el universo de Daniel y Ana Josse.
 
 La experiencia debe avanzar como una revelacion progresiva: primero despierta curiosidad, luego asombro, despues ternura y finalmente alegria, emocion y deseo de acompanar a la familia en este momento.
 
 ## 2. Historia
 
-Al abrir el enlace, el invitado entra en un universo silencioso y profundo donde pequenas luces comienzan a moverse como si algo especial estuviera por revelarse. Entre estrellas, nebulosas suaves y constelaciones sutiles, la experiencia guia al usuario en un viaje emocional hacia una nueva luz: Benjamin. La invitacion revela poco a poco que Daniel y Ana Josse estan celebrando la llegada de su bebe, presentando los detalles del Baby Shower como coordenadas de un encuentro especial. El recorrido termina con una invitacion calida y memorable a confirmar asistencia y acompanar a Benjamin en el inicio de su historia.
+Al abrir el enlace, el invitado entra en un universo silencioso y profundo donde pequenas luces comienzan a moverse como si algo especial estuviera por revelarse. Entre estrellas, nebulosas suaves y constelaciones sutiles, la experiencia guia al usuario en un viaje emocional hacia una nueva luz: Benjamín. La invitacion revela poco a poco que Daniel y Ana Josse estan celebrando la llegada de su bebe, presentando los detalles del Baby Shower como coordenadas de un encuentro especial. El recorrido termina con una invitacion calida y memorable a confirmar asistencia y acompanar a Benjamín en el inicio de su historia.
 
 ## 3. Moodboard
 
@@ -37,7 +37,7 @@ La direccion artistica debe ser **premium, cinematografica, espacial y emotiva**
 
 El universo visual debe evitar ilustraciones caricaturescas, cohetes infantiles, planetas con caritas, colores primarios o recursos demasiado literales. En su lugar, debe apoyarse en profundidad, luz, ritmo y composicion.
 
-La invitacion debe sentirse como una pieza editorial interactiva: sobria, bella, memorable y con momentos de sorpresa. El diseno debe tener una relacion clara entre escala cosmica y cercania familiar. El espacio representa lo inmenso; Benjamin representa lo intimo.
+La invitacion debe sentirse como una pieza editorial interactiva: sobria, bella, memorable y con momentos de sorpresa. El diseno debe tener una relacion clara entre escala cosmica y cercania familiar. El espacio representa lo inmenso; Benjamín representa lo intimo.
 
 Principios de direccion:
 
@@ -74,7 +74,7 @@ La combinacion tipografica debe equilibrar presencia cinematografica, lectura cl
 - **Playfair Display** para titulos, nombres y momentos de revelacion. Tiene una presencia editorial, elegante y ceremonial.
 - **Inter** para informacion practica, botones, fechas, ubicacion y textos breves. Es legible, moderna y funciona muy bien en pantallas pequenas.
 
-Esta combinacion permite que "Benjamin" tenga peso emocional y visual, mientras que los detalles del evento se mantienen claros y faciles de leer.
+Esta combinacion permite que "Benjamín" tenga peso emocional y visual, mientras que los detalles del evento se mantienen claros y faciles de leer.
 
 ### Alternativa premium
 
@@ -114,7 +114,7 @@ Principios de motion:
 
 - **Curiosidad:** iniciar con pequenos destellos, profundidad y movimiento casi imperceptible.
 - **Asombro:** revelar una escena cosmica con escala, luz y desplazamiento suave.
-- **Ternura:** desacelerar, acercar la camara emocionalmente y presentar a Benjamin con calidez.
+- **Ternura:** desacelerar, acercar la camara emocionalmente y presentar a Benjamín con calidez.
 - **Alegria:** introducir pequenos brillos, acentos dorados y una sensacion de celebracion contenida.
 - **Emocion:** usar transiciones fluidas que conecten la narrativa con los detalles del evento.
 - **Deseo de acompanar:** cerrar con una llamada clara, calida y facil de responder.
@@ -133,7 +133,7 @@ El ambiente sonoro recomendado:
 - Brillos sutiles, campanas suaves o sintetizadores delicados.
 - Progresion lenta que pase de misterio a calidez.
 
-La musica no debe ser dramatica ni epica en exceso. Debe sentirse como una bienvenida al universo de Benjamin: delicada, luminosa, esperanzadora y memorable.
+La musica no debe ser dramatica ni epica en exceso. Debe sentirse como una bienvenida al universo de Benjamín: delicada, luminosa, esperanzadora y memorable.
 
 Tambien se recomienda contemplar una experiencia silenciosa por defecto o con activacion voluntaria, considerando que muchos invitados abriran el enlace desde WhatsApp en contextos publicos.
 
@@ -143,7 +143,7 @@ Desde que abre el enlace, el usuario debe sentir que entro en algo especial. La 
 
 Luego, la experiencia debe provocar asombro mediante profundidad visual, estrellas, nebulosas y una sensacion de viaje. La informacion no debe aparecer toda de golpe; debe revelarse con ritmo, como si cada seccion fuera una coordenada del trayecto.
 
-Cuando aparezca el nombre **Benjamin**, la experiencia debe cambiar de escala: del universo inmenso a una emocion cercana. Ese momento debe ser el centro afectivo de la invitacion.
+Cuando aparezca el nombre **Benjamín**, la experiencia debe cambiar de escala: del universo inmenso a una emocion cercana. Ese momento debe ser el centro afectivo de la invitacion.
 
 Despues, el usuario debe recibir los detalles del evento de forma clara, hermosa y facil de entender: fecha, hora, lugar, anfitriones y confirmacion. La interfaz debe ser simple, especialmente en mobile, para que ninguna decision visual obstaculice la accion.
 
@@ -159,7 +159,7 @@ Diferenciadores clave:
 - **Direccion cinematografica:** profundidad, luz, ritmo y composicion trabajan como una pieza audiovisual.
 - **Estetica premium no infantil:** el universo se aborda con elegancia, no con recursos caricaturescos.
 - **Revelacion progresiva:** la informacion aparece como parte del viaje, no como bloques estaticos.
-- **Benjamin como estrella central:** el bebe no es solo un nombre en pantalla, sino el motivo simbolico de toda la experiencia.
+- **Benjamín como estrella central:** el bebe no es solo un nombre en pantalla, sino el motivo simbolico de toda la experiencia.
 - **Mobile first desde WhatsApp:** pensada para abrir rapido, emocionar y convertir desde telefono.
 - **Base reutilizable:** la estructura creativa puede convertirse en un sistema para futuras invitaciones tematicas.
 - **Equilibrio entre tecnologia y ternura:** la experiencia debe sentirse moderna sin perder humanidad.
@@ -168,6 +168,6 @@ Diferenciadores clave:
 
 Cada decision futura de diseno, interaccion, sonido y movimiento debe responder una pregunta:
 
-**Esto ayuda a que el invitado quiera acompanar a Benjamin con alegria y emocion?**
+**Esto ayuda a que el invitado quiera acompanar a Benjamín con alegria y emocion?**
 
 Si la respuesta no es clara, el elemento debe simplificarse, transformarse o eliminarse.

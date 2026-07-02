@@ -1,7 +1,7 @@
 const guestNameFallback = "un invitado especial";
 
 export const eventConfig = {
-  babyName: "Benjamin",
+  babyName: "Benjamín",
   hosts: "Daniel y Ana Josse",
   eventType: "Baby Shower",
   date: "2 de agosto de 2026",
@@ -13,12 +13,12 @@ export const eventConfig = {
   rsvp: {
     phone: "+50489089211",
     guestNameFallback,
-    affirmativeMessage: `Hola, soy ${guestNameFallback}. Confirmo con mucha alegría que asistiré al Baby Shower de Benjamin el 2 de agosto de 2026.`,
-    negativeMessage: `Hola, soy ${guestNameFallback}. Con mucho cariño agradezco la invitación al Baby Shower de Benjamin. En esta ocasión no podré acompañarlos, pero les deseo un hermoso evento y muchas bendiciones para Benjamin.`,
+    affirmativeMessage: `Hola, soy ${guestNameFallback}. Confirmo con mucha alegría que asistiré al Baby Shower de Benjamín el 2 de agosto de 2026.`,
+    negativeMessage: `Hola, soy ${guestNameFallback}. Con mucho cariño agradezco la invitación al Baby Shower de Benjamín. En esta ocasión no podré acompañarlos, pero les deseo un hermoso evento y muchas bendiciones para Benjamín.`,
   },
   gifts: {
-    title: "🎁 Regalos para Benjamin",
+    title: "🎁 Regalos para Benjamín",
     text:
-      "Su presencia será nuestro mejor regalo. Si además desean tener un detalle con Benjamin, les agradeceremos elegir un obsequio distinto de zapatos o juguetes.",
+      "Su presencia será nuestro mejor regalo. Si además desean tener un detalle con Benjamín, les agradeceremos elegir un obsequio distinto de zapatos o juguetes.",
   },
 };

@@ -2,7 +2,7 @@
 
 **Estado:** Alpha v0.1
 
-Baby Shower Space es una experiencia digital premium con temática espacial para el Baby Shower de Benjamin. La versión Alpha v0.1 incluye únicamente la Escena 1, la Escena 2, el `SceneManager` actual y la navegación funcional entre ambas escenas.
+Baby Shower Space es una experiencia digital premium con temática espacial para el Baby Shower de Benjamín. La versión Alpha v0.1 incluye únicamente la Escena 1, la Escena 2, el `SceneManager` actual y la navegación funcional entre ambas escenas.
 
 El proyecto está construido como una experiencia web estática, sin frameworks y sin dependencias externas.
 
@@ -50,7 +50,7 @@ index.html
 Incluye:
 
 - Escena 1: apertura espacial.
-- Escena 2: descubrimiento de Benjamin.
+- Escena 2: descubrimiento de Benjamín.
 - SceneManager modular.
 - Navegación entre Escena 1 y Escena 2.
 

@@ -1,4 +1,4 @@
-import { eventConfig } from "../config/event-config.js?v=11";
+import { eventConfig } from "../config/event-config.js?v=12";
 
 const RSVP_SCENE_ID = "scene8";
 const NEXT_SCENE_ID = "scene9";

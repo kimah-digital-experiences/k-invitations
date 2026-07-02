@@ -1,17 +1,19 @@
-import { eventConfig } from "./config/event-config.js?v=11";
-import { SceneManager } from "./core/scene-manager.js?v=11";
-import { createOpeningScene } from "./scenes/opening-scene.js?v=11";
-import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=11";
-import { createSignalScene } from "./scenes/signal-scene.js?v=11";
-import { createStarScene } from "./scenes/star-scene.js?v=11";
-import { createCelebrationScene } from "./scenes/celebration-scene.js?v=11";
-import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=11";
-import { createInvitationScene } from "./scenes/invitation-scene.js?v=11";
-import { createRsvpScene } from "./scenes/rsvp-scene.js?v=11";
-import { createFinaleScene } from "./scenes/finale-scene.js?v=11";
+import { eventConfig } from "./config/event-config.js?v=12";
+import { SceneManager } from "./core/scene-manager.js?v=12";
+import { createOpeningScene } from "./scenes/opening-scene.js?v=12";
+import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=12";
+import { createSignalScene } from "./scenes/signal-scene.js?v=12";
+import { createStarScene } from "./scenes/star-scene.js?v=12";
+import { createCelebrationScene } from "./scenes/celebration-scene.js?v=12";
+import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=12";
+import { createInvitationScene } from "./scenes/invitation-scene.js?v=12";
+import { createRsvpScene } from "./scenes/rsvp-scene.js?v=12";
+import { createFinaleScene } from "./scenes/finale-scene.js?v=12";
 
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
+const RSVP_SCENE_ID = "scene8";
+const AUTO_PLAY_DELAY_MS = 2000;
 let isStartingJourney = false;
 
 function getTransitionStatus() {
@@ -77,7 +79,123 @@ async function forceBenjaminScene(sceneManager) {
   return revealBenjaminManually();
 }
 
-function exposeStartJourneyFallback(sceneManager) {
+function createAutoPlayController(sceneManager) {
+  let isRunning = false;
+  let isPaused = false;
+  let timerId;
+  let targetTime = 0;
+  let remainingDelay = AUTO_PLAY_DELAY_MS;
+
+  function clearTimer() {
+    window.clearTimeout(timerId);
+    timerId = null;
+  }
+
+  function isAtStopScene() {
+    return sceneManager.getCurrentSceneId?.() === RSVP_SCENE_ID;
+  }
+
+  function stop() {
+    isRunning = false;
+    isPaused = false;
+    remainingDelay = AUTO_PLAY_DELAY_MS;
+    clearTimer();
+  }
+
+  function scheduleNext(delay = AUTO_PLAY_DELAY_MS) {
+    clearTimer();
+
+    if (!isRunning || isPaused) {
+      return;
+    }
+
+    if (isAtStopScene()) {
+      stop();
+      return;
+    }
+
+    targetTime = Date.now() + delay;
+    timerId = window.setTimeout(advance, delay);
+  }
+
+  async function advance() {
+    clearTimer();
+
+    if (!isRunning || isPaused) {
+      return;
+    }
+
+    if (sceneManager.isTransitioning?.()) {
+      scheduleNext(120);
+      return;
+    }
+
+    if (isAtStopScene()) {
+      stop();
+      return;
+    }
+
+    const didAdvance = await sceneManager.nextScene({ direction: "forward" });
+
+    if (!didAdvance || isAtStopScene()) {
+      stop();
+      return;
+    }
+
+    scheduleNext();
+  }
+
+  function start() {
+    isRunning = true;
+    isPaused = false;
+    remainingDelay = AUTO_PLAY_DELAY_MS;
+    scheduleNext();
+  }
+
+  function pause() {
+    if (!isRunning || isPaused) {
+      return;
+    }
+
+    remainingDelay = Math.max(0, targetTime - Date.now());
+    isPaused = true;
+    clearTimer();
+  }
+
+  function resume() {
+    if (!isRunning || !isPaused) {
+      return;
+    }
+
+    isPaused = false;
+    scheduleNext(remainingDelay || AUTO_PLAY_DELAY_MS);
+  }
+
+  return {
+    start,
+    stop,
+    pause,
+    resume,
+  };
+}
+
+function bindAutoPlayHoldControls(autoPlay) {
+  const experience = document.querySelector(".experience") ?? document.body;
+
+  ["pointerdown", "touchstart"].forEach((eventName) => {
+    experience.addEventListener(eventName, () => {
+      autoPlay.pause();
+    }, { passive: true });
+  });
+
+  ["pointerup", "pointercancel", "touchend", "touchcancel"].forEach((eventName) => {
+    experience.addEventListener(eventName, () => {
+      autoPlay.resume();
+    }, { passive: true });
+  });
+}
+
+function exposeStartJourneyFallback(sceneManager, autoPlay) {
   document.body.setAttribute("data-start-fallback-ready", "true");
 
   window.startPolarisJourney = async function startPolarisJourney(event) {
@@ -100,6 +218,7 @@ function exposeStartJourneyFallback(sceneManager) {
 
       if (didStart) {
         setTransitionStatus("");
+        autoPlay.start();
       } else {
         setTransitionStatus("No se pudo iniciar el viaje. Recarga la página.");
       }
@@ -137,6 +256,7 @@ function bootstrapPolarisEngine() {
   applyEventConfig();
 
   const sceneManager = new SceneManager();
+  const autoPlay = createAutoPlayController(sceneManager);
 
   sceneManager.registerScene(createOpeningScene());
   sceneManager.registerScene(createBenjaminScene());
@@ -149,11 +269,13 @@ function bootstrapPolarisEngine() {
   sceneManager.registerScene(createFinaleScene());
 
   window.PolarisEngine = {
+    autoPlay,
     eventConfig,
     sceneManager,
   };
 
-  exposeStartJourneyFallback(sceneManager);
+  bindAutoPlayHoldControls(autoPlay);
+  exposeStartJourneyFallback(sceneManager, autoPlay);
 
   if (document.querySelector("[data-start-journey]")) {
     setTransitionStatus("JS listo · Botón detectado");

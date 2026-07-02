@@ -50,7 +50,7 @@ Provocar asombro mediante una sensación de movimiento, escala y descubrimiento.
 
 ### Narrativa
 
-Después de la primera interacción, el usuario siente que inicia un viaje espacial. La pantalla deja de ser estática y se convierte en una travesía lenta entre capas de estrellas y nebulosas. Todavía no se revela el nombre de Benjamin; la experiencia construye expectativa.
+Después de la primera interacción, el usuario siente que inicia un viaje espacial. La pantalla deja de ser estática y se convierte en una travesía lenta entre capas de estrellas y nebulosas. Todavía no se revela el nombre de Benjamín; la experiencia construye expectativa.
 
 ### Elementos visuales
 
@@ -118,23 +118,23 @@ La constelación se transforma en una ruta luminosa que conduce hacia una estrel
 
 ### Nombre de la escena
 
-La estrella de Benjamin
+La estrella de Benjamín
 
 ### Objetivo emocional
 
-Generar ternura y convertir a Benjamin en el centro emocional de toda la experiencia.
+Generar ternura y convertir a Benjamín en el centro emocional de toda la experiencia.
 
 ### Narrativa
 
-La ruta estelar lleva al usuario hasta una luz más cálida y especial. La escena revela que esa nueva estrella representa a Benjamin. El universo deja de sentirse inmenso y distante; ahora se vuelve íntimo, familiar y lleno de significado.
+La ruta estelar lleva al usuario hasta una luz más cálida y especial. La escena revela que esa nueva estrella representa a Benjamín. El universo deja de sentirse inmenso y distante; ahora se vuelve íntimo, familiar y lleno de significado.
 
 ### Elementos visuales
 
-Una estrella principal con halo suave, acentos dorados y luz marfil. El nombre Benjamin debe aparecer como el momento más importante de la experiencia, con presencia elegante y emocional.
+Una estrella principal con halo suave, acentos dorados y luz marfil. El nombre Benjamín debe aparecer como el momento más importante de la experiencia, con presencia elegante y emocional.
 
 ### Animaciones
 
-La estrella crece lentamente en luminosidad. El nombre Benjamin aparece con una revelación pausada, sin golpes visuales. Las partículas alrededor se mueven como si orbitasen con suavidad.
+La estrella crece lentamente en luminosidad. El nombre Benjamín aparece con una revelación pausada, sin golpes visuales. Las partículas alrededor se mueven como si orbitasen con suavidad.
 
 ### Sonido
 
@@ -150,7 +150,7 @@ El usuario puede pausar naturalmente en este momento. La escena debe permitir co
 
 ### Transición hacia la siguiente escena
 
-La luz de la estrella se expande y revela una composición más celebratoria, como si el universo respondiera a la llegada de Benjamin.
+La luz de la estrella se expande y revela una composición más celebratoria, como si el universo respondiera a la llegada de Benjamín.
 
 ## Escena 5
 
@@ -164,7 +164,7 @@ Transformar la ternura en alegría contenida y elegante.
 
 ### Narrativa
 
-El viaje cambia de tono: la llegada de Benjamin no solo es un descubrimiento, también es una celebración. La experiencia presenta el Baby Shower como un encuentro especial alrededor de esa nueva luz.
+El viaje cambia de tono: la llegada de Benjamín no solo es un descubrimiento, también es una celebración. La experiencia presenta el Baby Shower como un encuentro especial alrededor de esa nueva luz.
 
 ### Elementos visuales
 
@@ -226,7 +226,7 @@ El usuario puede leer con calma y avanzar cuando esté listo. Las acciones relac
 
 ### Transición hacia la siguiente escena
 
-Los datos se estabilizan y una nueva señal invita al usuario a acompañar a Benjamin.
+Los datos se estabilizan y una nueva señal invita al usuario a acompañar a Benjamín.
 
 ## Escena 7
 
@@ -244,7 +244,7 @@ Después de conocer los detalles, el usuario recibe una invitación más humana:
 
 ### Elementos visuales
 
-Texto cálido y elegante, rodeado de luz suave. La estrella de Benjamin puede permanecer presente como símbolo central, acompañada por constelaciones discretas.
+Texto cálido y elegante, rodeado de luz suave. La estrella de Benjamín puede permanecer presente como símbolo central, acompañada por constelaciones discretas.
 
 ### Animaciones
 
@@ -278,7 +278,7 @@ Convertir la ilusión en una acción sencilla: confirmar asistencia con confianz
 
 ### Narrativa
 
-El usuario llega al momento de confirmar si acompañará a Benjamin. La confirmación debe sentirse como aceptar una invitación especial, no como completar un trámite.
+El usuario llega al momento de confirmar si acompañará a Benjamín. La confirmación debe sentirse como aceptar una invitación especial, no como completar un trámite.
 
 ### Elementos visuales
 
@@ -308,7 +308,7 @@ Al confirmar, la interfaz responde con una señal luminosa que valida la acción
 
 ### Nombre de la escena
 
-Gracias por acompañar a Benjamin
+Gracias por acompañar a Benjamín
 
 ### Objetivo emocional
 
@@ -316,11 +316,11 @@ Cerrar con gratitud, emoción y sensación de pertenencia.
 
 ### Narrativa
 
-La experiencia agradece al invitado por acompañar a Benjamin. El cierre refuerza que su presencia será parte de un recuerdo familiar importante. El usuario debe salir con una sensación de alegría tranquila y expectativa por el evento.
+La experiencia agradece al invitado por acompañar a Benjamín. El cierre refuerza que su presencia será parte de un recuerdo familiar importante. El usuario debe salir con una sensación de alegría tranquila y expectativa por el evento.
 
 ### Elementos visuales
 
-La estrella de Benjamin vuelve al centro, ahora rodeada de una constelación más completa. El mensaje de agradecimiento debe ser breve, cálido y memorable.
+La estrella de Benjamín vuelve al centro, ahora rodeada de una constelación más completa. El mensaje de agradecimiento debe ser breve, cálido y memorable.
 
 ### Animaciones
 
