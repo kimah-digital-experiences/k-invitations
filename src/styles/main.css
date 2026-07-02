@@ -56,6 +56,10 @@ button {
   opacity: 1;
   pointer-events: auto;
   z-index: 1;
+  transform: translateY(0);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
 }
 
 .scene[hidden] {
@@ -64,6 +68,24 @@ button {
   opacity: 0;
   pointer-events: none;
   z-index: -1;
+}
+
+.scene.is-scene-transition-leaving {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.75rem);
+}
+
+.scene.is-scene-transition-entering {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(1rem);
+}
+
+.scene.is-scene-transition-entering.is-scene-transition-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .scene-opening {

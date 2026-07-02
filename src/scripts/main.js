@@ -1,20 +1,91 @@
-import { eventConfig } from "./config/event-config.js?v=12";
-import { SceneManager } from "./core/scene-manager.js?v=12";
-import { createOpeningScene } from "./scenes/opening-scene.js?v=12";
-import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=12";
-import { createSignalScene } from "./scenes/signal-scene.js?v=12";
-import { createStarScene } from "./scenes/star-scene.js?v=12";
-import { createCelebrationScene } from "./scenes/celebration-scene.js?v=12";
-import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=12";
-import { createInvitationScene } from "./scenes/invitation-scene.js?v=12";
-import { createRsvpScene } from "./scenes/rsvp-scene.js?v=12";
-import { createFinaleScene } from "./scenes/finale-scene.js?v=12";
+import { eventConfig } from "./config/event-config.js?v=13";
+import { SceneManager } from "./core/scene-manager.js?v=13";
+import { createOpeningScene } from "./scenes/opening-scene.js?v=13";
+import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=13";
+import { createSignalScene } from "./scenes/signal-scene.js?v=13";
+import { createStarScene } from "./scenes/star-scene.js?v=13";
+import { createCelebrationScene } from "./scenes/celebration-scene.js?v=13";
+import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=13";
+import { createInvitationScene } from "./scenes/invitation-scene.js?v=13";
+import { createRsvpScene } from "./scenes/rsvp-scene.js?v=13";
+import { createFinaleScene } from "./scenes/finale-scene.js?v=13";
 
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
 const RSVP_SCENE_ID = "scene8";
 const AUTO_PLAY_DELAY_MS = 4000;
+const SCENE_TRANSITION_MS = 600;
 let isStartingJourney = false;
+
+function wait(ms) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
+function getSceneElement(sceneId) {
+  return document.querySelector(`[data-scene='${sceneId}']`);
+}
+
+function resetSceneTransition(sceneElement) {
+  sceneElement?.classList.remove(
+    "is-scene-transition-leaving",
+    "is-scene-transition-entering",
+    "is-scene-transition-active",
+  );
+}
+
+function nextAnimationFrame() {
+  return new Promise((resolve) => {
+    window.requestAnimationFrame(resolve);
+  });
+}
+
+function enableCinematicTransitions(sceneManager) {
+  const showScene = sceneManager.showScene.bind(sceneManager);
+
+  sceneManager.showScene = async function showSceneWithTransition(sceneId, context = {}) {
+    const currentSceneId = sceneManager.getCurrentSceneId?.();
+    const isInitialRender = !currentSceneId;
+
+    if (isInitialRender || currentSceneId === sceneId || sceneManager.isTransitioning?.()) {
+      return showScene(sceneId, context);
+    }
+
+    const leavingScene = getSceneElement(currentSceneId);
+    const enteringScene = getSceneElement(sceneId);
+
+    resetSceneTransition(leavingScene);
+    resetSceneTransition(enteringScene);
+
+    if (leavingScene) {
+      leavingScene.classList.add("is-scene-transition-leaving");
+      await wait(SCENE_TRANSITION_MS);
+    }
+
+    if (enteringScene) {
+      enteringScene.classList.add("is-scene-transition-entering");
+    }
+
+    const didShow = await showScene(sceneId, context);
+
+    resetSceneTransition(leavingScene);
+
+    if (!didShow) {
+      resetSceneTransition(enteringScene);
+      return false;
+    }
+
+    if (enteringScene) {
+      await nextAnimationFrame();
+      enteringScene.classList.add("is-scene-transition-active");
+      await wait(SCENE_TRANSITION_MS);
+      resetSceneTransition(enteringScene);
+    }
+
+    return true;
+  };
+}
 
 function getTransitionStatus() {
   return document.querySelector("[data-transition-status]");
@@ -267,6 +338,7 @@ function bootstrapPolarisEngine() {
   sceneManager.registerScene(createInvitationScene());
   sceneManager.registerScene(createRsvpScene());
   sceneManager.registerScene(createFinaleScene());
+  enableCinematicTransitions(sceneManager);
 
   window.PolarisEngine = {
     autoPlay,
