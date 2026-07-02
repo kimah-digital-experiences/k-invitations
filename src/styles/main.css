@@ -48,6 +48,67 @@ button {
     linear-gradient(180deg, #050b16 0%, var(--space-deep) 48%, #0b1830 100%);
 }
 
+.decorative-astronaut {
+  position: absolute;
+  top: 9svh;
+  right: 6vw;
+  width: clamp(4.5rem, 22vw, 8.5rem);
+  height: auto;
+  opacity: 0.34;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 0 1.4rem rgba(169, 199, 232, 0.18));
+  transform: translate3d(0, 0, 0) rotate(-9deg);
+  transform-origin: 50% 50%;
+  animation: decorativeAstronautDrift 30s var(--ease-cinematic) infinite alternate;
+}
+
+.decorative-astronaut-glow ellipse {
+  fill: rgba(169, 199, 232, 0.1);
+  filter: blur(9px);
+}
+
+.decorative-astronaut-body {
+  fill: rgba(246, 241, 232, 0.64);
+  stroke: rgba(246, 241, 232, 0.72);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.6;
+}
+
+.decorative-astronaut-body path:nth-of-type(2) {
+  fill: rgba(169, 199, 232, 0.22);
+}
+
+.decorative-astronaut-body path:nth-of-type(3),
+.decorative-astronaut-body path:nth-of-type(4),
+.decorative-astronaut-body path:nth-of-type(5),
+.decorative-astronaut-body path:nth-of-type(6),
+.decorative-astronaut-body path:nth-of-type(7),
+.decorative-astronaut-body path:nth-of-type(8) {
+  fill: none;
+}
+
+.decorative-astronaut-details,
+.decorative-astronaut-tether {
+  fill: none;
+  stroke: rgba(216, 180, 106, 0.58);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.decorative-astronaut-details circle {
+  fill: rgba(216, 180, 106, 0.7);
+  stroke: none;
+}
+
+.decorative-astronaut-tether {
+  opacity: 0.4;
+  stroke: rgba(169, 199, 232, 0.48);
+  stroke-width: 2;
+}
+
 .scene {
   position: relative;
   display: grid;
@@ -1077,6 +1138,20 @@ button {
   }
 }
 
+@keyframes decorativeAstronautDrift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-9deg);
+  }
+
+  45% {
+    transform: translate3d(-1.3rem, 2.4rem, 0) rotate(-4deg);
+  }
+
+  100% {
+    transform: translate3d(-2.1rem, 4.2rem, 0) rotate(3deg);
+  }
+}
+
 @keyframes nebulaFloat {
   from {
     transform: translate3d(0, 0, 0) scale(1);
@@ -1212,6 +1287,12 @@ button {
 }
 
 @media (min-width: 720px) {
+  .decorative-astronaut {
+    top: 12svh;
+    right: 10vw;
+    opacity: 0.4;
+  }
+
   .scene-opening {
     align-items: center;
   }
@@ -1295,5 +1376,10 @@ button {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+
+  .decorative-astronaut {
+    animation: none !important;
+    transform: translate3d(0, 0, 0) rotate(-9deg);
   }
 }
