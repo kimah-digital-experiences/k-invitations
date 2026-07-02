@@ -13,7 +13,7 @@ import { createFinaleScene } from "./scenes/finale-scene.js?v=12";
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
 const RSVP_SCENE_ID = "scene8";
-const AUTO_PLAY_DELAY_MS = 2000;
+const AUTO_PLAY_DELAY_MS = 4000;
 let isStartingJourney = false;
 
 function getTransitionStatus() {
