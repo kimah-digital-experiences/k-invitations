@@ -48,65 +48,70 @@ button {
     linear-gradient(180deg, #050b16 0%, var(--space-deep) 48%, #0b1830 100%);
 }
 
-.decorative-astronaut {
+.traveling-craft {
   position: absolute;
-  top: 9svh;
-  right: 6vw;
-  width: clamp(4.5rem, 22vw, 8.5rem);
+  top: 7svh;
+  right: -2rem;
+  width: clamp(6.4rem, 29vw, 10.5rem);
   height: auto;
-  opacity: 0.34;
+  opacity: 0.36;
   pointer-events: none;
   z-index: 1;
-  filter: drop-shadow(0 0 1.4rem rgba(169, 199, 232, 0.18));
-  transform: translate3d(0, 0, 0) rotate(-9deg);
+  filter:
+    drop-shadow(0 0 1.2rem rgba(169, 199, 232, 0.2))
+    drop-shadow(0 0 2.8rem rgba(216, 180, 106, 0.1));
+  transform: translate3d(0, 0, 0) rotate(-13deg);
   transform-origin: 50% 50%;
-  animation: decorativeAstronautDrift 30s var(--ease-cinematic) infinite alternate;
+  animation: travelingCraftDrift 34s var(--ease-cinematic) infinite alternate;
 }
 
-.decorative-astronaut-glow ellipse {
-  fill: rgba(169, 199, 232, 0.1);
-  filter: blur(9px);
-}
-
-.decorative-astronaut-body {
-  fill: rgba(246, 241, 232, 0.64);
-  stroke: rgba(246, 241, 232, 0.72);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 3.6;
-}
-
-.decorative-astronaut-body path:nth-of-type(2) {
-  fill: rgba(169, 199, 232, 0.22);
-}
-
-.decorative-astronaut-body path:nth-of-type(3),
-.decorative-astronaut-body path:nth-of-type(4),
-.decorative-astronaut-body path:nth-of-type(5),
-.decorative-astronaut-body path:nth-of-type(6),
-.decorative-astronaut-body path:nth-of-type(7),
-.decorative-astronaut-body path:nth-of-type(8) {
+.traveling-craft-trail {
   fill: none;
+  stroke: url("#craftTrailGradient");
+  stroke-linecap: round;
+  stroke-width: 5;
+  opacity: 0.66;
 }
 
-.decorative-astronaut-details,
-.decorative-astronaut-tether {
-  fill: none;
-  stroke: rgba(216, 180, 106, 0.58);
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.traveling-craft-trail-soft {
   stroke-width: 2.5;
+  opacity: 0.34;
 }
 
-.decorative-astronaut-details circle {
-  fill: rgba(216, 180, 106, 0.7);
-  stroke: none;
+.traveling-craft-vessel {
+  transform-origin: 128px 35px;
+  animation: travelingCraftBreath 7s var(--ease-cinematic) infinite alternate;
 }
 
-.decorative-astronaut-tether {
-  opacity: 0.4;
-  stroke: rgba(169, 199, 232, 0.48);
-  stroke-width: 2;
+.traveling-craft-glow {
+  fill: rgba(169, 199, 232, 0.16);
+  filter: blur(8px);
+}
+
+.traveling-craft-body {
+  fill: url("#craftBodyGradient");
+  stroke: rgba(246, 241, 232, 0.42);
+  stroke-width: 1.5;
+}
+
+.traveling-craft-wing {
+  fill: rgba(91, 75, 138, 0.34);
+  stroke: rgba(169, 199, 232, 0.22);
+  stroke-width: 1;
+}
+
+.traveling-craft-wing-upper {
+  fill: rgba(169, 199, 232, 0.18);
+}
+
+.traveling-craft-window {
+  fill: url("#craftWindowGradient");
+  stroke: rgba(246, 241, 232, 0.36);
+  stroke-width: 1;
+}
+
+.traveling-craft-pilot {
+  fill: rgba(7, 17, 31, 0.42);
 }
 
 .scene {
@@ -1138,17 +1143,29 @@ button {
   }
 }
 
-@keyframes decorativeAstronautDrift {
+@keyframes travelingCraftDrift {
   0% {
-    transform: translate3d(0, 0, 0) rotate(-9deg);
+    transform: translate3d(0, 0, 0) rotate(-13deg);
   }
 
   45% {
-    transform: translate3d(-1.3rem, 2.4rem, 0) rotate(-4deg);
+    transform: translate3d(-1.4rem, 2.2rem, 0) rotate(-10deg);
   }
 
   100% {
-    transform: translate3d(-2.1rem, 4.2rem, 0) rotate(3deg);
+    transform: translate3d(-2.7rem, 4.4rem, 0) rotate(-6deg);
+  }
+}
+
+@keyframes travelingCraftBreath {
+  from {
+    opacity: 0.74;
+    transform: scale(0.985);
+  }
+
+  to {
+    opacity: 0.95;
+    transform: scale(1.018);
   }
 }
 
@@ -1287,10 +1304,10 @@ button {
 }
 
 @media (min-width: 720px) {
-  .decorative-astronaut {
-    top: 12svh;
-    right: 10vw;
-    opacity: 0.4;
+  .traveling-craft {
+    top: 10svh;
+    right: 6vw;
+    opacity: 0.38;
   }
 
   .scene-opening {
@@ -1378,8 +1395,12 @@ button {
     transition-duration: 0.001ms !important;
   }
 
-  .decorative-astronaut {
+  .traveling-craft,
+  .traveling-craft-vessel {
     animation: none !important;
-    transform: translate3d(0, 0, 0) rotate(-9deg);
+  }
+
+  .traveling-craft {
+    transform: translate3d(0, 0, 0) rotate(-13deg);
   }
 }
