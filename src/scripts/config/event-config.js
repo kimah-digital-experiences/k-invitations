@@ -19,6 +19,6 @@ export const eventConfig = {
   gifts: {
     title: "🎁 Regalos para Benjamín",
     text:
-      "Su presencia será nuestro mejor regalo. Si además desean tener un detalle con Benjamín, les agradeceremos elegir un obsequio distinto de zapatos o juguetes.",
+      "Su presencia será nuestro mejor regalo. Si desea obsequiar algo a Benjamín, que no sean zapatos ni juguetes.",
   },
 };

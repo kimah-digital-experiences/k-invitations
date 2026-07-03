@@ -48,72 +48,6 @@ button {
     linear-gradient(180deg, #050b16 0%, var(--space-deep) 48%, #0b1830 100%);
 }
 
-.traveling-craft {
-  position: absolute;
-  top: 7svh;
-  right: -2rem;
-  width: clamp(6.4rem, 29vw, 10.5rem);
-  height: auto;
-  opacity: 0.36;
-  pointer-events: none;
-  z-index: 1;
-  filter:
-    drop-shadow(0 0 1.2rem rgba(169, 199, 232, 0.2))
-    drop-shadow(0 0 2.8rem rgba(216, 180, 106, 0.1));
-  transform: translate3d(0, 0, 0) rotate(-13deg);
-  transform-origin: 50% 50%;
-  animation: travelingCraftDrift 34s var(--ease-cinematic) infinite alternate;
-}
-
-.traveling-craft-trail {
-  fill: none;
-  stroke: url("#craftTrailGradient");
-  stroke-linecap: round;
-  stroke-width: 5;
-  opacity: 0.66;
-}
-
-.traveling-craft-trail-soft {
-  stroke-width: 2.5;
-  opacity: 0.34;
-}
-
-.traveling-craft-vessel {
-  transform-origin: 128px 35px;
-  animation: travelingCraftBreath 7s var(--ease-cinematic) infinite alternate;
-}
-
-.traveling-craft-glow {
-  fill: rgba(169, 199, 232, 0.16);
-  filter: blur(8px);
-}
-
-.traveling-craft-body {
-  fill: url("#craftBodyGradient");
-  stroke: rgba(246, 241, 232, 0.42);
-  stroke-width: 1.5;
-}
-
-.traveling-craft-wing {
-  fill: rgba(91, 75, 138, 0.34);
-  stroke: rgba(169, 199, 232, 0.22);
-  stroke-width: 1;
-}
-
-.traveling-craft-wing-upper {
-  fill: rgba(169, 199, 232, 0.18);
-}
-
-.traveling-craft-window {
-  fill: url("#craftWindowGradient");
-  stroke: rgba(246, 241, 232, 0.36);
-  stroke-width: 1;
-}
-
-.traveling-craft-pilot {
-  fill: rgba(7, 17, 31, 0.42);
-}
-
 .scene {
   position: relative;
   display: grid;
@@ -1143,32 +1077,6 @@ button {
   }
 }
 
-@keyframes travelingCraftDrift {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(-13deg);
-  }
-
-  45% {
-    transform: translate3d(-1.4rem, 2.2rem, 0) rotate(-10deg);
-  }
-
-  100% {
-    transform: translate3d(-2.7rem, 4.4rem, 0) rotate(-6deg);
-  }
-}
-
-@keyframes travelingCraftBreath {
-  from {
-    opacity: 0.74;
-    transform: scale(0.985);
-  }
-
-  to {
-    opacity: 0.95;
-    transform: scale(1.018);
-  }
-}
-
 @keyframes nebulaFloat {
   from {
     transform: translate3d(0, 0, 0) scale(1);
@@ -1304,12 +1212,6 @@ button {
 }
 
 @media (min-width: 720px) {
-  .traveling-craft {
-    top: 10svh;
-    right: 6vw;
-    opacity: 0.38;
-  }
-
   .scene-opening {
     align-items: center;
   }
@@ -1393,14 +1295,5 @@ button {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-  }
-
-  .traveling-craft,
-  .traveling-craft-vessel {
-    animation: none !important;
-  }
-
-  .traveling-craft {
-    transform: translate3d(0, 0, 0) rotate(-13deg);
   }
 }
