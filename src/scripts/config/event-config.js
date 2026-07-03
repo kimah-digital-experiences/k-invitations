@@ -9,7 +9,7 @@ export const eventConfig = {
     name: "Colegio Médico de Honduras, Tegucigalpa",
     googleMapsUrl: "https://maps.app.goo.gl/5NxaTAyVFGXkBZ117?g_st=ic",
   },
-  time: "3:00 p.m.",
+  time: "4:00 pm – 7:00 pm",
   rsvp: {
     phone: "+50489089211",
     guestNameFallback,
