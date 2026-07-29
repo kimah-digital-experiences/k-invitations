@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Una experiencia de boda íntima, elegante y cinematográfica." />
+    <title>Wedding · Elena &amp; Mateo</title>
+    <link rel="stylesheet" href="../../src/styles/wedding.css" />
+    <script type="module" src="main.js"></script>
+  </head>
+  <body>
+    <main class="experience wedding" aria-label="Experiencia de boda de Elena y Mateo">
+      <section class="scene scene-opening" data-scene="opening">
+        <div class="scene-card"><p class="eyebrow">Una promesa está por comenzar</p><h1>Hay encuentros que cambian el rumbo de una vida.</h1><p>Te invitamos a descubrir el nuestro.</p><button data-start-journey onclick="window.startPolarisJourney?.()">Abrir invitación</button><p class="status" data-transition-status role="status" aria-live="polite"></p></div>
+      </section>
+      <section class="scene" data-scene="couple" hidden><div class="scene-card"><p class="eyebrow">Bride &amp; Groom</p><h2 data-event-field="couple"></h2><p>Elegimos caminar juntos.</p><button data-wedding-next>Conocer nuestra historia</button></div></section>
+      <section class="scene" data-scene="story" hidden><div class="scene-card"><p class="eyebrow">Our Story</p><h2 data-event-field="storyTitle"></h2><p data-event-field="storyCopy"></p><button data-wedding-next>Guardar la fecha</button></div></section>
+      <section class="scene" data-scene="date" hidden><div class="scene-card"><p class="eyebrow">The Date</p><h2 data-event-field="eventDate"></h2><p data-event-field="eventTime"></p><button data-wedding-next>Ver el lugar</button></div></section>
+      <section class="scene" data-scene="location" hidden><div class="scene-card"><p class="eyebrow">Location</p><h2 data-event-field="eventLocation"></h2><p>Un jardín al atardecer será testigo de nuestro sí.</p><button data-wedding-next>Ver recuerdos</button></div></section>
+      <section class="scene" data-scene="gallery" hidden><div class="scene-card"><p class="eyebrow">Gallery</p><h2>Momentos que atesoramos</h2><p data-event-field="galleryCopy"></p><div class="gallery" aria-label="Galería decorativa"><span>El encuentro</span><span>La aventura</span><span>La promesa</span></div><button data-wedding-next>Confirmar asistencia</button></div></section>
+      <section class="scene" data-scene="rsvp" hidden><div class="scene-card"><p class="eyebrow">RSVP</p><h2>¿Celebras con nosotros?</h2><p data-event-field="rsvpCopy"></p><button data-wedding-next>Confirmar y continuar</button></div></section>
+      <section class="scene" data-scene="closing" hidden><div class="scene-card"><p class="eyebrow">18 · 10 · 2026</p><h2 data-event-field="closingTitle"></h2><p data-event-field="closingCopy"></p><a href="../../index.html">Volver a Polaris Showcase</a></div></section>
+    </main>
+  </body>
+</html>

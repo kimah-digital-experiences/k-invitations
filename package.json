@@ -1,0 +1,8 @@
+{
+  "name": "polaris-platform",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "create-template": "node scripts/create-template.mjs"
+  }
+}
