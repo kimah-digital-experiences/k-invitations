@@ -1,4 +1,4 @@
-import { eventConfig } from "../config/event-config.js?v=12";
+import { eventConfig } from "../config/event-config.js?v=18";
 
 const RSVP_SCENE_ID = "scene8";
 const NEXT_SCENE_ID = "scene9";
@@ -6,7 +6,6 @@ const NEXT_SCENE_ID = "scene9";
 export function createRsvpScene() {
   const root = document.querySelector("[data-scene='scene8']");
   const responseButtons = Array.from(document.querySelectorAll("[data-rsvp-response]"));
-  const giftMessage = root?.querySelector(".rsvp-actions + .rsvp-note");
 
   function formatWhatsappPhone(phone) {
     return phone.replace(/\D/g, "");
@@ -29,22 +28,6 @@ export function createRsvpScene() {
       button.dataset.rsvpMessage = message;
       button.dataset.rsvpUrl = buildWhatsappUrl(message);
     });
-  }
-
-  function hydrateGiftMessage() {
-    if (!giftMessage) {
-      return;
-    }
-
-    giftMessage.replaceChildren();
-
-    const title = document.createElement("strong");
-    title.textContent = eventConfig.gifts.title;
-
-    const lineBreak = document.createElement("br");
-    const copy = document.createTextNode(eventConfig.gifts.text);
-
-    giftMessage.append(title, lineBreak, copy);
   }
 
   return {
@@ -70,7 +53,6 @@ export function createRsvpScene() {
       }
 
       prepareRsvpMessages();
-      hydrateGiftMessage();
       root.removeAttribute("hidden");
       root.classList.remove("is-revealed");
 
