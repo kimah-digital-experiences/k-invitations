@@ -2,13 +2,13 @@ import { createCollectionScene } from "../../shared/scenes/create-collection-sce
 import { eventConfig } from "../config/event-config.js";
 
 const colorVariables = {
-  aegean: "--blue",
-  sea: "--sea",
-  bougainvillea: "--pink",
-  sunset: "--sun",
-  limestone: "--ivory",
+  turquoise: "--turquoise",
+  palm: "--palm",
+  sand: "--sand",
+  coral: "--coral",
+  white: "--white",
 };
 
-export function createSantoriniScene(sceneId) {
+export function createTropicalScene(sceneId) {
   return createCollectionScene(sceneId, eventConfig, colorVariables);
 }

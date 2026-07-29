@@ -4,7 +4,7 @@ import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { templates } from "../../src/scripts/templates/index.js";
 
-assert.equal(templates.length, 4, "Polaris debe registrar cuatro experiencias.");
+assert.equal(templates.length, 5, "Polaris debe registrar cinco experiencias.");
 assert.equal(new Set(templates.map(({ id }) => id)).size, templates.length, "Los IDs deben ser únicos.");
 
 for (const template of templates) {

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="An elegant tropical birthday celebration by the sea for Benjamin." />
+    <title>Benjamin's Tropical Birthday</title>
+    <link rel="stylesheet" href="../../src/styles/tropical-birthday.css" />
+    <script type="module" src="main.js"></script>
+  </head>
+  <body>
+    <main class="experience tropical" aria-label="Benjamin's Tropical Birthday invitation experience">
+      <section class="scene scene-opening" data-scene="opening">
+        <img class="scene-image parallax-image" data-event-image="opening" alt="Palm silhouettes overlooking a calm sea at coral sunset" />
+        <div class="opening-shade"></div>
+        <div class="leaf leaf--left" aria-hidden="true"></div><div class="leaf leaf--right" aria-hidden="true"></div>
+        <div class="editorial editorial--opening">
+          <p class="kicker" data-event-field="openingKicker"></p><span class="rule"></span>
+          <h1 data-event-field="openingTitle"></h1><p class="lede" data-event-field="openingCopy"></p>
+          <button class="action action--light" data-start-journey onclick="window.startPolarisJourney?.()">Enter paradise</button>
+          <p class="status" data-transition-status role="status" aria-live="polite"></p>
+        </div><p class="coordinates">18° N · Island time</p>
+      </section>
+      <section class="scene scene-countdown" data-scene="countdown" hidden>
+        <div class="sun-orbit" aria-hidden="true"></div><div class="editorial editorial--center glass-card">
+          <p class="kicker" data-event-field="countdownKicker"></p><h2 data-event-field="countdownTitle"></h2>
+          <div class="countdown" aria-label="Countdown to the celebration"><p><strong data-countdown="days">00</strong><span>Days</span></p><p><strong data-countdown="hours">00</strong><span>Hours</span></p><p><strong data-countdown="minutes">00</strong><span>Minutes</span></p></div>
+          <button class="text-action text-action--light" data-next-scene>Continue</button>
+        </div>
+      </section>
+      <section class="scene scene-message" data-scene="message" hidden><div class="split">
+        <figure class="image-frame"><img class="parallax-image" data-event-image="message" alt="A secluded tropical cove framed by palm leaves" /></figure>
+        <div class="editorial"><p class="kicker" data-event-field="messageKicker"></p><h2 data-event-field="messageTitle"></h2><p class="lede" data-event-field="messageCopy"></p><button class="action" data-next-scene>Discover the details</button></div>
+      </div></section>
+      <section class="scene scene-details" data-scene="details" hidden><div class="editorial editorial--center details">
+        <p class="kicker" data-event-field="detailsKicker"></p><h2 data-event-field="date"></h2>
+        <div class="detail-grid"><p><span>Time</span><strong data-event-field="time"></strong></p><p><span>Location</span><strong data-event-field="location"></strong></p></div>
+        <a class="action" data-location-link target="_blank" rel="noreferrer">Open location</a><button class="text-action" data-next-scene>What to wear</button>
+      </div></section>
+      <section class="scene scene-dress" data-scene="dress-code" hidden><div class="botanical-shadow" aria-hidden="true"></div><div class="editorial glass-card">
+        <p class="kicker" data-event-field="dressKicker"></p><h2 data-event-field="dressTitle"></h2><p class="lede" data-event-field="dressCopy"></p><p class="note" data-event-field="dressNote"></p>
+        <div class="palette" aria-label="Suggested color palette"><span></span><span></span><span></span><span></span><span></span></div><button class="action" data-next-scene>See the inspiration</button>
+      </div></section>
+      <section class="scene scene-gallery" data-scene="gallery" hidden><div class="gallery-copy editorial"><p class="kicker" data-event-field="galleryKicker"></p><h2 data-event-field="galleryTitle"></h2><p data-event-field="galleryCopy"></p><button class="action" data-next-scene>Reserve my place</button></div><div class="gallery-grid"><img data-event-image="gallery.0" alt="Elegant tropical table beneath decorative lights" /><img data-event-image="gallery.1" alt="Turquoise ocean reflecting warm evening light" /><img data-event-image="gallery.2" alt="Close detail of sculptural monstera leaves" /></div></section>
+      <section class="scene scene-rsvp" data-scene="rsvp" hidden><div class="editorial editorial--center glass-card"><p class="kicker" data-event-field="rsvpKicker"></p><h2 data-event-field="rsvpTitle"></h2><p class="lede" data-event-field="rsvpCopy"></p><a class="action action--light" data-rsvp-link target="_blank" rel="noreferrer">Confirm on WhatsApp</a><button class="text-action text-action--light" data-next-scene>One last note</button></div></section>
+      <footer class="scene scene-closing" data-scene="closing" hidden><div class="editorial editorial--center"><span class="monogram">BT</span><p class="kicker" data-event-field="closingKicker"></p><h2 data-event-field="closingTitle"></h2><p class="lede" data-event-field="closingCopy"></p><a class="text-action" href="../../index.html">Back to Polaris Showcase</a></div></footer>
+    </main>
+  </body>
+</html>
