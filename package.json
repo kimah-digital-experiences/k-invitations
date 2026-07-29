@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "create-template": "node scripts/create-template.mjs"
+    "create-template": "node scripts/create-template.mjs",
+    "build": "node .github/scripts/validate-tropical-birthday.mjs"
   }
 }

@@ -1,5 +1,6 @@
 import { babyShowerSpaceTemplate } from "./baby-shower-space/template-manifest.js";
 import { santoriniBirthdayTemplate } from "./santorini-birthday/template-manifest.js";
+import { tropicalBirthdayTemplate } from "./tropical-birthday/template-manifest.js";
 import { templateStarter } from "./template-starter/template-manifest.js";
 import { weddingTemplate } from "./wedding/template-manifest.js";
 
@@ -32,6 +33,14 @@ export const templates = [
     image: "assets/images/santorini/caldera.svg",
     launchUrl: "experiences/santorini-birthday/",
     manifest: santoriniBirthdayTemplate,
+  },
+  {
+    id: "tropical-birthday",
+    name: "Tropical Birthday",
+    description: "Una celebración isleña sofisticada entre palmeras, luz coral y mar turquesa.",
+    image: "assets/images/tropical/tropical-sunset.svg",
+    launchUrl: "experiences/tropical-birthday/",
+    manifest: tropicalBirthdayTemplate,
   },
   {
     id: "template-starter",
