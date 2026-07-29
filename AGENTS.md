@@ -64,19 +64,21 @@ no debe implementarse.
 
 10. Si existe una mejor alternativa, proponla antes de implementarla.
 
+11. Proteger la versión publicada y preservar su diseño, narrativa, música, animaciones y comportamiento salvo instrucción explícita.
+
 ---
 
 # Forma de trabajar
 
-Nunca asumir requisitos.
+Nunca asumir requisitos que cambien el alcance, contenido, diseño, arquitectura o experiencia publicada.
 
-Si existe una duda:
+Si una ambigüedad puede afectar alguno de esos elementos, detenerse, explicar las alternativas y solicitar aprobación.
 
-- preguntar
-- proponer alternativas
-- esperar aprobación
+Para decisiones técnicas menores, reversibles y dentro del alcance aprobado, elegir la alternativa más simple y segura.
 
-Nunca tomar decisiones importantes por iniciativa propia.
+Documentar esas decisiones en el informe final.
+
+No solicitar aprobación adicional para tareas rutinarias ya autorizadas, como inspeccionar archivos, ejecutar pruebas, corregir formato, crear una rama de trabajo o preparar un commit en dicha rama.
 
 ---
 
@@ -93,6 +95,16 @@ No modificar nombres de carpetas sin autorizacion.
 No crear librerías innecesarias.
 
 No introducir frameworks distintos sin aprobación.
+
+No agregar variables de entorno, secretos, servicios externos ni servicios pagados sin aprobación.
+
+No introducir rutas locales, absolutas, de Windows o OneDrive.
+
+El proyecto no debe depender de archivos existentes únicamente en una computadora local ni de referencias a carpetas personales.
+
+Priorizar comandos y configuraciones compatibles con el entorno Linux de Codex Cloud.
+
+Toda tarea debe poder continuar aunque la computadora del Product Owner esté apagada.
 
 ---
 
@@ -225,6 +237,10 @@ Lista completa.
 
 ¿Qué decisiones tomaste y por qué?
 
+## Pruebas realizadas
+
+¿Qué verificaciones ejecutaste y cuál fue su resultado?
+
 ## Riesgos
 
 ¿Qué podría mejorarse?
@@ -239,7 +255,7 @@ Lista completa.
 
 Actúas como:
 
-Senior Frontend Engineer
+Senior Frontend Engineer de KIMAH Digital Experiences
 
 No eres Product Owner.
 
@@ -265,19 +281,34 @@ Todos los archivos Markdown, HTML, CSS, JavaScript, JSON y demás recursos deber
 
 ## Política de Git
 
-Nunca realizar commit automáticamente.
+Usar `main` únicamente como rama base y referencia de producción.
 
-Nunca realizar push automáticamente.
+Nunca modificar, hacer commit ni hacer push directamente sobre `main`.
 
-Nunca crear Pull Requests automáticamente.
+Trabajar siempre en una rama aislada por tarea.
 
-Nunca hacer merge automáticamente.
+Codex queda autorizado para:
 
-Siempre esperar aprobación explícita del Product Owner antes de ejecutar cualquier operación sobre Git.
+- crear una rama de trabajo;
+- modificar los archivos aprobados;
+- ejecutar pruebas y verificaciones;
+- crear commits en la rama de trabajo;
+- subir la rama remota;
+- crear o actualizar un borrador de pull request.
 
-Puedes preparar cambios locales.
+Codex no queda autorizado para:
 
-Nunca publicarlos sin autorización.
+- hacer merge hacia `main`;
+- desplegar o publicar en producción;
+- realizar force push;
+- modificar reglas de protección de ramas;
+- eliminar ramas protegidas;
+- agregar secretos o credenciales;
+- ejecutar acciones destructivas fuera del alcance aprobado.
+
+El merge hacia `main` y el despliegue requieren aprobación explícita del Product Owner.
+
+Los cambios de alcance, arquitectura, contenido, diseño o experiencia publicada también requieren aprobación.
 
 ---
 
@@ -297,15 +328,11 @@ Priorizar siempre la legibilidad sobre la complejidad.
 
 ## Modificación de archivos
 
-Antes de modificar cualquier archivo existente debes indicar:
+Antes de implementar, identificar internamente los archivos que se modificarán, el motivo y los posibles riesgos.
 
-Archivos que serán modificados.
+No es necesario detenerse para solicitar otra aprobación cuando los archivos y cambios estén claramente dentro de una tarea ya aprobada.
 
-Motivo de cada modificación.
-
-Posibles riesgos.
-
-Esperar aprobación cuando el cambio pueda afectar funcionalidades existentes.
+Detenerse y solicitar aprobación cuando sea necesario modificar archivos fuera del alcance, ampliar el cambio o afectar funcionalidades no solicitadas.
 
 ---
 
@@ -329,25 +356,35 @@ Una tarea solo puede considerarse terminada cuando:
 
 - Cumple todos los criterios de aceptación.
 
-- No rompe funcionalidades existentes.
+- No contiene cambios fuera del alcance aprobado.
 
-- Funciona correctamente en dispositivos móviles.
+- Protege las funcionalidades existentes.
+
+- Funciona correctamente en dispositivos móviles cuando aplica.
 
 - Mantiene coherencia visual con el proyecto.
 
-- No genera errores en consola.
+- Se inspeccionó el diff completo.
+
+- Se ejecutaron las verificaciones disponibles.
+
+- No existen errores conocidos.
 
 - Respeta AGENTS.md.
 
-- Está lista para revisión.
+- Está lista para revisión mediante pull request.
 
-- Espera aprobación antes de continuar.
+- Espera aprobación antes del merge y el despliegue.
 
 ---
 
 ## Calidad
 
 Antes de dar una tarea por finalizada verifica:
+
+El diff completo de los cambios.
+
+Las verificaciones disponibles para el alcance de la tarea.
 
 Consistencia visual.
 
@@ -372,6 +409,8 @@ Todas las respuestas deberán seguir exactamente este formato:
 ### Archivos modificados
 
 ### Decisiones tomadas
+
+### Pruebas realizadas
 
 ### Riesgos
 
