@@ -42,6 +42,9 @@ jobs:
       - name: Validar respaldos estáticos de metadatos
         run: node .github/scripts/validate-event-metadata.mjs
 
+      - name: Validar Template Starter
+        run: node .github/scripts/validate-template-starter.mjs
+
       - name: Validar rutas, recursos, nombres y credenciales
         shell: bash
         run: |
