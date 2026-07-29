@@ -1,0 +1,217 @@
+name: Validación mínima
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validar sitio estático
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Validar sintaxis de JavaScript
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' javascript_files < <(git ls-files -z -- '*.js')
+
+          if ((${#javascript_files[@]} == 0)); then
+            echo "::notice::No hay archivos JavaScript versionados para validar."
+            exit 0
+          fi
+
+          for file in "${javascript_files[@]}"; do
+            if ! node --check "$file"; then
+              echo "::error file=$file::Falló la validación de sintaxis JavaScript. Corrige la sintaxis indicada por Node.js en '$file'."
+              exit 1
+            fi
+          done
+
+      - name: Validar rutas, recursos, nombres y credenciales
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          import re
+          import subprocess
+          import sys
+          from pathlib import Path, PurePosixPath
+          from urllib.parse import unquote, urlsplit
+
+          root = Path.cwd()
+          tracked = subprocess.run(
+              ["git", "ls-files", "-z"], check=True, capture_output=True
+          ).stdout.decode("utf-8").split("\0")
+          tracked = [path for path in tracked if path]
+          tracked_set = set(tracked)
+          failures = []
+
+          def fail(check, file, correction):
+              failures.append((check, file, correction))
+
+          # GitHub Pages y Linux distinguen mayúsculas de minúsculas.
+          names = {}
+          for path in tracked:
+              folded = path.casefold()
+              previous = names.get(folded)
+              if previous and previous != path:
+                  fail(
+                      "Nombres duplicados sin distinguir mayúsculas/minúsculas",
+                      f"{previous}, {path}",
+                      "Renombra uno de los archivos para que sus rutas sean únicas también en sistemas que ignoran mayúsculas.",
+                  )
+              names[folded] = path
+
+          text_suffixes = {
+              ".css", ".html", ".js", ".json", ".md", ".mjs", ".svg", ".txt", ".yaml", ".yml"
+          }
+          forbidden_paths = [
+              (re.compile(r"file://[^\s`\"']+", re.IGNORECASE), "elimina la URL file:// y usa una ruta relativa al repositorio"),
+              (re.compile(r"(?:^|[\s\"'=:(])(?:[A-Za-z]:[\\/])"), "reemplaza la ruta de Windows por una ruta relativa al repositorio"),
+              (re.compile(r"(?:^|[\s\"'=:(])/(?:Users|home)/[^/\s\"']+", re.IGNORECASE), "reemplaza la carpeta personal por una ruta relativa al repositorio"),
+              (re.compile(r"(?:^|[\\/])OneDrive(?:[\\/]|$)", re.IGNORECASE), "elimina la referencia a OneDrive y versiona el recurso dentro del repositorio"),
+          ]
+          secret_patterns = [
+              (re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----"), "clave privada"),
+              (re.compile(r"\bgh[opusr]_[A-Za-z0-9]{30,}\b"), "token de GitHub"),
+              (re.compile(r"\bAKIA[0-9A-Z]{16}\b"), "clave de acceso de AWS"),
+              (re.compile(r"(?i)\b(?:api[_-]?key|client[_-]?secret|password|passwd)\b\s*[:=]\s*[\"'][^\"'\s]{8,}[\"']"), "credencial asignada en texto plano"),
+          ]
+
+          texts = {}
+          scanner_file = ".github/workflows/validate.yml"
+          for path in tracked:
+              # El workflow contiene necesariamente las firmas que busca; sí participa en las demás validaciones.
+              if path == scanner_file or Path(path).suffix.lower() not in text_suffixes:
+                  continue
+              try:
+                  text = (root / path).read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  fail("Codificación de texto", path, "guarda el archivo como UTF-8")
+                  continue
+              texts[path] = text
+              for pattern, correction in forbidden_paths:
+                  if pattern.search(text):
+                      fail("Ruta local o absoluta no permitida", path, correction)
+              for pattern, kind in secret_patterns:
+                  if pattern.search(text):
+                      fail(
+                          "Posible secreto o credencial",
+                          path,
+                          f"retira la {kind}, revócala si es real y usa un mecanismo seguro; no guardes secretos en el repositorio",
+                      )
+
+          references = []
+          html_attributes = re.compile(r"\b(?:href|src)\s*=\s*[\"']([^\"']+)[\"']", re.IGNORECASE)
+          css_urls = re.compile(r"url\(\s*[\"']?([^\"')]+)", re.IGNORECASE)
+          js_imports = re.compile(r"\b(?:import|export)\s+(?:[^;]*?\s+from\s+)?[\"']([^\"']+)[\"']")
+          asset_literals = re.compile(r"[\"']((?:\.{0,2}/)?assets/[^\"']+)[\"']")
+
+          for source, text in texts.items():
+              suffix = Path(source).suffix.lower()
+              patterns = []
+              if suffix == ".html":
+                  patterns.append(html_attributes)
+              if suffix == ".css":
+                  patterns.append(css_urls)
+              if suffix in {".js", ".mjs"}:
+                  patterns.extend((js_imports, asset_literals))
+              for pattern in patterns:
+                  references.extend((source, match.group(1)) for match in pattern.finditer(text))
+
+          for source, raw_reference in references:
+              parsed = urlsplit(raw_reference)
+              if parsed.scheme or raw_reference.startswith(("//", "#", "data:", "mailto:", "tel:")):
+                  continue
+              path_part = unquote(parsed.path)
+              if not path_part:
+                  continue
+              if path_part.startswith("/"):
+                  fail(
+                      "Recurso local con ruta absoluta",
+                      source,
+                      f"cambia '{raw_reference}' por una ruta relativa compatible con /baby-shower-space/",
+                  )
+                  continue
+              base = PurePosixPath(source).parent
+              candidate = str(base.joinpath(path_part)) if path_part.startswith(".") else (
+                  str(base.joinpath(path_part)) if source.endswith((".js", ".mjs", ".css")) and not path_part.startswith("assets/") else path_part
+              )
+              normalized_parts = []
+              for part in PurePosixPath(candidate).parts:
+                  if part == "..":
+                      if normalized_parts:
+                          normalized_parts.pop()
+                  elif part not in ("", "."):
+                      normalized_parts.append(part)
+              candidate = "/".join(normalized_parts)
+              if candidate not in tracked_set:
+                  case_match = next((item for item in tracked if item.casefold() == candidate.casefold()), None)
+                  if case_match:
+                      correction = f"corrige la capitalización de '{raw_reference}' para que coincida con '{case_match}'"
+                  else:
+                      correction = f"agrega el recurso '{candidate}' al repositorio o corrige la referencia '{raw_reference}'"
+                  fail("Recurso local inexistente o con capitalización incorrecta", source, correction)
+
+          if failures:
+              for check, file, correction in failures:
+                  print(f"::error file={file}::{check}. Archivo involucrado: {file}. Cómo corregirlo: {correction}.")
+              sys.exit(1)
+
+          print(f"Validación completada: {len(tracked)} archivos versionados y {len(references)} referencias locales inspeccionadas.")
+          PY
+
+      - name: Probar recursos críticos por HTTP bajo el subdirectorio de Pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          site_root="$(mktemp -d)"
+          server_log="$(mktemp)"
+          mkdir -p "$site_root/baby-shower-space"
+          git archive HEAD | tar -x -C "$site_root/baby-shower-space"
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory "$site_root" >"$server_log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true; rm -rf "$site_root" "$server_log"' EXIT
+
+          base_url="http://127.0.0.1:4173/baby-shower-space"
+          for attempt in {1..20}; do
+            if curl --silent --fail --output /dev/null "$base_url/"; then
+              break
+            fi
+            if ((attempt == 20)); then
+              cat "$server_log"
+              echo "::error file=index.html::Falló la prueba de humo: el servidor HTTP local no respondió. Verifica que el sitio pueda servirse desde /baby-shower-space/."
+              exit 1
+            fi
+            sleep 0.25
+          done
+
+          declare -A critical_resources=(
+            ["Página principal"]="/"
+            ["Hoja de estilos principal"]="/src/styles/main.css?v=22"
+            ["Módulo JavaScript principal"]="/src/scripts/main.js?v=17"
+            ["Audio principal"]="/assets/audio/theme.mp3"
+          )
+
+          for label in "${!critical_resources[@]}"; do
+            resource="${critical_resources[$label]}"
+            if ! curl --silent --show-error --fail --output /dev/null "$base_url$resource"; then
+              file="${resource#/}"
+              file="${file%%\?*}"
+              [[ -n "$file" ]] || file="index.html"
+              echo "::error file=$file::Falló la comprobación HTTP de '$label' en '$base_url$resource'. Confirma que '$file' exista, respete su capitalización y pueda publicarse bajo /baby-shower-space/."
+              exit 1
+            fi
+          done
