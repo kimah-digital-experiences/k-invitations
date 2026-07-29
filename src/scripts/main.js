@@ -1,13 +1,13 @@
-import { eventConfig } from "./config/event-config.js?v=17";
+import { eventConfig } from "./config/event-config.js?v=18";
 import { SceneManager } from "./core/scene-manager.js?v=16";
 import { createOpeningScene } from "./scenes/opening-scene.js?v=16";
 import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=16";
 import { createSignalScene } from "./scenes/signal-scene.js?v=16";
 import { createStarScene } from "./scenes/star-scene.js?v=16";
-import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=17";
+import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=18";
 import { createInvitationScene } from "./scenes/invitation-scene.js?v=16";
-import { createRsvpScene } from "./scenes/rsvp-scene.js?v=16";
-import { createFinaleScene } from "./scenes/finale-scene.js?v=16";
+import { createRsvpScene } from "./scenes/rsvp-scene.js?v=18";
+import { createFinaleScene } from "./scenes/finale-scene.js?v=18";
 
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
@@ -343,19 +343,19 @@ function setEventText(fieldName, value) {
 }
 
 function applyEventConfig() {
-  const eventTitle = `${eventConfig.eventType} de ${eventConfig.babyName}`;
+  document.title = eventConfig.document.title;
+  document.querySelector("meta[name='description']")?.setAttribute(
+    "content",
+    eventConfig.document.description,
+  );
+  document.querySelector("main.experience")?.setAttribute(
+    "aria-label",
+    eventConfig.document.mainAriaLabel,
+  );
 
-  setEventText("babyName", eventConfig.babyName);
-  setEventText("hosts", eventConfig.hosts);
-  setEventText("eventTitle", eventTitle);
-  setEventText("eventDate", eventConfig.date);
-  setEventText("eventTime", eventConfig.time);
-  setEventText("eventLocation", eventConfig.location.name);
-  setEventText("invitationTitle", `Acompáñanos a celebrar a ${eventConfig.babyName}`);
-  setEventText("finaleTitle", `${eventConfig.babyName} los espera`);
-  setEventText("finaleHosts", `Con cariño, ${eventConfig.hosts}.`);
-  setEventText("giftTitle", eventConfig.gifts.title);
-  setEventText("giftText", eventConfig.gifts.text);
+  Object.entries(eventConfig.content).forEach(([fieldName, value]) => {
+    setEventText(fieldName, value);
+  });
 }
 
 function bootstrapPolarisEngine() {

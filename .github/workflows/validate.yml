@@ -201,7 +201,7 @@ jobs:
           declare -A critical_resources=(
             ["Página principal"]="/"
             ["Hoja de estilos principal"]="/src/styles/main.css?v=22"
-            ["Módulo JavaScript principal"]="/src/scripts/main.js?v=17"
+            ["Módulo JavaScript principal"]="/src/scripts/main.js?v=18"
             ["Audio principal"]="/assets/audio/theme.mp3"
           )
 

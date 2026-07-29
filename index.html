@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta
       name="description"
-      content="Primera escena interactiva de Baby Shower Space: una invitación espacial, cálida y cinematográfica."
+      content=""
     />
-    <title>Baby Shower Space</title>
+    <title>Polaris</title>
     <link rel="stylesheet" href="src/styles/main.css?v=22" />
-    <script type="module" src="src/scripts/main.js?v=17"></script>
+    <script type="module" src="src/scripts/main.js?v=18"></script>
   </head>
   <body>
-    <main class="experience" aria-label="Baby Shower Space">
+    <main class="experience" aria-label="Experiencia Polaris">
       <section class="scene scene-opening" data-scene="opening" aria-labelledby="scene-title">
         <div class="space-field" aria-hidden="true">
           <div class="nebula nebula-primary"></div>
@@ -68,7 +68,7 @@
           <p class="discovery-line discovery-line-second">
             hay una que pronto iluminará nuestras vidas.
           </p>
-          <h2 id="benjamin-title" class="benjamin-name" data-event-field="babyName">Benjamín</h2>
+          <h2 id="benjamin-title" class="benjamin-name" data-event-field="babyName"></h2>
           <button class="primary-action benjamin-next-action" type="button" data-continue-from-benjamin hidden>
             Seguir la señal
           </button>
@@ -93,7 +93,7 @@
 
         <div class="scene-content signal-content">
           <p class="scene-kicker signal-kicker">Una señal desde el universo</p>
-          <h2 id="signal-title" class="signal-title" data-event-field="hosts">Daniel y Ana Josse</h2>
+          <h2 id="signal-title" class="signal-title" data-event-field="hosts"></h2>
           <p class="scene-copy signal-copy">
             nos invitan a seguir esta luz y celebrar juntos el inicio de una historia
             muy especial.
@@ -116,12 +116,12 @@
         </div>
 
         <div class="scene-content star-content">
-          <p class="scene-kicker star-kicker">La estrella de Benjamín</p>
+          <p class="scene-kicker star-kicker" data-event-field="starKicker"></p>
           <h2 id="star-title" class="star-title">Una nueva luz</h2>
           <p class="scene-copy star-copy">
             pequeña, cálida y llena de esperanza, comienza a iluminar nuestro universo.
           </p>
-          <p class="benjamin-signature" data-event-field="babyName">Benjamín</p>
+          <p class="benjamin-signature" data-event-field="babyName"></p>
           <button class="primary-action star-next-action" type="button" data-continue-from-star hidden>
             Celebrar su llegada
           </button>
@@ -145,24 +145,24 @@
 
         <div class="scene-content coordinates-content">
           <p class="scene-kicker coordinates-kicker">Coordenadas del encuentro</p>
-          <h2 id="coordinates-title" class="coordinates-title" data-event-field="eventTitle">Baby Shower de Benjamín</h2>
+          <h2 id="coordinates-title" class="coordinates-title" data-event-field="eventTitle"></h2>
 
           <dl class="event-details" aria-label="Detalles del evento">
             <div class="event-detail">
               <dt>Fecha</dt>
-              <dd data-event-field="eventDate">2 de agosto de 2026</dd>
+              <dd data-event-field="eventDate"></dd>
             </div>
             <div class="event-detail">
               <dt>Hora</dt>
-              <dd data-event-field="eventTime">4:00 pm – 7:00 pm</dd>
+              <dd data-event-field="eventTime"></dd>
             </div>
             <div class="event-detail">
               <dt>Lugar</dt>
-              <dd data-event-field="eventLocation">Colegio Médico de Honduras, Tegucigalpa</dd>
+              <dd data-event-field="eventLocation"></dd>
             </div>
             <div class="event-detail">
               <dt>Anfitriones</dt>
-              <dd data-event-field="hosts">Daniel y Ana Josse</dd>
+              <dd data-event-field="hosts"></dd>
             </div>
           </dl>
 
@@ -188,11 +188,8 @@
 
         <div class="scene-content invitation-content">
           <p class="scene-kicker invitation-kicker">La invitación personal</p>
-          <h2 id="invitation-title" class="invitation-title" data-event-field="invitationTitle">Acompáñanos a celebrar a Benjamín</h2>
-          <p class="scene-copy invitation-copy">
-            Daniel y Ana Josse desean compartir este momento con las personas que hacen
-            más luminosa su historia.
-          </p>
+          <h2 id="invitation-title" class="invitation-title" data-event-field="invitationTitle"></h2>
+          <p class="scene-copy invitation-copy" data-event-field="invitationCopy"></p>
           <button class="primary-action invitation-next-action" type="button" data-continue-from-invitation hidden>
             Ir a confirmar
           </button>
@@ -217,10 +214,7 @@
         <div class="scene-content rsvp-content">
           <p class="scene-kicker rsvp-kicker">Invitación oficial</p>
           <h2 id="rsvp-title" class="rsvp-title">Confirma tu lugar en esta misión</h2>
-          <p class="scene-copy rsvp-copy">
-            Tu presencia hará más luminosa esta celebración. Benjamín está por llegar,
-            y nos emociona imaginar este momento acompañados por quienes queremos.
-          </p>
+          <p class="scene-copy rsvp-copy" data-event-field="rsvpCopy"></p>
           <p class="rsvp-note">
             Elige la respuesta que deseas enviar por WhatsApp.
           </p>
@@ -233,9 +227,9 @@
             </button>
           </div>
           <div class="rsvp-note">
-            <strong>🎁 Regalos para Benjamín</strong>
+            <strong data-event-field="giftTitle"></strong>
             <br />
-            Su presencia será nuestro mejor regalo. Si desea obsequiar algo a Benjamín, que no sean zapatos ni juguetes.
+            <span data-event-field="giftText"></span>
           </div>
         </div>
       </section>
@@ -257,20 +251,16 @@
 
         <div class="scene-content finale-content">
           <p class="scene-kicker finale-kicker">Gracias por acompañarnos</p>
-          <h2 id="finale-title" class="finale-title" data-event-field="finaleTitle">Benjamín los espera</h2>
+          <h2 id="finale-title" class="finale-title" data-event-field="finaleTitle"></h2>
           <p class="scene-copy finale-copy">
             Cada estrella de esta historia brilla un poco más cuando la compartimos con
             ustedes.
           </p>
           <section class="gift-preferences" aria-labelledby="gift-preferences-title">
-            <h3 id="gift-preferences-title" class="gift-preferences-title" data-event-field="giftTitle">
-              🎁 Regalos para Benjamín
-            </h3>
-            <p class="gift-preferences-copy" data-event-field="giftText">
-              Su presencia será nuestro mejor regalo. Si desea obsequiar algo a Benjamín, que no sean zapatos ni juguetes.
-            </p>
+            <h3 id="gift-preferences-title" class="gift-preferences-title" data-event-field="giftTitle"></h3>
+            <p class="gift-preferences-copy" data-event-field="giftText"></p>
           </section>
-          <p class="finale-message" data-event-field="finaleHosts">Con cariño, Daniel y Ana Josse.</p>
+          <p class="finale-message" data-event-field="finaleHosts"></p>
           <p class="scene-hint finale-hint">El viaje queda guardado entre las estrellas.</p>
         </div>
       </section>
