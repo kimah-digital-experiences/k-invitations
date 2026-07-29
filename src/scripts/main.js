@@ -1,13 +1,6 @@
 import { eventConfig } from "./config/event-config.js?v=18";
+import { sceneRegistry } from "./config/scene-registry.js";
 import { SceneManager } from "./core/scene-manager.js?v=16";
-import { createOpeningScene } from "./scenes/opening-scene.js?v=16";
-import { createBenjaminScene } from "./scenes/benjamin-scene.js?v=16";
-import { createSignalScene } from "./scenes/signal-scene.js?v=16";
-import { createStarScene } from "./scenes/star-scene.js?v=16";
-import { createCoordinatesScene } from "./scenes/coordinates-scene.js?v=18";
-import { createInvitationScene } from "./scenes/invitation-scene.js?v=16";
-import { createRsvpScene } from "./scenes/rsvp-scene.js?v=18";
-import { createFinaleScene } from "./scenes/finale-scene.js?v=18";
 
 const OPENING_SCENE_ID = "opening";
 const BENJAMIN_SCENE_ID = "benjamin";
@@ -363,14 +356,13 @@ function bootstrapPolarisEngine() {
   const autoPlay = createAutoPlayController(sceneManager);
   const backgroundMusic = createBackgroundMusicController();
 
-  sceneManager.registerScene(createOpeningScene());
-  sceneManager.registerScene(createBenjaminScene());
-  sceneManager.registerScene(createSignalScene());
-  sceneManager.registerScene(createStarScene());
-  sceneManager.registerScene(createCoordinatesScene());
-  sceneManager.registerScene(createInvitationScene());
-  sceneManager.registerScene(createRsvpScene());
-  sceneManager.registerScene(createFinaleScene());
+  sceneRegistry.forEach(({ create, id, nextSceneId }) => {
+    sceneManager.registerScene({
+      ...create(),
+      id,
+      nextSceneId,
+    });
+  });
   enableCinematicTransitions(sceneManager);
 
   window.PolarisEngine = {
