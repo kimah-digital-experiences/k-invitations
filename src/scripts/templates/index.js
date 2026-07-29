@@ -1,4 +1,5 @@
 import { babyShowerSpaceTemplate } from "./baby-shower-space/template-manifest.js";
+import { christmasDinnerTemplate } from "./christmas-dinner/template-manifest.js";
 import { santoriniBirthdayTemplate } from "./santorini-birthday/template-manifest.js";
 import { tropicalBirthdayTemplate } from "./tropical-birthday/template-manifest.js";
 import { templateStarter } from "./template-starter/template-manifest.js";
@@ -10,6 +11,14 @@ const placeholder = (label, background, accent) =>
   )}`;
 
 export const templates = [
+  {
+    id: "christmas-dinner",
+    name: "Christmas Dinner",
+    description: "Una cena navideña íntima entre luz de velas, tradición europea y elegancia atemporal.",
+    image: "assets/images/christmas/christmas-tree.svg",
+    launchUrl: "experiences/christmas-dinner/",
+    manifest: christmasDinnerTemplate,
+  },
   {
     id: "baby-shower-space",
     name: "Baby Shower Space",
