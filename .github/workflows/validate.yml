@@ -57,6 +57,9 @@ jobs:
       - name: Validar Tropical Birthday
         run: node .github/scripts/validate-tropical-birthday.mjs
 
+      - name: Validar Christmas Dinner
+        run: node .github/scripts/validate-christmas-dinner.mjs
+
       - name: Validar rutas, recursos, nombres y credenciales
         shell: bash
         run: |
@@ -227,6 +230,7 @@ jobs:
             ["Wedding"]="/experiences/wedding/"
             ["Santorini Birthday"]="/experiences/santorini-birthday/"
             ["Tropical Birthday"]="/experiences/tropical-birthday/"
+            ["Christmas Dinner"]="/experiences/christmas-dinner/"
             ["Template Starter"]="/experiences/template-starter/"
             ["Hoja de estilos principal"]="/src/styles/main.css?v=22"
             ["Módulo JavaScript principal"]="/src/scripts/main.js?v=18"
