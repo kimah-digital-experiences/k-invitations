@@ -39,6 +39,9 @@ jobs:
             fi
           done
 
+      - name: Validar respaldos estáticos de metadatos
+        run: node .github/scripts/validate-event-metadata.mjs
+
       - name: Validar rutas, recursos, nombres y credenciales
         shell: bash
         run: |
@@ -201,7 +204,8 @@ jobs:
           declare -A critical_resources=(
             ["Página principal"]="/"
             ["Hoja de estilos principal"]="/src/styles/main.css?v=22"
-            ["Módulo JavaScript principal"]="/src/scripts/main.js?v=17"
+            ["Módulo JavaScript principal"]="/src/scripts/main.js?v=18"
+            ["Configuración del evento"]="/src/scripts/config/event-config.js?v=18"
             ["Audio principal"]="/assets/audio/theme.mp3"
           )
 
