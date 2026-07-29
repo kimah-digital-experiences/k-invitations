@@ -45,6 +45,12 @@ jobs:
       - name: Validar Template Starter
         run: node .github/scripts/validate-template-starter.mjs
 
+      - name: Validar Polaris Platform
+        run: node .github/scripts/validate-polaris-platform.mjs
+
+      - name: Validar Wedding Experience
+        run: node .github/scripts/validate-wedding.mjs
+
       - name: Validar rutas, recursos, nombres y credenciales
         shell: bash
         run: |
@@ -126,6 +132,9 @@ jobs:
           asset_literals = re.compile(r"[\"']((?:\.{0,2}/)?assets/[^\"']+)[\"']")
 
           for source, text in texts.items():
+              # La CLI contiene módulos como texto de salida; no son imports del propio script.
+              if source == "scripts/create-template.mjs":
+                  continue
               suffix = Path(source).suffix.lower()
               patterns = []
               if suffix == ".html":
@@ -152,8 +161,10 @@ jobs:
                   )
                   continue
               base = PurePosixPath(source).parent
-              candidate = str(base.joinpath(path_part)) if path_part.startswith(".") else (
-                  str(base.joinpath(path_part)) if source.endswith((".js", ".mjs", ".css")) and not path_part.startswith("assets/") else path_part
+              candidate = (
+                  path_part
+                  if path_part.startswith("assets/")
+                  else str(base.joinpath(path_part))
               )
               normalized_parts = []
               for part in PurePosixPath(candidate).parts:
@@ -205,7 +216,10 @@ jobs:
           done
 
           declare -A critical_resources=(
-            ["Página principal"]="/"
+            ["Polaris Showcase"]="/"
+            ["Baby Shower Space"]="/experiences/baby-shower-space/"
+            ["Wedding"]="/experiences/wedding/"
+            ["Template Starter"]="/experiences/template-starter/"
             ["Hoja de estilos principal"]="/src/styles/main.css?v=22"
             ["Módulo JavaScript principal"]="/src/scripts/main.js?v=18"
             ["Configuración del evento"]="/src/scripts/config/event-config.js?v=18"

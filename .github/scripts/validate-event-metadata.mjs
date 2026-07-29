@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { eventConfig } from "../../src/scripts/config/event-config.js?v=18";
 
-const htmlPath = process.argv[2] ?? "index.html";
+const htmlPath = process.argv[2] ?? "experiences/baby-shower-space/index.html";
 const html = await readFile(htmlPath, "utf8");
 
 function decodeHtml(value) {
@@ -62,5 +62,5 @@ for (const { label, found, expected } of checks) {
 if (failed) {
   process.exitCode = 1;
 } else {
-  console.log("Los metadatos estáticos de index.html coinciden con eventConfig.document.");
+  console.log("Los metadatos estáticos de la experiencia Baby Shower Space coinciden con eventConfig.document.");
 }
