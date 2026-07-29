@@ -51,6 +51,9 @@ jobs:
       - name: Validar Wedding Experience
         run: node .github/scripts/validate-wedding.mjs
 
+      - name: Validar Santorini Birthday
+        run: node .github/scripts/validate-santorini-birthday.mjs
+
       - name: Validar rutas, recursos, nombres y credenciales
         shell: bash
         run: |
@@ -219,6 +222,7 @@ jobs:
             ["Polaris Showcase"]="/"
             ["Baby Shower Space"]="/experiences/baby-shower-space/"
             ["Wedding"]="/experiences/wedding/"
+            ["Santorini Birthday"]="/experiences/santorini-birthday/"
             ["Template Starter"]="/experiences/template-starter/"
             ["Hoja de estilos principal"]="/src/styles/main.css?v=22"
             ["Módulo JavaScript principal"]="/src/scripts/main.js?v=18"
