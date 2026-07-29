@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Una celebración mediterránea íntima, luminosa y cinematográfica." />
+    <title>Santorini Birthday · Sofía</title>
+    <link rel="stylesheet" href="../../src/styles/santorini-birthday.css" />
+    <script type="module" src="main.js"></script>
+  </head>
+  <body>
+    <main class="experience santorini" aria-label="Experiencia de cumpleaños mediterránea de Sofía">
+      <section class="scene scene-opening" data-scene="opening">
+        <img class="scene-image" data-event-image="opening" alt="Ilustración de la costa de Santorini al atardecer" />
+        <div class="shade"></div><div class="editorial editorial--opening">
+          <p class="kicker" data-event-field="openingKicker"></p><span class="rule"></span>
+          <h1 data-event-field="openingTitle"></h1><p class="lede" data-event-field="openingCopy"></p>
+          <button class="action action--light" data-start-journey onclick="window.startPolarisJourney?.()">Descubrir la invitación</button>
+          <p class="status" data-transition-status role="status" aria-live="polite"></p>
+        </div><p class="folio">Θήρα · 36°23′N</p>
+      </section>
+      <section class="scene scene-ivory" data-scene="welcome" hidden><div class="split">
+        <div class="editorial"><p class="kicker" data-event-field="welcomeKicker"></p><h2 data-event-field="welcomeTitle"></h2><p class="lede" data-event-field="welcomeCopy"></p><button class="action" data-next-scene>Continuar hacia el horizonte</button></div>
+        <figure class="arch-frame"><img data-event-image="architecture" alt="Arquitectura blanca y cúpula azul frente al mar" /></figure>
+      </div></section>
+      <section class="scene scene-blue" data-scene="birthday" hidden><div class="sun-disc"></div><div class="editorial editorial--center"><p class="kicker" data-event-field="birthdayKicker"></p><p class="age" data-event-field="age"></p><h2 data-event-field="guestOfHonor"></h2><p class="lede" data-event-field="birthdayCopy"></p><button class="action action--light" data-next-scene>Brindemos por la vida</button></div></section>
+      <section class="scene scene-quote" data-scene="quote" hidden><div class="quote-mark">“</div><blockquote data-event-field="quote"></blockquote><button class="text-action" data-next-scene>La celebración</button></section>
+      <section class="scene scene-ivory" data-scene="details" hidden><div class="editorial editorial--center details"><p class="kicker" data-event-field="detailsKicker"></p><h2 data-event-field="date"></h2><div class="detail-grid"><p><span>Hora</span><strong data-event-field="time"></strong></p><p><span>Lugar</span><strong data-event-field="location"></strong></p></div><a class="action" data-location-link target="_blank" rel="noreferrer">Abrir ubicación</a><button class="text-action" data-next-scene>Ver código de vestimenta</button></div></section>
+      <section class="scene scene-dress" data-scene="dress-code" hidden><div class="palette" aria-hidden="true"><span></span><span></span><span></span><span></span></div><div class="editorial"><p class="kicker" data-event-field="dressKicker"></p><h2 data-event-field="dressTitle"></h2><p class="lede" data-event-field="dressCopy"></p><p class="note" data-event-field="dressNote"></p><button class="action" data-next-scene>Contar los días</button></div></section>
+      <section class="scene scene-sunset" data-scene="countdown" hidden><div class="editorial editorial--center"><p class="kicker" data-event-field="countdownKicker"></p><div class="countdown" aria-label="Cuenta regresiva"><p><strong data-countdown="days">00</strong><span>Días</span></p><p><strong data-countdown="hours">00</strong><span>Horas</span></p><p><strong data-countdown="minutes">00</strong><span>Minutos</span></p></div><button class="action action--light" data-next-scene>Explorar la inspiración</button></div></section>
+      <section class="scene scene-gallery" data-scene="gallery" hidden><div class="gallery-copy"><p class="kicker" data-event-field="galleryKicker"></p><h2 data-event-field="galleryTitle"></h2><p data-event-field="galleryCopy"></p><button class="action" data-next-scene>Reservar mi lugar</button></div><div class="gallery-grid"><img data-event-image="gallery.0" alt="Terraza mediterránea frente al mar" /><img data-event-image="gallery.1" alt="Costa volcánica bañada por el Egeo" /><img data-event-image="gallery.2" alt="Bougainvilleas sobre un muro blanco" /></div></section>
+      <section class="scene scene-rsvp" data-scene="rsvp" hidden><div class="editorial editorial--center"><p class="kicker" data-event-field="rsvpKicker"></p><h2 data-event-field="rsvpTitle"></h2><p class="lede" data-event-field="rsvpCopy"></p><a class="action action--light" data-rsvp-link target="_blank" rel="noreferrer">Confirmar por WhatsApp</a><button class="text-action text-action--light" data-next-scene>Continuar</button></div></section>
+      <section class="scene scene-closing" data-scene="closing" hidden><div class="editorial editorial--center"><span class="monogram">SB</span><p class="kicker" data-event-field="closingKicker"></p><h2 data-event-field="closingTitle"></h2><p class="lede" data-event-field="closingCopy"></p><a class="text-action" href="../../index.html">Volver a Polaris Showcase</a></div></section>
+    </main>
+  </body>
+</html>

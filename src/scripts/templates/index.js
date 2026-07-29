@@ -1,4 +1,5 @@
 import { babyShowerSpaceTemplate } from "./baby-shower-space/template-manifest.js";
+import { santoriniBirthdayTemplate } from "./santorini-birthday/template-manifest.js";
 import { templateStarter } from "./template-starter/template-manifest.js";
 import { weddingTemplate } from "./wedding/template-manifest.js";
 
@@ -23,6 +24,14 @@ export const templates = [
     image: placeholder("Wedding", "#211814", "#d9b77e"),
     launchUrl: "experiences/wedding/",
     manifest: weddingTemplate,
+  },
+  {
+    id: "santorini-birthday",
+    name: "Santorini Birthday",
+    description: "Lujo discreto, luz del Egeo y diseño editorial para celebrar una nueva vuelta al sol.",
+    image: "assets/images/santorini/caldera.svg",
+    launchUrl: "experiences/santorini-birthday/",
+    manifest: santoriniBirthdayTemplate,
   },
   {
     id: "template-starter",

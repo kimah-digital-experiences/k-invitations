@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap");
+
+:root { color-scheme: light; font-family: Manrope, Arial, sans-serif; color: #174a66; background: #f5f0e7; --blue: #174a66; --sea: #4f879b; --pink: #a94369; --sun: #dc9b72; --ivory: #f5f0e7; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body { background: var(--ivory); }
+button, a { font: inherit; }
+.experience, .scene { min-height: 100svh; }
+.scene { position: relative; display: grid; place-items: center; overflow: hidden; padding: clamp(1.5rem, 5vw, 5rem); opacity: 1; transition: opacity .7s ease; }
+.scene[hidden] { display: none; }
+.scene-image, .shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.scene-image { object-fit: cover; }
+.shade { background: linear-gradient(90deg, rgba(8, 39, 57, .76), rgba(8, 39, 57, .12)); }
+.editorial { position: relative; z-index: 2; width: min(38rem, 100%); opacity: 0; transform: translateY(1rem); transition: opacity 1s ease .15s, transform 1s ease .15s; }
+.scene.is-revealed .editorial, .scene-opening .editorial { opacity: 1; transform: none; }
+.editorial--opening { justify-self: start; color: white; }
+.editorial--center { text-align: center; margin: auto; }
+.kicker { margin: 0 0 1rem; font-size: .68rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; }
+.rule { display: block; width: 3rem; height: 1px; margin: 1.4rem 0 2rem; background: currentColor; opacity: .7; }
+h1, h2, blockquote { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: clamp(3rem, 8vw, 6.8rem); line-height: .95; letter-spacing: -.035em; text-wrap: balance; }
+.lede { max-width: 35rem; margin: 1.5rem auto 0; font-size: clamp(.95rem, 2vw, 1.12rem); line-height: 1.8; text-wrap: balance; }
+.editorial--opening .lede { margin-left: 0; }
+.action { display: inline-grid; place-items: center; min-height: 3.2rem; margin-top: 2rem; border: 1px solid var(--blue); padding: .8rem 1.5rem; color: var(--blue); background: transparent; text-decoration: none; cursor: pointer; transition: background .25s, color .25s; }
+.action:hover { color: var(--ivory); background: var(--blue); }
+.action--light { border-color: rgba(255,255,255,.8); color: white; }
+.action--light:hover { color: var(--blue); background: white; }
+.text-action { display: block; margin: 1.7rem auto 0; border: 0; border-bottom: 1px solid currentColor; padding: .35rem 0; color: inherit; background: none; text-decoration: none; cursor: pointer; }
+.text-action--light { color: white; }
+.status { min-height: 1.4rem; font-size: .75rem; }
+.folio { position: absolute; right: 1.5rem; bottom: 1.5rem; z-index: 2; color: white; font-size: .6rem; letter-spacing: .18em; writing-mode: vertical-rl; }
+.scene-ivory { background: var(--ivory); }
+.split { display: grid; align-items: center; width: min(72rem, 100%); gap: clamp(2rem, 7vw, 7rem); }
+.arch-frame { position: relative; margin: 0; overflow: hidden; aspect-ratio: 4/5; border-radius: 12rem 12rem 0 0; }
+.arch-frame img { width: 100%; height: 100%; object-fit: cover; }
+.scene-blue { color: white; background: linear-gradient(145deg, #0d344d, var(--blue) 60%, #2e6f89); }
+.sun-disc { position: absolute; width: min(65vw, 32rem); aspect-ratio: 1; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; box-shadow: 0 0 7rem rgba(220,155,114,.25) inset; }
+.age { margin: 0; font: 400 clamp(7rem, 32vw, 20rem)/.62 "Cormorant Garamond", serif; color: rgba(255,255,255,.1); }
+.scene-blue h2 { margin-top: -1rem; }
+.scene-quote { color: white; background: var(--pink); text-align: center; }
+.scene-quote blockquote { width: min(55rem, 100%); font-size: clamp(2.6rem, 7vw, 5.7rem); }
+.quote-mark { position: absolute; top: -4rem; color: rgba(255,255,255,.12); font: 20rem Georgia, serif; }
+.details h2 { font-size: clamp(3rem, 8vw, 5.7rem); }
+.detail-grid { display: grid; gap: 1px; margin-top: 2.5rem; background: rgba(23,74,102,.25); }
+.detail-grid p { margin: 0; padding: 1.5rem; background: var(--ivory); }
+.detail-grid span, .detail-grid strong { display: block; }
+.detail-grid span { margin-bottom: .5rem; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; }
+.detail-grid strong { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; font-weight: 500; }
+.scene-dress { background: #e8e3d8; }
+.scene-dress .editorial { justify-self: end; }
+.palette { position: absolute; left: 0; inset-block: 0; display: grid; width: 38%; grid-template-columns: repeat(2,1fr); }
+.palette span:nth-child(1) { background: #d6c8ae; }.palette span:nth-child(2) { background: #7d8264; }.palette span:nth-child(3) { background: #a94369; }.palette span:nth-child(4) { background: #4f879b; }
+.note { margin-top: 1.5rem; font: italic 1.2rem "Cormorant Garamond", serif; }
+.scene-sunset { color: white; background: linear-gradient(165deg, #174a66, #9a6271 57%, #dc9b72); }
+.countdown { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 3rem; }
+.countdown p { margin: 0; border-right: 1px solid rgba(255,255,255,.35); }.countdown p:last-child { border: 0; }
+.countdown strong, .countdown span { display: block; }.countdown strong { font: 400 clamp(2.8rem, 10vw, 5rem) "Cormorant Garamond", serif; }.countdown span { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; }
+.scene-gallery { align-items: center; background: var(--ivory); }
+.gallery-copy { width: min(27rem, 100%); opacity: 0; transition: opacity 1s ease; }
+.scene.is-revealed .gallery-copy { opacity: 1; }
+.gallery-copy h2 { font-size: clamp(3rem, 7vw, 5.5rem); }
+.gallery-copy > p:last-of-type { line-height: 1.7; }
+.gallery-grid { display: grid; width: min(42rem, 100%); grid-template-columns: 1.2fr .8fr; gap: .8rem; }
+.gallery-grid img { width: 100%; height: 100%; min-height: 12rem; object-fit: cover; opacity: 0; transform: translateY(1rem); transition: opacity .9s ease, transform .9s ease; }
+.gallery-grid img:first-child { grid-row: span 2; }.scene.is-revealed .gallery-grid img { opacity: 1; transform: none; }.scene.is-revealed .gallery-grid img:nth-child(2) { transition-delay: .18s; }.scene.is-revealed .gallery-grid img:nth-child(3) { transition-delay: .32s; }
+.scene-rsvp { color: white; background: radial-gradient(circle at 50% 0, #39758a, #0d344d 72%); }
+.scene-closing { background: #efe8dc; }
+.monogram { display: grid; place-items: center; width: 5rem; height: 5rem; margin: 0 auto 2.5rem; border: 1px solid var(--blue); border-radius: 50%; font: 500 1.5rem "Cormorant Garamond", serif; }
+.scene-closing h2 { font-size: clamp(3rem, 8vw, 6rem); }
+.is-scene-transition-leaving { opacity: 0; }.is-scene-transition-entering { opacity: 0; }.is-scene-transition-active { opacity: 1; }
+@media (min-width: 760px) { .split { grid-template-columns: 1fr 1fr; }.detail-grid { grid-template-columns: 1fr 1.6fr; }.scene-gallery { grid-template-columns: .65fr 1fr; gap: 6vw; } }
+@media (max-width: 759px) { .scene { padding: 1.5rem; }.split { min-height: calc(100svh - 3rem); grid-template-rows: 1fr 44svh; }.split .editorial { align-self: end; }.arch-frame { width: 72%; max-height: 42svh; justify-self: end; }.palette { inset: 0 0 auto; width: 100%; height: 28%; grid-template-columns: repeat(4,1fr); }.scene-dress { align-items: end; }.scene-dress .editorial { padding-top: 29svh; }.scene-gallery { align-content: center; gap: 2rem; }.gallery-grid { max-height: 43svh; }.gallery-grid img { min-height: 9rem; }.folio { display: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }

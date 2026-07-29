@@ -39,6 +39,7 @@ El Showcase la renderiza automáticamente.
 
 - Baby Shower Space: experiencia publicada preservada en su propia ruta.
 - Wedding: recorrido de ocho escenas para Elena y Mateo.
+- Santorini Birthday: primera experiencia editorial de Mediterranean Collection.
 - Template Starter: referencia mínima ejecutable.
 
 ## GitHub Pages
