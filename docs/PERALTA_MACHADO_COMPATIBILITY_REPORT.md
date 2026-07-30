@@ -1,15 +1,16 @@
 # Compatibility spike: Peralta–Machado → Polaris
 
-**Fecha del análisis:** 30 de julio de 2026  
-**Repositorio de trabajo:** `k-invitations`  
-**Baseline verificado:** `60a41364fed1f5148e86d90114f5a24718a1ee51` (`work`)  
+**Fecha del análisis:** 30 de julio de 2026<br>
+**Repositorio de trabajo:** `k-invitations`<br>
+**Baseline Polaris verificado:** `c7f92fb7b6eaaab98fef2eff32bf83803d20c5d7` (`work`, merge del PR #15)<br>
+**Baseline BODA-PERALTA-MACHADO:** **no verificable; no se obtuvo ningún objeto Git del repositorio original**<br>
 **Estado:** **compatibilidad parcial; migración no lista para comenzar**
 
 ## 1. Resumen ejecutivo
 
 Polaris ya ofrece una base técnicamente adecuada para alojar una invitación de boda como una experiencia estática independiente: ruta publicable, manifiesto de plantilla, configuración de contenido, manifiesto de recursos, registro ordenado de escenas, ciclo de vida, transiciones, autoplay, audio, hidratación de metadatos y registro en el Showcase. La experiencia `wedding` existente confirma el patrón de integración, pero es una demo editorial mínima y **no** demuestra paridad con Peralta–Machado.
 
-El spike no puede cerrar todavía la compatibilidad específica. El repositorio de referencia y, por tanto, `docs/MIGRATION_PLAN_PERALTA_MACHADO.md`, no estuvieron disponibles desde este entorno: el clon HTTPS y las lecturas de `raw.githubusercontent.com`/GitHub API fueron rechazados por el proxy con `CONNECT tunnel failed, response 403`; la herramienta de consulta web respondió `401 Unauthorized`. No existe una copia del repositorio ni del documento en el workspace. En consecuencia, este informe no inventa su estructura, funciones, dependencias, assets ni propuestas del plan.
+El spike no puede cerrar todavía la compatibilidad específica. En la reevaluación del 30 de julio de 2026, el repositorio de referencia y, por tanto, `docs/MIGRATION_PLAN_PERALTA_MACHADO.md`, continuaron inaccesibles desde este entorno: el clon y las lecturas HTTPS fueron rechazados por el proxy con `CONNECT tunnel failed, response 403`; la herramienta de consulta web respondió `401 Unauthorized`. También se comprobó que no existe una copia, bundle, objeto Git alcanzable ni recurso MCP del original en el entorno. En consecuencia, este informe no inventa su SHA, estructura, funciones, dependencias, assets ni propuestas del plan.
 
 ### Hallazgos principales
 
@@ -43,6 +44,10 @@ curl -L https://raw.githubusercontent.com/.../docs/MIGRATION_PLAN_PERALTA_MACHAD
 consulta web/GitHub
 → 401 Unauthorized
 ```
+
+La búsqueda de copias locales (`/workspace`, `/root` y `/opt`), recursos MCP y objetos Git del repositorio de trabajo tampoco encontró el original. Desactivar el proxy no constituye una alternativa: el entorno no resuelve `github.com` sin él. Por ello, **no se registra un SHA especulativo**; el campo de baseline del original permanece explícitamente sin verificar.
+
+> **Bloqueo de PR-0:** esta no es una decisión pendiente de producto, sino una dependencia técnica externa. Para completar las acciones 1–9 se necesita que el repositorio original sea legible desde el entorno (por red, checkout o bundle Git que conserve el SHA). Un ZIP sin metadatos permitiría auditar archivos, pero no demostrar el commit exacto solicitado.
 
 ### 2.3 Convenciones de certeza
 
@@ -389,4 +394,3 @@ El siguiente paso recomendado es proporcionar acceso de solo lectura o un archiv
 - [x] No se atribuyeron al original hechos no observados.
 - [ ] Comparación línea por línea con `MIGRATION_PLAN_PERALTA_MACHADO.md` (bloqueada por acceso).
 - [ ] Inventario y baseline del original (bloqueados por acceso).
-
