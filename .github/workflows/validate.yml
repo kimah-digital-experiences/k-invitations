@@ -48,6 +48,9 @@ jobs:
       - name: Validar Polaris Platform
         run: node .github/scripts/validate-polaris-platform.mjs
 
+      - name: Validar contrato Peralta–Machado
+        run: node .github/scripts/validate-peralta-machado.mjs
+
       - name: Validar Wedding Experience
         run: node .github/scripts/validate-wedding.mjs
 
