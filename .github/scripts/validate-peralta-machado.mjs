@@ -124,9 +124,16 @@ assert.match(html, new RegExp(`aria-label="${eventConfig.document.ariaLabel}"`))
 assert.match(html, /<html lang="es-HN">/);
 assert.doesNotMatch(html, /(?:href|src)="\//, "Las rutas locales no deben ser absolutas.");
 assert.doesNotMatch(html, /https?:\/\//, "PR-2 no debe activar integraciones externas.");
-assert.doesNotMatch(html, /\.(?:jpe?g|png|webp|mp3|woff2?)(?:[?"'])/i, "PR-2 no debe incorporar assets reales.");
-assert.ok(style.includes(".peralta-machado"), "El estilo diagnóstico debe estar aislado.");
-assert.doesNotMatch(style, /url\(/i, "El estilo diagnóstico no debe cargar assets.");
+assert.ok(style.includes(".peralta-machado"), "Los estilos visuales deben estar aislados.");
+assert.doesNotMatch(style, /(?:^|})\s*(?:body|main|section|button|h[1-6])\s*[{,]/m, "PR-3 no debe introducir selectores globales.");
+assert.doesNotMatch(style, /estilo diagnóstico|border:\s*0\.5rem\s+solid/i, "PR-3 debe retirar el estilo diagnóstico.");
+assert.match(style, /prefers-reduced-motion/, "La experiencia debe respetar movimiento reducido.");
+assert.match(style, /env\(safe-area-inset-top\)/, "El layout móvil debe respetar áreas seguras.");
+assert.match(html, /data-scene="gallery"[\s\S]*peralta-machado__gallery/, "La galería debe tener composición visual.");
+assert.match(html, /data-scene="venues"[\s\S]*button type="button" disabled/, "Las ubicaciones deben seguir deshabilitadas.");
+assert.match(html, /data-scene="rsvp"[\s\S]*No se enviará información/, "RSVP debe indicar que no transmite datos.");
+assert.doesNotMatch(html, /(?:tel:|https?:\/\/|wa\.me|maps\.google|forms\.gle|script\.google)/i, "PR-3 no debe activar integraciones reales.");
+assert.doesNotMatch(`${html}\n${style}`, /(?:[A-Z]:\\|OneDrive|\/Users\/|\/home\/)/, "No se permiten rutas locales.");
 
 class TestElement {
   attributes = new Map();
@@ -217,4 +224,4 @@ for (const id of expectedScenes.slice(0, -1)) {
   assert.equal(scenes.get(id).hasAttribute("hidden"), true, `${id}: una escena inactiva debe quedar oculta.`);
 }
 
-console.log("Peralta–Machado PR-2 validado: contrato, shell semántico, rutas, foco y recorrido completo.");
+console.log("Peralta–Machado PR-3 validado: contrato, estados visuales, aislamiento, privacidad, foco y recorrido completo.");
