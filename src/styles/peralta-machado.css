@@ -30,16 +30,24 @@
   src: url("../../experiences/peralta-machado/assets/fonts/montserrat-600.woff2") format("woff2");
 }
 
-:root { color-scheme: light; }
+:root { color-scheme: light; scroll-behavior: smooth; }
+
+.invitation-is-locked { overflow: hidden; }
 
 .peralta-machado-page { margin: 0; color: #403a35; background: #eee7df; font-family: Montserrat, "Avenir Next", Avenir, system-ui, sans-serif; }
 .peralta-machado, .peralta-machado * { box-sizing: border-box; }
-.peralta-machado { --ivory: #f8f5f0; --paper: #fffdf9; --ink: #403a35; --gold: #a88a5d; --sage: #7f8b7a; --line: rgb(168 138 93 / 35%); min-height: 100svh; overflow: hidden; }
+.peralta-machado { --ivory: #f8f5f0; --paper: #fffdf9; --ink: #403a35; --gold: #a88a5d; --sage: #7f8b7a; --line: rgb(168 138 93 / 35%); min-height: 100svh; overflow: clip; }
 .peralta-machado__scene { position: relative; min-height: 100svh; display: grid; place-items: center; isolation: isolate; padding: max(1.5rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left)); overflow: hidden; background-color: var(--ivory); background-image: url("../../experiences/peralta-machado/assets/images/paper-texture.webp"); background-size: 38rem; background-blend-mode: multiply; }
 .peralta-machado__scene::before, .peralta-machado__scene::after { content: ""; position: absolute; z-index: -1; width: min(70vw, 32rem); aspect-ratio: 1; border: 1px solid var(--line); border-radius: 50%; }
 .peralta-machado__scene::before { inset: -28vw auto auto -34vw; box-shadow: 0 0 0 2rem rgb(168 138 93 / 4%), 0 0 0 4rem rgb(127 139 122 / 4%); }
 .peralta-machado__scene::after { inset: auto -38vw -36vw auto; }
+.peralta-machado__scene--opening { position: fixed; inset: 0; z-index: 20; transition: opacity 650ms ease, transform 650ms ease; }
+.peralta-machado__scene--opening.is-opening { opacity: 0; transform: translateY(-2rem); pointer-events: none; }
+.peralta-machado__scene:not(.peralta-machado__scene--opening) > * { opacity: 0; transform: translateY(1.5rem); transition: opacity 700ms ease, transform 700ms ease; }
+.peralta-machado__scene.is-revealed > * { opacity: 1; transform: none; }
 .peralta-machado__scene[hidden] { display: none; }
+.peralta-machado__scroll-cue { display: block; margin-top: .75rem; color: var(--gold); font-size: 1.35rem; animation: peralta-cue 1.8s ease-in-out infinite; }
+@keyframes peralta-cue { 50% { transform: translateY(.35rem); } }
 .peralta-machado__content { width: min(100%, 54rem); text-align: center; }
 .peralta-machado__content--wide { width: min(100%, 68rem); }
 .peralta-machado h1, .peralta-machado h2, .peralta-machado h3, .peralta-machado__names, .peralta-machado__signature { margin-block: .35em; color: var(--ink); font-family: "Playfair Display", Didot, Georgia, serif; font-weight: 400; line-height: 1.05; text-wrap: balance; }
@@ -103,5 +111,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
   .peralta-machado *, .peralta-machado *::before, .peralta-machado *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .peralta-machado__scene:not(.peralta-machado__scene--opening) > * { opacity: 1; transform: none; }
 }

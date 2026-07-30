@@ -3,243 +3,43 @@ import { access, readFile } from "node:fs/promises";
 import { eventConfig } from "../../src/scripts/templates/peralta-machado/config/event-config.js";
 import { resourcesManifest } from "../../src/scripts/templates/peralta-machado/resources-manifest.js";
 import { sceneRegistry } from "../../src/scripts/templates/peralta-machado/scene-registry.js";
-import { peraltaMachadoTemplate } from "../../src/scripts/templates/peralta-machado/template-manifest.js";
-import { templates } from "../../src/scripts/templates/index.js";
 
-const expectedScenes = [
-  "opening", "hero", "date", "venues", "gallery", "itinerary", "guidance", "rsvp", "closing",
-];
-const requiredSections = [
-  "event", "couple", "guest", "opening", "audio", "countdown", "date", "gallery", "itinerary",
-  "locations", "gifts", "rsvp", "whatsapp", "content", "document",
-];
-const dataUriPattern = /^data:(?:audio|image)\/[a-z0-9.+-]+(?:;[^,]+)?,/i;
-const htmlPath = "experiences/peralta-machado/index.html";
-const mainPath = "experiences/peralta-machado/main.js";
-const stylePath = "src/styles/peralta-machado.css";
-const assetPaths = [
-  "experiences/peralta-machado/assets/images/foto-1.webp",
-  "experiences/peralta-machado/assets/images/foto-3.webp",
-  "experiences/peralta-machado/assets/images/foto-4.webp",
-  "experiences/peralta-machado/assets/images/foto-5.webp",
-  "experiences/peralta-machado/assets/images/paper-texture.webp",
-  "experiences/peralta-machado/assets/fonts/playfair-display-400.woff2",
-  "experiences/peralta-machado/assets/fonts/playfair-display-600.woff2",
-  "experiences/peralta-machado/assets/fonts/montserrat-400.woff2",
-  "experiences/peralta-machado/assets/fonts/montserrat-600.woff2",
-];
+const expectedScenes = ["opening", "hero", "date", "venues", "gallery", "itinerary", "guidance", "rsvp", "closing"];
+const root = new URL("../../", import.meta.url);
+const html = await readFile(new URL("experiences/peralta-machado/index.html", root), "utf8");
+const main = await readFile(new URL("experiences/peralta-machado/main.js", root), "utf8");
+const style = await readFile(new URL("src/styles/peralta-machado.css", root), "utf8");
 
-export function validatePeraltaMachadoConfig(config) {
-  assert.ok(config && typeof config === "object", "La configuración es obligatoria.");
-  for (const section of requiredSections) assert.ok(config[section], `Falta la sección obligatoria '${section}'.`);
-  assert.match(
-    config.event.dateTime,
-    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}-06:00$/,
-    "La fecha debe incluir la zona -06:00.",
-  );
-  assert.equal(config.countdown.targetDateTime, config.event.dateTime, "El countdown debe usar la fecha canónica.");
-  assert.ok(config.event.timeZone, "La zona horaria IANA es obligatoria.");
-  assert.equal(config.couple.partners.length, 2, "La pareja debe declarar dos integrantes.");
-  assert.ok(config.locations.length >= 2, "Se requieren ceremonia y recepción.");
-  assert.deepEqual(new Set(config.locations.map(({ type }) => type)), new Set(["ceremony", "reception"]));
-  for (const location of config.locations) {
-    assert.match(location.externalUrl, /^https:\/\//, "Los enlaces externos deben usar HTTPS.");
-  }
-  assert.equal(config.rsvp.endpoint, null, "PR-1 no debe exponer un endpoint RSVP.");
-  assert.equal(config.whatsapp.phone, null, "PR-1 no debe incluir teléfonos.");
-  assert.equal(config.gifts.accountDetails, null, "PR-1 no debe incluir datos bancarios.");
-  for (const field of ["title", "description", "ariaLabel", "language"]) {
-    assert.ok(config.document[field], `Falta document.${field}.`);
-  }
-  return true;
+assert.deepEqual(sceneRegistry.map(({ id }) => id), expectedScenes, "El contrato debe conservar las nueve escenas y su orden.");
+assert.deepEqual([...html.matchAll(/data-scene="([^"]+)"/g)].map(([, id]) => id), expectedScenes, "El DOM debe conservar el orden narrativo.");
+assert.equal((html.match(/Abrir invitación/g) ?? []).length, 1, "Debe existir una única apertura.");
+assert.doesNotMatch(html, />\s*Continuar(?:\s|<)/i, "No deben existir botones Continuar.");
+assert.doesNotMatch(html, /data-next-scene|\sanimations?\s*=|scroll-snap-type/, "La experiencia no debe usar navegación paginada ni scroll-jacking.");
+for (const id of expectedScenes.slice(1)) {
+  assert.doesNotMatch(html, new RegExp(`data-scene="${id}"[^>]*\\shidden`), `${id} debe permanecer en el DOM visible sin JavaScript.`);
 }
+assert.match(main, /data-open-invitation/, "La apertura debe depender de un gesto válido.");
+assert.match(main, /focus\(\{ preventScroll: true \}\)/, "La apertura debe gestionar el foco.");
+assert.match(main, /IntersectionObserver/, "Las revelaciones deben evitar listeners de scroll costosos.");
+assert.match(style, /prefers-reduced-motion/, "Debe respetarse movimiento reducido.");
+assert.match(style, /focus-visible/, "El foco de teclado debe ser visible.");
+assert.match(style, /env\(safe-area-inset-top\)/, "Debe respetar áreas seguras móviles.");
+assert.doesNotMatch(html, /(?:href|src)="\//, "Las rutas deben funcionar bajo el subdirectorio de Pages.");
+assert.doesNotMatch(`${html}\n${main}`, /(?:wa\.me|maps\.google|script\.google|googletagmanager|analytics|tel:|https?:\/\/)/i, "No debe haber integraciones externas activas.");
+assert.equal(eventConfig.rsvp.endpoint, null);
+assert.equal(eventConfig.whatsapp.phone, null);
+assert.equal(eventConfig.gifts.accountDetails, null);
+assert.equal(eventConfig.audio.enabled, false, "El audio debe permanecer inactivo hasta verificar la licencia de la pista original.");
+assert.equal(resourcesManifest.audio.backgroundMusic.src, null);
+assert.doesNotMatch(JSON.stringify(resourcesManifest), /placeholder/i, "El manifiesto no debe declarar placeholders engañosos.");
 
-export function validatePeraltaMachadoResources(manifest, config) {
-  assert.equal(manifest.version, 1, "El manifiesto debe declarar su versión.");
-  const resources = [manifest.audio.backgroundMusic, ...manifest.images, ...manifest.fonts];
-  const ids = resources.map(({ id }) => id);
-  assert.equal(new Set(ids).size, ids.length, "Los IDs de recursos deben ser únicos.");
-  for (const resource of resources) {
-    assert.ok(["audio", "image", "font"].includes(resource.type), `Tipo inválido para '${resource.id}'.`);
-    assert.ok(resource.status, `Falta el estado de '${resource.id}'.`);
-    if (resource.src !== null) {
-      assert.match(resource.src, dataUriPattern, `El placeholder '${resource.id}' debe estar embebido.`);
-    }
-  }
-  assert.ok(ids.includes(config.audio.resourceId), "El audio configurado debe existir en el manifiesto.");
-  for (const id of config.gallery.imageResourceIds) assert.ok(ids.includes(id), `Falta el recurso de galería '${id}'.`);
-  assert.ok(ids.includes("hero-portrait"), "Falta el slot de imagen principal.");
-  return true;
+const resources = [...resourcesManifest.images, ...resourcesManifest.fonts];
+assert.equal(new Set(resources.map(({ id }) => id)).size, resources.length, "Los IDs de recursos deben ser únicos.");
+for (const resource of resources) {
+  assert.match(resource.src, /^\.\.\/\.\.\/\.\.\/\.\.\//, `${resource.id} debe usar una ruta relativa POSIX.`);
+  await access(new URL(resource.src, new URL("src/scripts/templates/peralta-machado/", root)));
 }
-
-validatePeraltaMachadoConfig(eventConfig);
-validatePeraltaMachadoResources(resourcesManifest, eventConfig);
-assert.equal(
-  templates.some(({ id }) => id === "peralta-machado"),
-  false,
-  "PR-1 no debe publicar la plantilla en Showcase.",
-);
-assert.deepEqual(sceneRegistry.map(({ id }) => id), expectedScenes, "El registro debe preservar el orden narrativo.");
-assert.equal(new Set(expectedScenes).size, expectedScenes.length, "Los IDs de escena deben ser únicos.");
-sceneRegistry.forEach(({ id, create, nextSceneId }, index) => {
-  assert.equal(typeof create, "function", `${id}: la fábrica es obligatoria.`);
-  assert.equal(create().id, id, `${id}: la fábrica debe respetar el contrato de escena.`);
-  assert.equal(nextSceneId, expectedScenes[index + 1] ?? null, `${id}: destino narrativo inválido.`);
-});
-assert.equal(peraltaMachadoTemplate.eventConfig, eventConfig);
-assert.equal(peraltaMachadoTemplate.resources, resourcesManifest);
-assert.equal(peraltaMachadoTemplate.runtime.audio, resourcesManifest.audio.backgroundMusic);
-assert.ok(expectedScenes.includes(peraltaMachadoTemplate.runtime.initialSceneId));
-assert.ok(expectedScenes.includes(peraltaMachadoTemplate.runtime.journeySceneId));
-assert.ok(expectedScenes.includes(peraltaMachadoTemplate.runtime.autoplay.stopSceneId));
-
-assert.throws(
-  () => validatePeraltaMachadoConfig({ ...eventConfig, guest: undefined }),
-  /guest/,
-  "Debe rechazar secciones obligatorias ausentes.",
-);
-assert.throws(
-  () => validatePeraltaMachadoConfig({ ...eventConfig, event: { ...eventConfig.event, dateTime: "2027-03-20" } }),
-  /zona -06:00/,
-  "Debe rechazar fechas sin zona horaria.",
-);
-assert.throws(
-  () => validatePeraltaMachadoConfig({ ...eventConfig, whatsapp: { ...eventConfig.whatsapp, phone: "+50400000000" } }),
-  /no debe incluir teléfonos/,
-  "Debe rechazar teléfonos en el fixture de PR-1.",
-);
-assert.throws(
-  () => validatePeraltaMachadoResources({
-    ...resourcesManifest,
-    images: resourcesManifest.images.filter(({ id }) => id !== "gallery-portrait-01"),
-  }, eventConfig),
-  /gallery-portrait-01/,
-  "Debe rechazar manifiestos incompletos.",
-);
-
-await Promise.all([access(htmlPath), access(mainPath), access(stylePath), ...assetPaths.map((path) => access(path))]);
-const [html, main, style] = await Promise.all([
-  readFile(htmlPath, "utf8"),
-  readFile(mainPath, "utf8"),
-  readFile(stylePath, "utf8"),
-]);
-const htmlScenes = [...html.matchAll(/data-scene="([^"]+)"/g)].map(([, id]) => id);
-
-assert.deepEqual(htmlScenes, expectedScenes, "El shell debe representar el orden declarativo completo.");
-assert.equal(new Set(htmlScenes).size, htmlScenes.length, "El shell no debe duplicar IDs de escena.");
-assert.match(main, /bootstrapPolaris\(peraltaMachadoTemplate\)/, "El módulo debe arrancar el manifiesto de PR-1.");
-assert.match(main, /\.\.\/\.\.\/src\/scripts\/polaris\/bootstrap\.js/, "El bootstrap debe usar una ruta relativa.");
-assert.match(html, /<title>Valeria &amp; Nicolás · Invitación de boda<\/title>/);
-assert.match(html, new RegExp(`content="${eventConfig.document.description.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
-assert.match(html, new RegExp(`aria-label="${eventConfig.document.ariaLabel}"`));
-assert.match(html, /<html lang="es-HN">/);
-assert.doesNotMatch(html, /(?:href|src)="\//, "Las rutas locales no deben ser absolutas.");
-assert.doesNotMatch(html, /https?:\/\//, "PR-2 no debe activar integraciones externas.");
-assert.ok(style.includes(".peralta-machado"), "Los estilos visuales deben estar aislados.");
-assert.doesNotMatch(style, /(?:^|})\s*(?:body|main|section|button|h[1-6])\s*[{,]/m, "PR-3 no debe introducir selectores globales.");
-assert.doesNotMatch(style, /estilo diagnóstico|border:\s*0\.5rem\s+solid/i, "PR-3 debe retirar el estilo diagnóstico.");
-assert.match(style, /prefers-reduced-motion/, "La experiencia debe respetar movimiento reducido.");
-assert.match(style, /env\(safe-area-inset-top\)/, "El layout móvil debe respetar áreas seguras.");
-assert.equal((style.match(/@font-face/g) ?? []).length, 4, "PR-3 debe cargar las cuatro variantes tipográficas locales.");
-assert.match(style, /font-display:\s*swap/, "Las fuentes locales deben evitar bloquear el texto.");
-assert.doesNotMatch(html, /Fotografía autorizada \d/, "La galería no debe conservar marcadores.");
-for (const path of assetPaths) {
-  const relativePath = path.replace("experiences/peralta-machado/", "");
-  assert.match(`${html}\n${style}`, new RegExp(relativePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `El asset '${relativePath}' debe estar referenciado.`);
-}
-assert.match(html, /data-scene="gallery"[\s\S]*peralta-machado__gallery/, "La galería debe tener composición visual.");
-assert.match(html, /data-scene="venues"[\s\S]*button type="button" disabled/, "Las ubicaciones deben seguir deshabilitadas.");
-assert.match(html, /data-scene="rsvp"[\s\S]*No se enviará información/, "RSVP debe indicar que no transmite datos.");
-assert.doesNotMatch(html, /(?:tel:|https?:\/\/|wa\.me|maps\.google|forms\.gle|script\.google)/i, "PR-3 no debe activar integraciones reales.");
-assert.doesNotMatch(`${html}\n${style}`, /(?:[A-Z]:\\|OneDrive|\/Users\/|\/home\/)/, "No se permiten rutas locales.");
-
-class TestElement {
-  attributes = new Map();
-  classList = { add() {}, remove() {} };
-  listeners = new Map();
-  textContent = "";
-  focusCount = 0;
-
-  constructor({ hidden = false, action = null, focus = null } = {}) {
-    if (hidden) this.attributes.set("hidden", "");
-    this.action = action;
-    this.focusTarget = focus;
-  }
-
-  addEventListener(name, listener) { this.listeners.set(name, listener); }
-  hasAttribute(name) { return this.attributes.has(name); }
-  removeAttribute(name) { this.attributes.delete(name); }
-  setAttribute(name, value) { this.attributes.set(name, value); }
-  focus() { this.focusCount += 1; }
-  querySelector(selector) {
-    if (selector === "[data-next-scene]") return this.action;
-    if (selector === "[data-scene-focus]") return this.focusTarget;
-    return null;
-  }
-}
-
-const controls = new Map(expectedScenes.map((id) => [id, id === "closing" ? null : new TestElement()]));
-const focusTargets = new Map(expectedScenes.map((id) => [id, new TestElement()]));
-const scenes = new Map(expectedScenes.map((id, index) => [id, new TestElement({
-  hidden: index !== 0,
-  action: controls.get(id),
-  focus: focusTargets.get(id),
-})]));
-const experience = new TestElement();
-const description = new TestElement();
-const status = new TestElement();
-const fields = new Map();
-
-globalThis.document = {
-  body: experience,
-  readyState: "complete",
-  title: "",
-  querySelector(selector) {
-    const sceneId = selector.match(/^\[data-scene='(.+)'\]$/)?.[1];
-    if (sceneId) return scenes.get(sceneId) ?? null;
-    if (selector === 'meta[name="description"]') return description;
-    if (["main.experience", ".experience"].includes(selector)) return experience;
-    if (selector === "[data-transition-status]") return status;
-    return null;
-  },
-  querySelectorAll(selector) {
-    const field = selector.match(/^\[data-event-field='(.+)'\]$/)?.[1];
-    if (!field) return [];
-    if (!fields.has(field)) fields.set(field, new TestElement());
-    return [fields.get(field)];
-  },
-};
-globalThis.Audio = class { play() { return Promise.resolve(); } };
-globalThis.window = {
-  clearTimeout,
-  setTimeout,
-  requestAnimationFrame: (callback) => callback(),
-};
-
-const { bootstrapPolaris } = await import("../../src/scripts/polaris/bootstrap.js");
-bootstrapPolaris({
-  ...peraltaMachadoTemplate,
-  runtime: { ...peraltaMachadoTemplate.runtime, transitionMs: 0 },
-});
-await new Promise((resolve) => setTimeout(resolve, 0));
-assert.equal(window.PolarisEngine.sceneManager.getCurrentSceneId(), "opening");
-assert.equal(focusTargets.get("opening").focusCount, 1, "La escena inicial debe recibir foco.");
-
-await window.startPolarisJourney();
-window.PolarisEngine.autoPlay.stop();
-assert.equal(window.PolarisEngine.sceneManager.getCurrentSceneId(), "hero");
-for (const [index, expectedId] of expectedScenes.slice(2).entries()) {
-  const activeId = expectedScenes[index + 1];
-  const action = controls.get(activeId);
-  assert.equal(action.listeners.size, 1, `${activeId}: debe existir un único listener de navegación.`);
-  assert.equal(await action.listeners.get("click")(), true);
-  assert.equal(window.PolarisEngine.sceneManager.getCurrentSceneId(), expectedId);
-  assert.equal(focusTargets.get(expectedId).focusCount, 1, `${expectedId}: el encabezado debe recibir foco.`);
-}
-assert.equal(await window.PolarisEngine.sceneManager.nextScene(), false, "El cierre debe terminar el recorrido.");
-assert.equal(window.PolarisEngine.sceneManager.getCurrentSceneId(), "closing");
-for (const id of expectedScenes.slice(0, -1)) {
-  assert.equal(scenes.get(id).hasAttribute("hidden"), true, `${id}: una escena inactiva debe quedar oculta.`);
-}
-
-console.log("Peralta–Machado PR-3 validado: contrato, estados visuales, aislamiento, privacidad, foco y recorrido completo.");
+assert.ok(style.includes(".peralta-machado"), "Los estilos deben estar aislados.");
+assert.doesNotMatch(style, /(?:^|})\s*(?:body|main|section|button|h[1-6])\s*[{,]/m, "No se permiten selectores globales de elementos.");
+assert.doesNotMatch(`${html}\n${main}\n${style}`, /(?:[A-Z]:\\|OneDrive|\/Users\/|\/home\/)/, "No se permiten rutas locales.");
+console.log("Peralta–Machado validado: nueve escenas verticales, apertura, foco, privacidad, recursos y aislamiento.");

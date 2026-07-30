@@ -1,58 +1,32 @@
-const placeholderImage =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23eee8df'/%3E%3C/svg%3E";
-const silentAudio =
-  "data:audio/wav;base64,UklGRiwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQgAAACAgICAgICAgA==";
-
 export const resourcesManifest = {
   version: 1,
   audio: {
     backgroundMusic: {
       id: "background-music",
       type: "audio",
-      src: silentAudio,
-      mimeType: "audio/wav",
-      volume: 0,
-      status: "placeholder",
+      src: null,
+      mimeType: null,
+      volume: 0.35,
+      status: "pending-license-verification",
       required: false,
     },
   },
   branding: {
     name: "Peralta–Machado",
-    stylesheet: null,
+    stylesheet: "../../../../src/styles/peralta-machado.css",
   },
   images: [
-    "hero-portrait",
-    "gallery-portrait-01",
-    "gallery-portrait-02",
-    "gallery-portrait-03",
-    "gallery-portrait-04",
-  ].map((id) => ({
-    id,
-    type: "image",
-    src: placeholderImage,
-    mimeType: "image/svg+xml",
-    alt: "Imagen ficticia pendiente de autorización",
-    status: "placeholder",
-    required: true,
-  })),
+    ["hero-portrait", "../../../../experiences/peralta-machado/assets/images/foto-5.webp"],
+    ["gallery-portrait-01", "../../../../experiences/peralta-machado/assets/images/foto-3.webp"],
+    ["gallery-portrait-02", "../../../../experiences/peralta-machado/assets/images/foto-1.webp"],
+    ["gallery-portrait-03", "../../../../experiences/peralta-machado/assets/images/foto-4.webp"],
+    ["gallery-portrait-04", "../../../../experiences/peralta-machado/assets/images/foto-5.webp"],
+    ["paper-texture", "../../../../experiences/peralta-machado/assets/images/paper-texture.webp"],
+  ].map(([id, src]) => ({ id, type: "image", src, mimeType: "image/webp", status: "authorized-local", required: true })),
   fonts: [
-    {
-      id: "display-font",
-      type: "font",
-      family: "serif",
-      src: null,
-      fallback: "Georgia, serif",
-      status: "system-fallback",
-      required: true,
-    },
-    {
-      id: "body-font",
-      type: "font",
-      family: "sans-serif",
-      src: null,
-      fallback: "Arial, sans-serif",
-      status: "system-fallback",
-      required: true,
-    },
-  ],
+    ["display-regular", "Playfair Display", "../../../../experiences/peralta-machado/assets/fonts/playfair-display-400.woff2"],
+    ["display-semibold", "Playfair Display", "../../../../experiences/peralta-machado/assets/fonts/playfair-display-600.woff2"],
+    ["body-regular", "Montserrat", "../../../../experiences/peralta-machado/assets/fonts/montserrat-400.woff2"],
+    ["body-semibold", "Montserrat", "../../../../experiences/peralta-machado/assets/fonts/montserrat-600.woff2"],
+  ].map(([id, family, src]) => ({ id, type: "font", family, src, mimeType: "font/woff2", status: "licensed-local", required: true })),
 };
