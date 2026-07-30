@@ -9,7 +9,9 @@ export const peraltaMachadoTemplate = {
     initialSceneId: "opening",
     journeySceneId: "hero",
     transitionMs: 500,
+    navigation: { mode: "continuous" },
     autoplay: {
+      enabled: false,
       delayMs: 5000,
       retryDelayMs: 120,
       stopSceneId: "rsvp",

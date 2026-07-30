@@ -4,146 +4,94 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f3eee7" />
-    <meta
-      name="description"
-      content="Una invitación ficticia de boda creada como contrato declarativo para Polaris."
-    />
+    <meta name="description" content="Una invitación ficticia de boda creada como contrato declarativo para Polaris." />
     <title>Valeria &amp; Nicolás · Invitación de boda</title>
-    <link
-      rel="preload"
-      href="./assets/fonts/playfair-display-400.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <link rel="preload" href="./assets/fonts/playfair-display-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="./assets/images/foto-5.webp" as="image" type="image/webp" />
     <link rel="stylesheet" href="../../src/styles/peralta-machado.css" />
     <script type="module" src="main.js"></script>
   </head>
   <body class="peralta-machado-page">
-    <main
-      class="experience peralta-machado"
-      aria-label="Invitación de boda ficticia de Valeria y Nicolás"
-    >
+    <main class="experience peralta-machado" data-invitation-state="closed" aria-label="Invitación de boda ficticia de Valeria y Nicolás">
       <section class="peralta-machado__scene peralta-machado__scene--opening" data-scene="opening">
+        <div class="peralta-machado__envelope" aria-hidden="true"></div>
         <div class="peralta-machado__paper peralta-machado__paper--invitation">
           <p class="peralta-machado__eyebrow" data-event-field="openingEyebrow"></p>
           <p class="peralta-machado__monogram" aria-hidden="true">V <i>&amp;</i> N</p>
           <h1 data-event-field="openingTitle" data-scene-focus tabindex="-1"></h1>
           <p class="peralta-machado__opening-copy">Tenemos el honor de invitarte a compartir nuestra celebración.</p>
-          <button class="peralta-machado__button" type="button" data-start-journey onclick="window.startPolarisJourney?.()">
-            Abrir invitación
-          </button>
+          <button class="peralta-machado__button" type="button" data-start-journey onclick="window.startPolarisJourney?.()">Abrir invitación</button>
           <p class="peralta-machado__status" data-transition-status role="status" aria-live="polite"></p>
+          <p class="peralta-machado__scroll-cue" aria-hidden="true"><span>Desliza para descubrir</span><b>↓</b></p>
         </div>
       </section>
 
-      <section class="peralta-machado__scene peralta-machado__scene--hero" data-scene="hero" hidden>
-        <div class="peralta-machado__split">
-          <figure class="peralta-machado__portrait">
-            <img
-              src="./assets/images/foto-5.webp"
-              width="960"
-              height="1280"
-              alt="Retrato autorizado de la pareja durante su celebración"
-              fetchpriority="high"
-            />
-          </figure>
+      <section class="peralta-machado__scene peralta-machado__scene--hero" data-scene="hero">
+        <div class="peralta-machado__split peralta-machado__reveal">
+          <figure class="peralta-machado__portrait"><img src="./assets/images/foto-5.webp" width="960" height="1280" alt="Arreglo floral de la propuesta de matrimonio" fetchpriority="high" /></figure>
           <div class="peralta-machado__content peralta-machado__content--hero">
             <p class="peralta-machado__eyebrow">Nos casamos</p>
             <h2 data-event-field="heroTitle" data-scene-focus tabindex="-1"></h2>
             <p class="peralta-machado__names">Valeria <i>&amp;</i> Nicolás</p>
             <p class="peralta-machado__date-line"><span data-event-field="eventDate"></span><br /><span data-event-field="eventTime"></span></p>
-            <button class="peralta-machado__button" type="button" data-next-scene>Descubrir la celebración</button>
           </div>
         </div>
       </section>
 
-      <section class="peralta-machado__scene peralta-machado__scene--date" data-scene="date" hidden>
-        <div class="peralta-machado__content peralta-machado__content--centered">
-          <p class="peralta-machado__ornament" aria-hidden="true">❦</p>
+      <section class="peralta-machado__scene peralta-machado__scene--date" data-scene="date">
+        <div class="peralta-machado__content peralta-machado__content--centered peralta-machado__reveal">
+          <p class="peralta-machado__flourish" aria-hidden="true">❦</p>
+          <p class="peralta-machado__eyebrow">Con la bendición de nuestras familias</p>
           <h2 data-event-field="dateHeading" data-scene-focus tabindex="-1"></h2>
           <blockquote data-event-field="dateBlessing"></blockquote>
-          <div class="peralta-machado__calendar" aria-label="Fecha de la celebración">
-            <span>Sábado</span><strong>20</strong><span>Marzo · 2027</span>
-          </div>
+          <div class="peralta-machado__calendar" aria-label="Fecha de la celebración"><span>Sábado</span><strong>20</strong><span>Marzo · 2027</span></div>
           <p><time datetime="2027-03-20T17:00:00-06:00" data-event-field="eventDate"></time></p>
           <p><span data-event-field="eventTime"></span> · <span data-event-field="eventCity"></span></p>
-          <button class="peralta-machado__button" type="button" data-next-scene>Ver lugares</button>
         </div>
       </section>
 
-      <section class="peralta-machado__scene peralta-machado__scene--venues" data-scene="venues" hidden>
-        <div class="peralta-machado__content">
-          <p class="peralta-machado__eyebrow">Dónde celebrar</p>
-          <h2 data-scene-focus tabindex="-1">Ceremonia <i>&amp;</i> recepción</h2>
-          <div class="peralta-machado__cards">
-            <article><span aria-hidden="true">◇</span><h3>Ceremonia</h3><p>Capilla del Bosque</p><small>Dirección ficticia · Tegucigalpa</small><button type="button" disabled>Ubicación próximamente</button></article>
-            <article><span aria-hidden="true">◇</span><h3>Recepción</h3><p>Jardín del Alba</p><small>Dirección ficticia · Tegucigalpa</small><button type="button" disabled>Ubicación próximamente</button></article>
+      <section class="peralta-machado__scene peralta-machado__scene--venues" data-scene="venues">
+        <div class="peralta-machado__content peralta-machado__reveal">
+          <p class="peralta-machado__eyebrow">Dónde celebraremos</p><h2 data-scene-focus tabindex="-1">Ceremonia <i>&amp;</i> recepción</h2>
+          <div class="peralta-machado__venues">
+            <article><span aria-hidden="true">◇</span><h3>Ceremonia</h3><p>Capilla del Bosque</p><small>Dirección ficticia · Tegucigalpa</small><button type="button" disabled>Ubicación no disponible</button></article>
+            <article><span aria-hidden="true">◇</span><h3>Recepción</h3><p>Jardín del Alba</p><small>Dirección ficticia · Tegucigalpa</small><button type="button" disabled>Ubicación no disponible</button></article>
           </div>
-          <button class="peralta-machado__button" type="button" data-next-scene>Ver nuestra historia</button>
         </div>
       </section>
 
-      <section class="peralta-machado__scene peralta-machado__scene--gallery" data-scene="gallery" hidden>
-        <div class="peralta-machado__content peralta-machado__content--wide">
-          <p class="peralta-machado__eyebrow">Momentos que atesoramos</p>
-          <h2 data-event-field="galleryHeading" data-scene-focus tabindex="-1"></h2>
-          <ul class="peralta-machado__gallery" aria-label="Fotografías autorizadas de la pareja">
-            <li><img src="./assets/images/foto-3.webp" width="1080" height="720" loading="lazy" alt="Propuesta de matrimonio de la pareja" /></li>
-            <li><img src="./assets/images/foto-1.webp" width="324" height="532" loading="lazy" alt="Retrato de la pareja celebrando su compromiso" /></li>
-            <li><img src="./assets/images/foto-4.webp" width="1147" height="766" loading="lazy" alt="La pareja durante la celebración de su compromiso" /></li>
-            <li><img src="./assets/images/foto-5.webp" width="960" height="1280" loading="lazy" alt="Retrato de la pareja junto al arreglo floral de su compromiso" /></li>
+      <section class="peralta-machado__scene peralta-machado__scene--gallery" data-scene="gallery">
+        <div class="peralta-machado__content peralta-machado__content--wide peralta-machado__reveal">
+          <p class="peralta-machado__eyebrow">Momentos que atesoramos</p><h2 data-event-field="galleryHeading" data-scene-focus tabindex="-1"></h2>
+          <ul class="peralta-machado__gallery" aria-label="Fotografías autorizadas de la propuesta de matrimonio">
+            <li><img src="./assets/images/foto-3.webp" width="1080" height="720" loading="lazy" alt="Propuesta de matrimonio bajo un arco floral" /></li>
+            <li><img src="./assets/images/foto-1.webp" width="324" height="532" loading="lazy" alt="Detalle de la celebración de compromiso" /></li>
+            <li><img src="./assets/images/foto-4.webp" width="1147" height="766" loading="lazy" alt="Momento de la propuesta de matrimonio" /></li>
+            <li><img src="./assets/images/foto-5.webp" width="960" height="1280" loading="lazy" alt="Anillo y arreglo floral de la propuesta" /></li>
           </ul>
-          <button class="peralta-machado__button" type="button" data-next-scene>Ver itinerario</button>
         </div>
       </section>
 
-      <section class="peralta-machado__scene peralta-machado__scene--itinerary" data-scene="itinerary" hidden>
-        <div class="peralta-machado__content peralta-machado__content--centered">
-          <p class="peralta-machado__eyebrow">Celebremos juntos</p>
-          <h2 data-event-field="itineraryHeading" data-scene-focus tabindex="-1"></h2>
-          <ol class="peralta-machado__timeline">
-            <li><time datetime="17:00">5:00 p. m.</time><span>Ceremonia</span></li>
-            <li><time datetime="18:30">6:30 p. m.</time><span>Recepción</span></li>
-            <li><time datetime="19:30">7:30 p. m.</time><span>Cena</span></li>
-            <li><time datetime="21:00">9:00 p. m.</time><span>Celebración</span></li>
-          </ol>
-          <button class="peralta-machado__button" type="button" data-next-scene>Indicaciones</button>
+      <section class="peralta-machado__scene peralta-machado__scene--itinerary" data-scene="itinerary">
+        <div class="peralta-machado__content peralta-machado__content--centered peralta-machado__reveal">
+          <p class="peralta-machado__eyebrow">Celebremos juntos</p><h2 data-event-field="itineraryHeading" data-scene-focus tabindex="-1"></h2>
+          <ol class="peralta-machado__timeline"><li><time datetime="17:00">5:00 p. m.</time><span>Ceremonia</span></li><li><time datetime="18:30">6:30 p. m.</time><span>Recepción</span></li><li><time datetime="19:30">7:30 p. m.</time><span>Cena</span></li><li><time datetime="21:00">9:00 p. m.</time><span>Celebración</span></li></ol>
         </div>
       </section>
 
-      <section class="peralta-machado__scene peralta-machado__scene--guidance" data-scene="guidance" hidden>
-        <div class="peralta-machado__content peralta-machado__content--centered">
-          <p class="peralta-machado__eyebrow">Detalles para ti</p>
-          <h2 data-event-field="guidanceHeading" data-scene-focus tabindex="-1"></h2>
-          <div class="peralta-machado__guidance-grid">
-            <article><span aria-hidden="true">♢</span><h3>Código de vestimenta</h3><p>Formal elegante</p><small>Esta indicación pertenece al contenido ficticio de la plantilla.</small></article>
-            <article><span aria-hidden="true">♡</span><h3>Regalos</h3><p data-event-field="giftMessage"></p><button type="button" disabled>Información próximamente</button></article>
-          </div>
-          <button class="peralta-machado__button" type="button" data-next-scene>Confirmar asistencia</button>
+      <section class="peralta-machado__scene peralta-machado__scene--guidance" data-scene="guidance">
+        <div class="peralta-machado__content peralta-machado__content--centered peralta-machado__reveal">
+          <p class="peralta-machado__eyebrow">Detalles para ti</p><h2 data-event-field="guidanceHeading" data-scene-focus tabindex="-1"></h2>
+          <div class="peralta-machado__guidance"><article><span aria-hidden="true">♢</span><h3>Código de vestimenta</h3><p>Formal elegante</p><small>Indicación ficticia de demostración.</small></article><article><span aria-hidden="true">♡</span><h3>Regalos</h3><p data-event-field="giftMessage"></p><button type="button" disabled>Información no disponible</button></article></div>
         </div>
       </section>
 
-      <section class="peralta-machado__scene peralta-machado__scene--rsvp" data-scene="rsvp" hidden>
-        <div class="peralta-machado__paper">
-          <p class="peralta-machado__eyebrow">Será un honor contar contigo</p>
-          <h2 data-event-field="rsvpHeading" data-scene-focus tabindex="-1"></h2>
-          <p>La confirmación está deshabilitada en esta demostración ficticia. No se enviará información.</p>
-          <div class="peralta-machado__rsvp-actions" aria-label="Opciones no operativas">
-            <button type="button" disabled>Sí, asistiré</button><button type="button" disabled>No podré asistir</button>
-          </div>
-          <button class="peralta-machado__button" type="button" data-next-scene>Continuar al cierre</button>
-        </div>
+      <section class="peralta-machado__scene peralta-machado__scene--rsvp" data-scene="rsvp">
+        <div class="peralta-machado__paper peralta-machado__reveal"><p class="peralta-machado__eyebrow">Será un honor contar contigo</p><h2 data-event-field="rsvpHeading" data-scene-focus tabindex="-1"></h2><p>La confirmación está deshabilitada en esta demostración ficticia. No se enviará información.</p><div class="peralta-machado__rsvp-actions" aria-label="Opciones no operativas"><button type="button" disabled>Sí, asistiré</button><button type="button" disabled>No podré asistir</button></div></div>
       </section>
 
-      <footer class="peralta-machado__scene peralta-machado__scene--closing" data-scene="closing" hidden>
-        <div class="peralta-machado__content peralta-machado__content--centered">
-          <p class="peralta-machado__monogram" aria-hidden="true">V <i>&amp;</i> N</p>
-          <h2 data-event-field="closingTitle" data-scene-focus tabindex="-1"></h2>
-          <p>Que este sea el comienzo de una historia para recordar.</p>
-          <p class="peralta-machado__signature">Valeria <i>&amp;</i> Nicolás</p>
-        </div>
+      <footer class="peralta-machado__scene peralta-machado__scene--closing" data-scene="closing">
+        <div class="peralta-machado__content peralta-machado__content--centered peralta-machado__reveal"><p class="peralta-machado__monogram" aria-hidden="true">V <i>&amp;</i> N</p><h2 data-event-field="closingTitle" data-scene-focus tabindex="-1"></h2><p>Que este sea el comienzo de una historia para recordar.</p><p class="peralta-machado__signature">Valeria <i>&amp;</i> Nicolás</p></div>
       </footer>
     </main>
   </body>

@@ -46,8 +46,8 @@ function revealSceneManually(initialSceneId, journeySceneId) {
   return true;
 }
 
-async function forceJourneyScene(sceneManager, initialSceneId, journeySceneId) {
-  if (isSceneVisible(journeySceneId)) return true;
+async function forceJourneyScene(sceneManager, initialSceneId, journeySceneId, continuous) {
+  if (!continuous && isSceneVisible(journeySceneId)) return true;
 
   try {
     if (await sceneManager?.nextScene?.()) return true;
@@ -66,13 +66,17 @@ async function forceJourneyScene(sceneManager, initialSceneId, journeySceneId) {
   return revealSceneManually(initialSceneId, journeySceneId);
 }
 
-function exposeStartJourneyFallback(engine, { initialSceneId, journeySceneId }) {
+function exposeStartJourneyFallback(engine, runtime) {
   const { autoPlay, backgroundMusic, sceneManager } = engine;
+  const { initialSceneId, journeySceneId } = runtime;
+  const continuous = runtime.navigation?.mode === "continuous";
 
   window.startPolarisJourney = async function startPolarisJourney(event) {
     event?.preventDefault?.();
 
-    if (isStartingJourney || isSceneVisible(journeySceneId)) return;
+    if (isStartingJourney || (continuous
+      ? sceneManager.getCurrentSceneId?.() === journeySceneId
+      : isSceneVisible(journeySceneId))) return;
 
     isStartingJourney = true;
     backgroundMusic.start();
@@ -81,11 +85,11 @@ function exposeStartJourneyFallback(engine, { initialSceneId, journeySceneId }) 
     try {
       await new Promise((resolve) => window.setTimeout(resolve, 0));
       setTransitionStatus("Intentando navegar...");
-      const didStart = await forceJourneyScene(sceneManager, initialSceneId, journeySceneId);
+      const didStart = await forceJourneyScene(sceneManager, initialSceneId, journeySceneId, continuous);
 
       if (didStart) {
         setTransitionStatus("");
-        autoPlay.start();
+        if (runtime.autoplay.enabled !== false) autoPlay.start();
       } else {
         setTransitionStatus("No se pudo iniciar el viaje. Recarga la página.");
       }

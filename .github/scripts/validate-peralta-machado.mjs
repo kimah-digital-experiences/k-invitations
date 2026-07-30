@@ -62,13 +62,20 @@ export function validatePeraltaMachadoResources(manifest, config) {
   for (const resource of resources) {
     assert.ok(["audio", "image", "font"].includes(resource.type), `Tipo inválido para '${resource.id}'.`);
     assert.ok(resource.status, `Falta el estado de '${resource.id}'.`);
-    if (resource.src !== null) {
+    if (resource.status === "placeholder") {
       assert.match(resource.src, dataUriPattern, `El placeholder '${resource.id}' debe estar embebido.`);
+    } else {
+      assert.match(resource.src, /^\.\/assets\//, `El recurso '${resource.id}' debe usar una ruta local relativa.`);
     }
   }
   assert.ok(ids.includes(config.audio.resourceId), "El audio configurado debe existir en el manifiesto.");
   for (const id of config.gallery.imageResourceIds) assert.ok(ids.includes(id), `Falta el recurso de galería '${id}'.`);
   assert.ok(ids.includes("hero-portrait"), "Falta el slot de imagen principal.");
+  assert.equal(
+    manifest.images.some(({ status }) => status === "placeholder"),
+    false,
+    "Las imágenes visibles no deben ser placeholders.",
+  );
   return true;
 }
 
@@ -92,6 +99,7 @@ assert.equal(peraltaMachadoTemplate.runtime.audio, resourcesManifest.audio.backg
 assert.ok(expectedScenes.includes(peraltaMachadoTemplate.runtime.initialSceneId));
 assert.ok(expectedScenes.includes(peraltaMachadoTemplate.runtime.journeySceneId));
 assert.ok(expectedScenes.includes(peraltaMachadoTemplate.runtime.autoplay.stopSceneId));
+assert.equal(peraltaMachadoTemplate.runtime.autoplay.enabled, false, "El scroll continuo no debe usar autoplay.");
 
 assert.throws(
   () => validatePeraltaMachadoConfig({ ...eventConfig, guest: undefined }),
@@ -150,6 +158,10 @@ for (const path of assetPaths) {
 assert.match(html, /data-scene="gallery"[\s\S]*peralta-machado__gallery/, "La galería debe tener composición visual.");
 assert.match(html, /data-scene="venues"[\s\S]*button type="button" disabled/, "Las ubicaciones deben seguir deshabilitadas.");
 assert.match(html, /data-scene="rsvp"[\s\S]*No se enviará información/, "RSVP debe indicar que no transmite datos.");
+assert.doesNotMatch(html, /data-next-scene|>\s*Continuar/i, "El recorrido vertical no debe incluir controles Continuar.");
+assert.doesNotMatch(html, /data-scene="[^"]+"[^>]*\shidden(?:\s|>)/, "Las nueve secciones deben existir visibles en el DOM sin JavaScript.");
+assert.match(style, /overflow:\s*clip/, "La experiencia debe evitar desbordamiento horizontal sin bloquear el scroll vertical.");
+assert.match(style, /IntersectionObserver|data-motion-ready/, "Las apariciones deben degradarse sin ocultar contenido permanentemente.");
 assert.doesNotMatch(html, /(?:tel:|https?:\/\/|wa\.me|maps\.google|forms\.gle|script\.google)/i, "PR-3 no debe activar integraciones reales.");
 assert.doesNotMatch(`${html}\n${style}`, /(?:[A-Z]:\\|OneDrive|\/Users\/|\/home\/)/, "No se permiten rutas locales.");
 
@@ -170,6 +182,7 @@ class TestElement {
   hasAttribute(name) { return this.attributes.has(name); }
   removeAttribute(name) { this.attributes.delete(name); }
   setAttribute(name, value) { this.attributes.set(name, value); }
+  scrollIntoView() { this.didScroll = true; }
   focus() { this.focusCount += 1; }
   querySelector(selector) {
     if (selector === "[data-next-scene]") return this.action;
@@ -178,11 +191,9 @@ class TestElement {
   }
 }
 
-const controls = new Map(expectedScenes.map((id) => [id, id === "closing" ? null : new TestElement()]));
 const focusTargets = new Map(expectedScenes.map((id) => [id, new TestElement()]));
-const scenes = new Map(expectedScenes.map((id, index) => [id, new TestElement({
-  hidden: index !== 0,
-  action: controls.get(id),
+const scenes = new Map(expectedScenes.map((id) => [id, new TestElement({
+  hidden: false,
   focus: focusTargets.get(id),
 })]));
 const experience = new TestElement();
@@ -191,6 +202,7 @@ const status = new TestElement();
 const fields = new Map();
 
 globalThis.document = {
+  documentElement: new TestElement(),
   body: experience,
   readyState: "complete",
   title: "",
@@ -203,6 +215,7 @@ globalThis.document = {
     return null;
   },
   querySelectorAll(selector) {
+    if (selector === ".peralta-machado [data-scene]") return [...scenes.values()];
     const field = selector.match(/^\[data-event-field='(.+)'\]$/)?.[1];
     if (!field) return [];
     if (!fields.has(field)) fields.set(field, new TestElement());
@@ -226,20 +239,13 @@ assert.equal(window.PolarisEngine.sceneManager.getCurrentSceneId(), "opening");
 assert.equal(focusTargets.get("opening").focusCount, 1, "La escena inicial debe recibir foco.");
 
 await window.startPolarisJourney();
-window.PolarisEngine.autoPlay.stop();
+await new Promise((resolve) => setTimeout(resolve, 0));
 assert.equal(window.PolarisEngine.sceneManager.getCurrentSceneId(), "hero");
-for (const [index, expectedId] of expectedScenes.slice(2).entries()) {
-  const activeId = expectedScenes[index + 1];
-  const action = controls.get(activeId);
-  assert.equal(action.listeners.size, 1, `${activeId}: debe existir un único listener de navegación.`);
-  assert.equal(await action.listeners.get("click")(), true);
-  assert.equal(window.PolarisEngine.sceneManager.getCurrentSceneId(), expectedId);
-  assert.equal(focusTargets.get(expectedId).focusCount, 1, `${expectedId}: el encabezado debe recibir foco.`);
-}
-assert.equal(await window.PolarisEngine.sceneManager.nextScene(), false, "El cierre debe terminar el recorrido.");
-assert.equal(window.PolarisEngine.sceneManager.getCurrentSceneId(), "closing");
-for (const id of expectedScenes.slice(0, -1)) {
-  assert.equal(scenes.get(id).hasAttribute("hidden"), true, `${id}: una escena inactiva debe quedar oculta.`);
-}
+assert.equal(focusTargets.get("hero").focusCount, 1, "La apertura debe llevar el foco al inicio del contenido.");
+assert.equal(scenes.get("hero").didScroll, true, "La apertura debe situar el recorrido en la bienvenida.");
+assert.equal(scenes.get("opening").hasAttribute("hidden"), true, "La portada debe retirarse después de abrir.");
+for (const id of expectedScenes.slice(1)) assert.equal(scenes.get(id).hasAttribute("hidden"), false, `${id}: debe permanecer disponible para scroll natural.`);
+await new Promise((resolve) => setTimeout(resolve, 10));
+assert.equal(window.PolarisEngine.sceneManager.getCurrentSceneId(), "hero", "El recorrido vertical no debe avanzar automáticamente.");
 
-console.log("Peralta–Machado PR-3 validado: contrato, estados visuales, aislamiento, privacidad, foco y recorrido completo.");
+console.log("Peralta–Machado PR-4 validado: apertura, nueve secciones continuas, movimiento reducido, privacidad y foco.");

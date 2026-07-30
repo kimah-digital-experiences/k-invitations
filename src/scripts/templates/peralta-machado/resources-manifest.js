@@ -1,5 +1,3 @@
-const placeholderImage =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23eee8df'/%3E%3C/svg%3E";
 const silentAudio =
   "data:audio/wav;base64,UklGRiwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQgAAACAgICAgICAgA==";
 
@@ -21,37 +19,29 @@ export const resourcesManifest = {
     stylesheet: null,
   },
   images: [
-    "hero-portrait",
-    "gallery-portrait-01",
-    "gallery-portrait-02",
-    "gallery-portrait-03",
-    "gallery-portrait-04",
-  ].map((id) => ({
-    id,
-    type: "image",
-    src: placeholderImage,
-    mimeType: "image/svg+xml",
-    alt: "Imagen ficticia pendiente de autorización",
-    status: "placeholder",
-    required: true,
-  })),
+    ["hero-portrait", "./assets/images/foto-5.webp"],
+    ["gallery-portrait-01", "./assets/images/foto-3.webp"],
+    ["gallery-portrait-02", "./assets/images/foto-1.webp"],
+    ["gallery-portrait-03", "./assets/images/foto-4.webp"],
+    ["gallery-portrait-04", "./assets/images/foto-5.webp"],
+  ].map(([id, src]) => ({ id, type: "image", src, mimeType: "image/webp", status: "authorized-local", required: true })),
   fonts: [
     {
       id: "display-font",
       type: "font",
-      family: "serif",
-      src: null,
+      family: "Playfair Display",
+      src: "./assets/fonts/playfair-display-400.woff2",
       fallback: "Georgia, serif",
-      status: "system-fallback",
+      status: "authorized-local",
       required: true,
     },
     {
       id: "body-font",
       type: "font",
-      family: "sans-serif",
-      src: null,
+      family: "Montserrat",
+      src: "./assets/fonts/montserrat-400.woff2",
       fallback: "Arial, sans-serif",
-      status: "system-fallback",
+      status: "authorized-local",
       required: true,
     },
   ],
