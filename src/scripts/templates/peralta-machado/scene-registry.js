@@ -1,6 +1,4 @@
-function createContractScene(id) {
-  return () => ({ id });
-}
+import { createPeraltaMachadoScene } from "./scenes/create-peralta-machado-scene.js";
 
 const narrative = [
   "opening",
@@ -16,6 +14,6 @@ const narrative = [
 
 export const sceneRegistry = narrative.map((id, index) => ({
   id,
-  create: createContractScene(id),
+  create: () => createPeraltaMachadoScene(id),
   nextSceneId: narrative[index + 1] ?? null,
 }));

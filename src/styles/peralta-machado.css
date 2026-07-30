@@ -1,0 +1,68 @@
+.peralta-machado-page {
+  margin: 0;
+  color: #1f2933;
+  background: #f4f4f4;
+  font-family: system-ui, sans-serif;
+}
+
+.peralta-machado,
+.peralta-machado * {
+  box-sizing: border-box;
+}
+
+.peralta-machado__scene {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 5vw, 3rem);
+  border: 0.5rem solid #6b7280;
+  background: #ffffff;
+}
+
+.peralta-machado__scene[hidden] {
+  display: none;
+}
+
+.peralta-machado__scene.is-revealed {
+  border-color: #1f2933;
+}
+
+.peralta-machado__content {
+  width: min(100%, 42rem);
+}
+
+.peralta-machado h1,
+.peralta-machado h2,
+.peralta-machado h3 {
+  line-height: 1.2;
+}
+
+.peralta-machado p,
+.peralta-machado li {
+  line-height: 1.6;
+}
+
+.peralta-machado button {
+  min-height: 3rem;
+  margin-top: 1rem;
+  border: 2px solid currentColor;
+  padding: 0.75rem 1rem;
+  color: inherit;
+  background: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.peralta-machado button:focus-visible,
+.peralta-machado [data-scene-focus]:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 4px;
+}
+
+@media (min-width: 48rem) {
+  .peralta-machado__content {
+    padding: 2rem;
+    border: 1px dashed #6b7280;
+  }
+}

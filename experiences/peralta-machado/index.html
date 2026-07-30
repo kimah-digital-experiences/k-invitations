@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es-HN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Una invitación ficticia de boda creada como contrato declarativo para Polaris."
+    />
+    <title>Valeria &amp; Nicolás · Invitación de boda</title>
+    <link rel="stylesheet" href="../../src/styles/peralta-machado.css" />
+    <script type="module" src="main.js"></script>
+  </head>
+  <body class="peralta-machado-page">
+    <main
+      class="experience peralta-machado"
+      aria-label="Invitación de boda ficticia de Valeria y Nicolás"
+    >
+      <section class="peralta-machado__scene" data-scene="opening">
+        <div class="peralta-machado__content">
+          <p data-event-field="openingEyebrow"></p>
+          <h1 data-event-field="openingTitle" data-scene-focus tabindex="-1"></h1>
+          <button type="button" data-start-journey onclick="window.startPolarisJourney?.()">
+            Abrir invitación
+          </button>
+          <p data-transition-status role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="peralta-machado__scene" data-scene="hero" hidden>
+        <div class="peralta-machado__content">
+          <p>Experiencia semántica de diagnóstico</p>
+          <h2 data-event-field="heroTitle" data-scene-focus tabindex="-1"></h2>
+          <p><span data-event-field="eventDate"></span> · <span data-event-field="eventTime"></span></p>
+          <button type="button" data-next-scene>Continuar a la fecha</button>
+        </div>
+      </section>
+
+      <section class="peralta-machado__scene" data-scene="date" hidden>
+        <div class="peralta-machado__content">
+          <h2 data-event-field="dateHeading" data-scene-focus tabindex="-1"></h2>
+          <p data-event-field="dateBlessing"></p>
+          <p><time datetime="2027-03-20T17:00:00-06:00" data-event-field="eventDate"></time></p>
+          <p><span data-event-field="eventTime"></span> · <span data-event-field="eventCity"></span></p>
+          <button type="button" data-next-scene>Continuar a los lugares</button>
+        </div>
+      </section>
+
+      <section class="peralta-machado__scene" data-scene="venues" hidden>
+        <div class="peralta-machado__content">
+          <h2 data-scene-focus tabindex="-1">Ceremonia y recepción</h2>
+          <article><h3>Ceremonia</h3><p>Capilla del Bosque · Dirección ficticia</p></article>
+          <article><h3>Recepción</h3><p>Jardín del Alba · Dirección ficticia</p></article>
+          <p>Los enlaces de ubicación se habilitarán en una fase posterior.</p>
+          <button type="button" data-next-scene>Continuar a la galería</button>
+        </div>
+      </section>
+
+      <section class="peralta-machado__scene" data-scene="gallery" hidden>
+        <div class="peralta-machado__content">
+          <h2 data-event-field="galleryHeading" data-scene-focus tabindex="-1"></h2>
+          <ul aria-label="Espacios reservados para fotografías ficticias">
+            <li>Imagen ficticia 1</li><li>Imagen ficticia 2</li>
+            <li>Imagen ficticia 3</li><li>Imagen ficticia 4</li>
+          </ul>
+          <button type="button" data-next-scene>Continuar al itinerario</button>
+        </div>
+      </section>
+
+      <section class="peralta-machado__scene" data-scene="itinerary" hidden>
+        <div class="peralta-machado__content">
+          <h2 data-event-field="itineraryHeading" data-scene-focus tabindex="-1"></h2>
+          <ol>
+            <li><time datetime="17:00">5:00 p. m.</time> · Ceremonia</li>
+            <li><time datetime="18:30">6:30 p. m.</time> · Recepción</li>
+            <li><time datetime="19:30">7:30 p. m.</time> · Cena</li>
+            <li><time datetime="21:00">9:00 p. m.</time> · Celebración</li>
+          </ol>
+          <button type="button" data-next-scene>Continuar a las indicaciones</button>
+        </div>
+      </section>
+
+      <section class="peralta-machado__scene" data-scene="guidance" hidden>
+        <div class="peralta-machado__content">
+          <h2 data-event-field="guidanceHeading" data-scene-focus tabindex="-1"></h2>
+          <p>La guía de vestimenta se definirá en una fase posterior.</p>
+          <h3>Regalos</h3><p data-event-field="giftMessage"></p>
+          <button type="button" data-next-scene>Continuar a la confirmación</button>
+        </div>
+      </section>
+
+      <section class="peralta-machado__scene" data-scene="rsvp" hidden>
+        <div class="peralta-machado__content">
+          <h2 data-event-field="rsvpHeading" data-scene-focus tabindex="-1"></h2>
+          <p>La confirmación está deshabilitada en este recorrido ficticio.</p>
+          <button type="button" data-next-scene>Continuar al cierre</button>
+        </div>
+      </section>
+
+      <footer class="peralta-machado__scene" data-scene="closing" hidden>
+        <div class="peralta-machado__content">
+          <h2 data-event-field="closingTitle" data-scene-focus tabindex="-1"></h2>
+          <p>Fin del recorrido semántico de diagnóstico.</p>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
