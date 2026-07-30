@@ -17,6 +17,17 @@ const dataUriPattern = /^data:(?:audio|image)\/[a-z0-9.+-]+(?:;[^,]+)?,/i;
 const htmlPath = "experiences/peralta-machado/index.html";
 const mainPath = "experiences/peralta-machado/main.js";
 const stylePath = "src/styles/peralta-machado.css";
+const assetPaths = [
+  "experiences/peralta-machado/assets/images/foto-1.webp",
+  "experiences/peralta-machado/assets/images/foto-3.webp",
+  "experiences/peralta-machado/assets/images/foto-4.webp",
+  "experiences/peralta-machado/assets/images/foto-5.webp",
+  "experiences/peralta-machado/assets/images/paper-texture.webp",
+  "experiences/peralta-machado/assets/fonts/playfair-display-400.woff2",
+  "experiences/peralta-machado/assets/fonts/playfair-display-600.woff2",
+  "experiences/peralta-machado/assets/fonts/montserrat-400.woff2",
+  "experiences/peralta-machado/assets/fonts/montserrat-600.woff2",
+];
 
 export function validatePeraltaMachadoConfig(config) {
   assert.ok(config && typeof config === "object", "La configuración es obligatoria.");
@@ -106,7 +117,7 @@ assert.throws(
   "Debe rechazar manifiestos incompletos.",
 );
 
-await Promise.all([access(htmlPath), access(mainPath), access(stylePath)]);
+await Promise.all([access(htmlPath), access(mainPath), access(stylePath), ...assetPaths.map((path) => access(path))]);
 const [html, main, style] = await Promise.all([
   readFile(htmlPath, "utf8"),
   readFile(mainPath, "utf8"),
@@ -129,6 +140,13 @@ assert.doesNotMatch(style, /(?:^|})\s*(?:body|main|section|button|h[1-6])\s*[{,]
 assert.doesNotMatch(style, /estilo diagnóstico|border:\s*0\.5rem\s+solid/i, "PR-3 debe retirar el estilo diagnóstico.");
 assert.match(style, /prefers-reduced-motion/, "La experiencia debe respetar movimiento reducido.");
 assert.match(style, /env\(safe-area-inset-top\)/, "El layout móvil debe respetar áreas seguras.");
+assert.equal((style.match(/@font-face/g) ?? []).length, 4, "PR-3 debe cargar las cuatro variantes tipográficas locales.");
+assert.match(style, /font-display:\s*swap/, "Las fuentes locales deben evitar bloquear el texto.");
+assert.doesNotMatch(html, /Fotografía autorizada \d/, "La galería no debe conservar marcadores.");
+for (const path of assetPaths) {
+  const relativePath = path.replace("experiences/peralta-machado/", "");
+  assert.match(`${html}\n${style}`, new RegExp(relativePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `El asset '${relativePath}' debe estar referenciado.`);
+}
 assert.match(html, /data-scene="gallery"[\s\S]*peralta-machado__gallery/, "La galería debe tener composición visual.");
 assert.match(html, /data-scene="venues"[\s\S]*button type="button" disabled/, "Las ubicaciones deben seguir deshabilitadas.");
 assert.match(html, /data-scene="rsvp"[\s\S]*No se enviará información/, "RSVP debe indicar que no transmite datos.");

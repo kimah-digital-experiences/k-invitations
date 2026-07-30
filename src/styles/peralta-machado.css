@@ -1,9 +1,41 @@
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../experiences/peralta-machado/assets/fonts/playfair-display-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../../experiences/peralta-machado/assets/fonts/playfair-display-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../experiences/peralta-machado/assets/fonts/montserrat-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../../experiences/peralta-machado/assets/fonts/montserrat-600.woff2") format("woff2");
+}
+
 :root { color-scheme: light; }
 
 .peralta-machado-page { margin: 0; color: #403a35; background: #eee7df; font-family: Montserrat, "Avenir Next", Avenir, system-ui, sans-serif; }
 .peralta-machado, .peralta-machado * { box-sizing: border-box; }
 .peralta-machado { --ivory: #f8f5f0; --paper: #fffdf9; --ink: #403a35; --gold: #a88a5d; --sage: #7f8b7a; --line: rgb(168 138 93 / 35%); min-height: 100svh; overflow: hidden; }
-.peralta-machado__scene { position: relative; min-height: 100svh; display: grid; place-items: center; isolation: isolate; padding: max(1.5rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left)); overflow: hidden; background: var(--ivory); }
+.peralta-machado__scene { position: relative; min-height: 100svh; display: grid; place-items: center; isolation: isolate; padding: max(1.5rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left)); overflow: hidden; background-color: var(--ivory); background-image: url("../../experiences/peralta-machado/assets/images/paper-texture.webp"); background-size: 38rem; background-blend-mode: multiply; }
 .peralta-machado__scene::before, .peralta-machado__scene::after { content: ""; position: absolute; z-index: -1; width: min(70vw, 32rem); aspect-ratio: 1; border: 1px solid var(--line); border-radius: 50%; }
 .peralta-machado__scene::before { inset: -28vw auto auto -34vw; box-shadow: 0 0 0 2rem rgb(168 138 93 / 4%), 0 0 0 4rem rgb(127 139 122 / 4%); }
 .peralta-machado__scene::after { inset: auto -38vw -36vw auto; }
@@ -27,8 +59,8 @@
 .peralta-machado button:disabled { min-height: 2.75rem; border: 1px solid var(--line); padding: .65rem 1rem; color: #70675f; background: transparent; cursor: not-allowed; }
 .peralta-machado__status { min-height: 1.7em; font-size: .8rem; }
 .peralta-machado__split { display: grid; width: min(100%, 72rem); align-items: center; gap: clamp(2rem, 6vw, 7rem); }
-.peralta-machado__portrait { width: min(78vw, 27rem); aspect-ratio: 4 / 5; display: grid; place-items: center; justify-self: center; border-radius: 50% 50% 2rem 2rem; color: rgb(255 255 255 / 88%); background: radial-gradient(circle at 50% 30%, #b9b1a6, #7d776e 55%, #4c4945); box-shadow: 1rem 1rem 0 var(--line); }
-.peralta-machado__portrait span { font: 400 clamp(2.3rem, 9vw, 5rem)/1 "Playfair Display", Georgia, serif; }
+.peralta-machado__portrait { width: min(78vw, 27rem); aspect-ratio: 4 / 5; margin: 0; overflow: hidden; justify-self: center; border-radius: 50% 50% 2rem 2rem; background: #d6d0c7; box-shadow: 1rem 1rem 0 var(--line); }
+.peralta-machado__portrait img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 42%; }
 .peralta-machado__content--hero { text-align: center; }
 .peralta-machado__names, .peralta-machado__signature { font-size: clamp(2rem, 7vw, 4.8rem); }
 .peralta-machado__date-line { color: var(--sage); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
@@ -41,16 +73,18 @@
 .peralta-machado__cards article > span, .peralta-machado__guidance-grid article > span { color: var(--gold); font-size: 2rem; }
 .peralta-machado small { display: block; line-height: 1.5; }
 .peralta-machado__gallery { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: clamp(9rem, 30vw, 18rem); gap: .65rem; margin: 2rem 0; padding: 0; list-style: none; }
-.peralta-machado__gallery li { display: grid; place-items: end center; overflow: hidden; padding: 1rem; color: #fff; background: linear-gradient(145deg, #b7b0a5, #77776f); }
-.peralta-machado__gallery li:nth-child(2), .peralta-machado__gallery li:nth-child(3) { background: linear-gradient(145deg, #869188, #555e57); }
-.peralta-machado__gallery span { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
+.peralta-machado__gallery li { position: relative; overflow: hidden; background: #d6d0c7; }
+.peralta-machado__gallery img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 500ms ease; }
+.peralta-machado__gallery li:first-child img { object-position: center; }
+.peralta-machado__gallery li:nth-child(2) img { object-position: center 34%; }
+.peralta-machado__gallery li:hover img { transform: scale(1.025); }
 .peralta-machado__timeline { width: min(100%, 32rem); margin: 2rem auto; padding: 0; list-style: none; }
 .peralta-machado__timeline li { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 1rem 0; }
 .peralta-machado__timeline li::before { content: ""; position: absolute; inset: 0 auto 0 50%; border-left: 1px solid var(--line); }
 .peralta-machado__timeline time { text-align: right; color: var(--sage); font-size: .8rem; font-weight: 700; letter-spacing: .08em; }
 .peralta-machado__timeline span { text-align: left; font-family: "Playfair Display", Georgia, serif; font-size: 1.2rem; }
 .peralta-machado__rsvp-actions { display: grid; gap: .75rem; margin-block: 1.5rem; }
-.peralta-machado__scene--closing { color: #f8f5f0; background: #444a43; }
+.peralta-machado__scene--closing { color: #f8f5f0; background-color: #444a43; background-blend-mode: soft-light; }
 .peralta-machado__scene--closing h2, .peralta-machado__scene--closing .peralta-machado__monogram, .peralta-machado__scene--closing .peralta-machado__signature { color: #fff; }
 
 @media (min-width: 45rem) {
